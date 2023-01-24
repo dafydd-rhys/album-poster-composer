@@ -41,15 +41,7 @@
       <div class="content" role="main">
 
         <!-- This is the start of content for our page -->
-        <h1 class="title">llo Node!</h1>
-
-        <!-- Add text indicating that we've changed color OR had an error -->
-        {{#if color}}
-          <p class="color-info">
-            Now available in
-            <b>{{color}}</b>!
-          </p>
-        {{/if}}
+        <h1 class="title">Spotify Album Poster</h1>
 
         {{#if colorError}}
           <p class="color-info">
@@ -71,7 +63,7 @@
                  but nesting two "#unless" statements sets up an 
                  "if these are both missing..." condition -->
               <p>
-                Learn about communication with a server by talking about color.
+                Create a poster of a Spotify album!
               </p>
             {{/unless}}
           {{/unless}}
@@ -85,7 +77,7 @@
               {{#if color}}
                 Try another color?<br />
               {{else}}
-                What's your favorite color?<br />
+                What's the artist's name?<br />
               {{/if}}
               <input id="color" name="color" required="required" type="text" />
             </label>
@@ -97,28 +89,26 @@
 
           <!-- This randomize link communicates with the server (server.js) 
                using a querystring and GET request instead of a form POST -->
-          Can't decide?
-          <a href="?randomize=go">Use a random color!</a>
+          Looking for a preview?
+          <a href="?randomize=go">Use a random album!</a>
         </div>
 
         <div class="illo-container">
           <img
-            src="https://cdn.glitch.com/c62efef6-1e75-45cf-b248-afeccdda9477%2Fillustration.svg?v=1618196069568"
+            src="https://cdn.glitch.global/26dbc63d-4f2c-4201-be76-34e4291f6e34/Spotify_logo_without_text.svg?v=1674528395220"
             class="illustration"
-            alt="Node logo"
+            alt="Spotify logo"
           />
         </div>
 
         <!-- Instructions on using this project -->
         <div class="instructions">
           <h2>
-            Using this project
+            How it works
           </h2>
           <p>
-            This is the Glitch
-            <strong>Hello Node</strong>
-            project. You can use it to build your own app. Check out README.md
-            in the editor for more info and next steps you can take!
+            Using Spotify's developer API, the album's details and artwork can be fetched.
+            Image processing is used to create a standard paper-sized image with respective album details.
           </p>
         </div>
 
@@ -126,18 +116,7 @@
     </div>
     <!-- The footer holds our remix button — you can use it for structure or cut it out ✂ -->
     <footer class="footer">
-      <div class="links"></div>
-      <a
-        class="btn--remix"
-        target="_top"
-        href="https://glitch.com/edit/#!/remix/glitch-hello-node"
-      >
-        <img
-          src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140"
-          alt=""
-        />
-        Remix on Glitch
-      </a>
+      
     </footer>
   </body>
 </html>
