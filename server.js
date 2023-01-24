@@ -67,23 +67,36 @@ fastify.get("/", function (request, reply) {
   // params is an object we'll pass to our handlebars template
   let params = { seo: seo };
 
-  // If someone clicked the option for a random album, it'll be passed in the querystring
+  // If someone clicked the option for a random artist, it'll be passed in the querystring
   if (request.query.randomize) {
-    // We need to load our color data file, pick one at random, and add it to the params
-    const colors = require("./src/colors.json");
-    const allColors = Object.keys(colors);
-    let currentColor = allColors[(allColors.length * Math.random()) << 0];
+    // We need to load our artists data file, pick one at random, and add it to the params
+    const artists = require("./src/artists.json");
+    const allArtists = Object.keys(artists);
+    let currentArtist = allArtists[(allArtists.length * Math.random()) << 0];
 
-    // Add the color properties to the params object
+    spotifyApi.getArtist(artists[currentArtist]).then(
+      function (data) {
+        console.log("Artist information", data.body);
+        // Add the artist properties to the params object
+        params = {
+          artist_name: data.body.name,
+          artist_image: data.body.images[0].url,
+          seo: seo,
+        };
+
+        // The Handlebars code will be able to access the parameter values and build them into the page
+        return reply.view("/src/pages/index.hbs", params);
+      },
+      function (err) {
+        console.error(err);
+      }
+    );
+  } else {
     params = {
-      color: colors[currentColor],
-      colorError: null,
       seo: seo,
     };
+    return reply.view("/src/pages/index.hbs", params);
   }
-
-  // The Handlebars code will be able to access the parameter values and build them into the page
-  return reply.view("/src/pages/index.hbs", params);
 });
 
 /**
