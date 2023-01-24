@@ -94,10 +94,8 @@ fastify.post("/", function (request, reply) {
   // Build the params object to pass to the template
   let params = { seo: seo };
 
-  // If the user submitted a color through the form it'll be passed here in the request body
-  let artist = request.body.color;
+  let artist = request.body.artist;
 
-  // If it's not empty, let's try to find the color
   if (artist) {
 
     // Take our form submission, remove whitespace, and convert to lowercase
@@ -107,19 +105,18 @@ fastify.post("/", function (request, reply) {
     spotifyApi.searchArtists(artist)
       .then(function(data) {
         console.log('Artist information', data.body.artists.items[0]);
+        params = {
+          artist_name: data.body.artists.items[0].name,
+          artist_image: data.body.artists.items[0].images[0].url,
+          seo: seo,
+        };
+      
+        return reply.view("/src/pages/index.hbs", params);
       
       }, function(err) {
       console.error(err);
     });
-
-    params = {
-      artist: data.body.artists.items[0],
-      seo: seo,
-    };
   }
-
-  // The Handlebars template will use the parameter values to update the page with the chosen color
-  return reply.view("/src/pages/index.hbs", params);
 });
 
 // Run the server and report out to the logs

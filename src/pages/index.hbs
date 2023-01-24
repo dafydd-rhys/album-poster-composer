@@ -25,16 +25,6 @@
 
     <!-- Import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css" />
-
-    <!-- This is a handlebars IF statement
-         Checking for a custom "color" parameter from server.js -->
-    {{#if color}}
-      <!-- If there is a color value, update the style for the page title -->
-      <style>
-        .title { color:
-        {{color}}; }
-      </style>
-    {{/if}}
   </head>
   <body>
     <div class="wrapper">
@@ -74,12 +64,12 @@
             <label for="color">
 
               <!-- We use the handlebars "#if" statement so the form can adapt to its situation -->
-              {{#if color}}
-                Try another color?<br />
+              {{#if artist_name}}
+                Try another artist?<br />
               {{else}}
                 What's the artist's name?<br />
               {{/if}}
-              <input id="color" name="color" required="required" type="text" />
+              <input id="artist" name="artist" required="required" type="text" />
             </label>
 
             <!-- If the user submits a value through the form 
@@ -95,7 +85,11 @@
 
         <div class="illo-container">
           <img
+            {{#if artist_image}}
+            src=artist_image
+            {{else}}
             src="https://cdn.glitch.global/26dbc63d-4f2c-4201-be76-34e4291f6e34/Spotify_logo_without_text.svg?v=1674528395220"
+            {{/if}}
             class="illustration"
             alt="Spotify logo"
           />
