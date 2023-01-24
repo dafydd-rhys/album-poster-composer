@@ -7,25 +7,28 @@ const path = require("path");
 const fetch = require("fetch");
 
 // Initialize Spotify API wrapper
-var SpotifyWebApi = require('spotify-web-api-node');
+var SpotifyWebApi = require("spotify-web-api-node");
 
 // The object we'll use to interact with the API
 var spotifyApi = new SpotifyWebApi({
-  clientId : process.env.CLIENT_ID,
-  clientSecret : process.env.CLIENT_SECRET
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
 });
 
 // Using the Client Credentials auth flow, authenticate our app
-spotifyApi.clientCredentialsGrant()
-  .then(function(data) {
-  
+spotifyApi.clientCredentialsGrant().then(
+  function (data) {
     // Save the access token so that it's used in future calls
-    spotifyApi.setAccessToken(data.body['access_token']);
-    console.log('Got an access token: ' + spotifyApi.getAccessToken());
-  
-  }, function(err) {
-    console.log('Something went wrong when retrieving an access token', err.message);
-  });
+    spotifyApi.setAccessToken(data.body["access_token"]);
+    console.log("Got an access token: " + spotifyApi.getAccessToken());
+  },
+  function (err) {
+    console.log(
+      "Something went wrong when retrieving an access token",
+      err.message
+    );
+  }
+);
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -64,7 +67,7 @@ fastify.get("/", function (request, reply) {
   // params is an object we'll pass to our handlebars template
   let params = { seo: seo };
 
-  // If someone clicked the option for a random color it'll be passed in the querystring
+  // If someone clicked the option for a random album, it'll be passed in the querystring
   if (request.query.randomize) {
     // We need to load our color data file, pick one at random, and add it to the params
     const colors = require("./src/colors.json");
@@ -95,25 +98,37 @@ fastify.post("/", function (request, reply) {
   let artist = request.body.artist;
 
   if (artist) {
-
     // Take our form submission, remove whitespace, and convert to lowercase
     artist = artist.toLowerCase().replace(/\s/g, "");
-    
+
     // Get an artist
-    spotifyApi.searchArtists(artist)
-      .then(function(data) {
-        console.log('Artist information', data.body.artists.items[0]);
+    spotifyApi.searchArtists(artist).then(
+      function (data) {
+        console.log("Artist information", data.body.artists.items[0]);
+        if (data.body.artists.items[0] !== undefined) {
+          params = {
+            artist_name: data.body.artists.items[0].name,
+            artist_image: data.body.artists.items[0].images[0].url,
+            seo: seo,
+          };
+          return reply.view("/src/pages/index.hbs", params);
+        } else {
+          params = {
+            artist_error: artist,
+            seo: seo,
+          };
+          return reply.view("/src/pages/index.hbs", params);
+        }
+      },
+      function (err) {
+        console.error(err);
         params = {
-          artist_name: data.body.artists.items[0].name,
-          artist_image: data.body.artists.items[0].images[0].url,
+          artist_error: artist,
           seo: seo,
         };
-      
         return reply.view("/src/pages/index.hbs", params);
-      
-      }, function(err) {
-      console.error(err);
-    });
+      }
+    );
   }
 });
 
