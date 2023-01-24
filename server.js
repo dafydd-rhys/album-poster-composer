@@ -101,6 +101,11 @@ fastify.post("/", function (request, reply) {
       };
     }
   }
+  
+  const response = fetch('https://api.github.com/users/github');
+  const data = response.json();
+
+console.log(data);
 
   // The Handlebars template will use the parameter values to update the page with the chosen color
   return reply.view("/src/pages/index.hbs", params);
