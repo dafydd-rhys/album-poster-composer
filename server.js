@@ -95,38 +95,26 @@ fastify.post("/", function (request, reply) {
   let params = { seo: seo };
 
   // If the user submitted a color through the form it'll be passed here in the request body
-  let color = request.body.color;
+  let artist = request.body.color;
 
   // If it's not empty, let's try to find the color
-  if (color) {
-    // ADD CODE FROM TODO HERE TO SAVE SUBMITTED FAVORITES
-
-    // Load our color data file
-    const colors = require("./src/colors.json");
+  if (artist) {
 
     // Take our form submission, remove whitespace, and convert to lowercase
-    color = color.toLowerCase().replace(/\s/g, "");
+    artist = artist.toLowerCase().replace(/\s/g, "");
+    
+    // Get an artist
+    spotifyApi.searchArtists(artist)
+      .then(function(data) {
+        console.log('Artist information', data.body.artists.items[0]);
+      }, function(err) {
+      console.error(err);
+    });
 
-    // Now we see if that color is a key in our colors object
-    if (colors[color]) {
-      // Found one!
-      params = {
-        color: colors[color],
-        colorError: null,
-        seo: seo,
-      };
-    } else {
-      // No luck! Return the user value as the error property
-      params = {
-        colorError: request.body.color,
-        seo: seo,
-      };
-    }
+    params = {
+      seo: seo,
+    };
   }
-  
-  const response = fetch.fetchUrl('https://api.github.com/users/github', function(error, meta, body) {
-    console.log(body.toString())
-  });
 
   // The Handlebars template will use the parameter values to update the page with the chosen color
   return reply.view("/src/pages/index.hbs", params);
