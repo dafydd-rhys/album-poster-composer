@@ -4,6 +4,28 @@
  */
 
 const path = require("path");
+const fetch = require("fetch");
+
+// Initialize Spotify API wrapper
+var SpotifyWebApi = require('spotify-web-api-node');
+
+// The object we'll use to interact with the API
+var spotifyApi = new SpotifyWebApi({
+  clientId : process.env.CLIENT_ID,
+  clientSecret : process.env.CLIENT_SECRET
+});
+
+// Using the Client Credentials auth flow, authenticate our app
+spotifyApi.clientCredentialsGrant()
+  .then(function(data) {
+  
+    // Save the access token so that it's used in future calls
+    spotifyApi.setAccessToken(data.body['access_token']);
+    console.log('Got an access token: ' + spotifyApi.getAccessToken());
+  
+  }, function(err) {
+    console.log('Something went wrong when retrieving an access token', err.message);
+  });
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -102,10 +124,9 @@ fastify.post("/", function (request, reply) {
     }
   }
   
-  const response = fetch('https://api.github.com/users/github');
-  const data = response.json();
-
-console.log(data);
+  const response = fetch.fetchUrl('https://api.github.com/users/github', function(error, meta, body) {
+    console.log(body.toString())
+  });
 
   // The Handlebars template will use the parameter values to update the page with the chosen color
   return reply.view("/src/pages/index.hbs", params);
