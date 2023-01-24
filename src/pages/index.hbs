@@ -84,15 +84,20 @@
         </div>
 
         <div class="illo-container">
+          
+          {{#if artist_image}}
           <img
-            {{#if artist_image}}
-            src=artist_image
-            {{else}}
+            src="{{artist_image}}"
+            class="illustration"
+            alt="{{artist_name}}"
+          />
+          {{else}}
+          <img
             src="https://cdn.glitch.global/26dbc63d-4f2c-4201-be76-34e4291f6e34/Spotify_logo_without_text.svg?v=1674528395220"
-            {{/if}}
             class="illustration"
             alt="Spotify logo"
           />
+          {{/if}}
         </div>
 
         <!-- Instructions on using this project -->
