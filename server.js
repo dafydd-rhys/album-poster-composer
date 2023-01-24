@@ -107,11 +107,13 @@ fastify.post("/", function (request, reply) {
     spotifyApi.searchArtists(artist)
       .then(function(data) {
         console.log('Artist information', data.body.artists.items[0]);
+      
       }, function(err) {
       console.error(err);
     });
 
     params = {
+      artist: data.body.artists.items[0],
       seo: seo,
     };
   }
