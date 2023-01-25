@@ -140,10 +140,6 @@ p {
   margin-top: 1rem;
 }
 
-.album {
-  max-height: 150px;
-}
-
 /* Styles for our custom color form and its results */
 .color-info {
   margin-left: 5px;
@@ -197,4 +193,38 @@ label {
 }
 h2 {
   color: #ffffff;
+}
+
+/* Container needed to position the overlay. Adjust the width as needed */
+.albumContainer {
+  position: relative;
+  max-width: 150px;
+  float: left;
+  margin: 
+}
+
+/* Make the image to responsive */
+.album {
+  display: block;
+  max-height: 150px;
+}
+
+/* The overlay effect - lays on top of the container and over the image */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.albumContainer:hover .overlay {
+  opacity: 1;
 }
