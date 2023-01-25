@@ -9,6 +9,8 @@ const fetch = require("fetch");
 // Initialize Spotify API wrapper
 var SpotifyWebApi = require("spotify-web-api-node");
 
+let tokenExpirationEpoch;
+
 // The object we'll use to interact with the API
 var spotifyApi = new SpotifyWebApi({
   clientId: process.env.CLIENT_ID,
@@ -20,6 +22,11 @@ spotifyApi.clientCredentialsGrant().then(
   function (data) {
     // Save the access token so that it's used in future calls
     spotifyApi.setAccessToken(data.body["access_token"]);
+    spotifyApi.setRefreshToken(data.body['refresh_token']);
+    
+    tokenExpirationEpoch =
+      new Date().getTime() / 1000 + data.body['expires_in'];
+    
     console.log("Got an access token: " + spotifyApi.getAccessToken());
   },
   function (err) {
@@ -29,6 +36,10 @@ spotifyApi.clientCredentialsGrant().then(
     );
   }
 );
+
+function refreshToken() {
+  if (tokenExpirationEpoch - )
+}
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -73,6 +84,8 @@ fastify.get("/", function (request, reply) {
     const artists = require("./src/artists.json");
     const allArtists = Object.keys(artists);
     let currentArtist = allArtists[(allArtists.length * Math.random()) << 0];
+    
+    refreshToken();
 
     spotifyApi.getArtist(artists[currentArtist]).then(
       function (artistData) {

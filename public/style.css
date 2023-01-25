@@ -130,11 +130,12 @@ p {
 }
 
 .title-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
 }
 
 .title-image {
-  align-self: flex-end;
+  justify-self: flex-end;
 }
 
 /* Very light scaling for our illustration */
