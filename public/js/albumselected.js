@@ -30,5 +30,5 @@ async function getAlbumArtwork(albumName) {
     "https://artwork.themoshcrypt.net/api/search?keyword=" + encodeURIComponent(albumName);
   const response = await fetch(url)
   const data = await response.json();
-  return data.results[0].artworkUrl100;
+  return data.results[0].artworkUrl100.replace((.*?)\d(.*?)(.*), "http://a1.mzstatic.com/us/r1000/063/").replace("/100x100bb.jpg", "");
 }
