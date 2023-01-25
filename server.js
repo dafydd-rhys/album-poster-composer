@@ -22,11 +22,11 @@ spotifyApi.clientCredentialsGrant().then(
   function (data) {
     // Save the access token so that it's used in future calls
     spotifyApi.setAccessToken(data.body["access_token"]);
-    spotifyApi.setRefreshToken(data.body['refresh_token']);
-    
+    spotifyApi.setRefreshToken(data.body["refresh_token"]);
+
     tokenExpirationEpoch =
-      new Date().getTime() / 1000 + data.body['expires_in'];
-    
+      new Date().getTime() / 1000 + data.body["expires_in"];
+
     console.log("Got an access token: " + spotifyApi.getAccessToken());
   },
   function (err) {
@@ -41,15 +41,15 @@ function refreshToken() {
   if (tokenExpirationEpoch < new Date().getTime() / 1000) {
     // refresh token
     spotifyApi.refreshAccessToken().then(
-      function(data) {
+      function (data) {
         tokenExpirationEpoch =
-          new Date().getTime() / 1000 + data.body['expires_in'];
-        console.log('Refreshed token');
+          new Date().getTime() / 1000 + data.body["expires_in"];
+        console.log("Refreshed token");
       },
-      function(err) {
-        console.log('Could not refresh the token!', err.message);
+      function (err) {
+        console.log("Could not refresh the token!", err.message);
       }
-    )
+    );
   }
 }
 
@@ -96,7 +96,7 @@ fastify.get("/", function (request, reply) {
     const artists = require("./src/artists.json");
     const allArtists = Object.keys(artists);
     let currentArtist = allArtists[(allArtists.length * Math.random()) << 0];
-    
+
     refreshToken();
 
     spotifyApi.getArtist(artists[currentArtist]).then(
@@ -161,13 +161,21 @@ fastify.post("/", function (request, reply) {
       }
     );
   } else if (artistId) {
-    spotifyApi.getArtistAlbums(artistId, {include_groups: 'album', limit: 50}).then(
+    spotifyApi.getArtistAlbums(artistId, { limit: 50 }).then(
       function (data) {
-        var albums = data.body
-        if (data.total > 50) {
-          spotifyApi.getArtistAlbums(artistId, {include_groups: 'album', limit: 50, offset: 50}).then(
-            function (data) {
-              
+        var totalAlbums = data.body.total;
+        console.log(totalAlbums);
+        var page = 1;
+        while (data.body.offset < totalAlbums) {
+          spotifyApi
+            .getArtistAlbums(artistId, {
+              include_groups: "album",
+              limit: 50,
+              offset: page * 50 + 1,
+            })
+            .then(function (data2) {
+              console.log("Fetched extra " + data2.body.total);
+              data.body.items += data2.body.items;
             });
         }
         return reply
