@@ -1,7 +1,8 @@
 $(document).ready(function () {
   $(document).on("click", ".albumContainer", function () {
-    console.log("album selected: " + $(this).attr("data-value"));
-    $.post("", { album: $(this).attr("data-value") }, function (album, status) {
+    const albumContainer = $(this);
+    console.log("album selected: " + albumContainer.attr("data-value"));
+    $.post("", { album: albumContainer.attr("data-value") }, function (album, status) {
       alert(
         album.name +
           "\n" +
@@ -19,9 +20,12 @@ $(document).ready(function () {
         })
         .join("\n");
       alert(tracks);
-      console.log($(this).children('img:first').get());
-      const colours = getImageColourPalette($(this).children('img:first').get());
-      console.log(colours);
+      
+      const colours = getImageColourPalette(albumContainer.children('img:first').get(0));
+      colours.forEach((colour => {
+        console.log(colour.getHex());
+      }))
+      
       getAlbumArtwork(
         album.name,
         album.artists[0].name,

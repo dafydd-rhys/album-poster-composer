@@ -12,6 +12,7 @@ $(document).ready(function () {
             class: "album",
             src: album.images[0].url,
             alt: album.name,
+            crossOrigin: 'Anonymous'
           });
           var overlay = $("<div>", { class: "overlay", text: album.name });
           $("#albums").prepend(container);
