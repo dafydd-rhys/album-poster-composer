@@ -19,22 +19,26 @@ $(document).ready(function () {
         })
         .join("\n");
       alert(tracks);
-      getAlbumArtwork(album.name).then((image) =>
+      getAlbumArtwork(album.name, album.artists[0].name).then((image) =>
         window.open(image)
       );
     });
   });
 });
 
-async function getAlbumArtwork(albumName) {
+async function getAlbumArtwork(albumName, artistName) {
   const url =
     "https://artwork.themoshcrypt.net/api/search?keyword=" +
     encodeURIComponent(albumName);
   const response = await fetch(url);
   const data = await response.json();
-  
-  console.log("Requested " + albumName);
-  const highestMatch = data.results.find(album => album.collectionName.toUpperCase() == albumName.toUpperCase());
+
+  console.log("Requested " + albumName + " from " + artistName);
+  const highestMatch = data.results.find(
+    (album) =>
+      album.collectionName.toUpperCase() == albumName.toUpperCase() &&
+      album.artistName.toUpperCase() == artistName.toUpperCase()
+  );
   console.log("Found " + highestMatch.collectionName);
 
   return highestMatch.artworkUrl100
