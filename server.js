@@ -77,13 +77,11 @@ fastify.get("/", function (request, reply) {
     spotifyApi.getArtist(artists[currentArtist]).then(
       function (artistData) {
         console.log("Artist information requested for ", artistData.body.name);
-        
-        spotifyApi.getArtistAlbums(artistData.body.id).then(
-          function (albums) {
-            
-          }
-        )
-        
+
+        spotifyApi
+          .getArtistAlbums(artistData.body.id)
+          .then(function (albums) {});
+
         // Add the artist properties to the params object
         params = {
           artist_name: artistData.body.name,
@@ -130,16 +128,20 @@ fastify.post("/", function (request, reply) {
           params = {
             artist_name: data.body.artists.items[0].name,
             artist_image: data.body.artists.items[0].images[0].url,
-            artist_id: data.body.id,
+            artist_id: data.body.artists.items[0].id,
             seo: seo,
           };
-          return reply.view("/src/pages/index.hbs", params);
+          return reply
+            .code(200)
+            .header("Content-Type", "application/json")
+            .send(data.body.artists.items[0]);
         } else {
           params = {
             artist_error: artist,
             seo: seo,
           };
-          return reply.view("/src/pages/index.hbs", params);
+
+          return reply.code(404).send();
         }
       },
       function (err) {
@@ -148,7 +150,8 @@ fastify.post("/", function (request, reply) {
           artist_error: artist,
           seo: seo,
         };
-        return reply.view("/src/pages/index.hbs", params);
+
+        return reply.code(404).send();
       }
     );
   }

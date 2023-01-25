@@ -1,9 +1,9 @@
 $(document).ready(function () {
-  $("artist-submit").click(function () {
+  $("#artist-submit").click(function () {
     console.log("button pressed");
     $.post(
-      "server.js",
-      { name: "Donald Duck", city: "Duckburg" },
+      "",
+      { artist: "Donald Duck" },
       function (data, status) {
         alert("Data: " + data + "\\nStatus: " + status);
       }
