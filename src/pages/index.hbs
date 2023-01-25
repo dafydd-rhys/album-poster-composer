@@ -25,6 +25,10 @@
 
     <!-- Import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css" />
+
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <script src="/js/loadartist.js"></script>
+
   </head>
   <body>
     <div class="wrapper">
@@ -45,26 +49,24 @@
 
         <div class="color-form">
 
-        <p>
+          <p>
             Create a poster of a Spotify album!
-        </p>
+          </p>
 
-          <form class="artist-search" method="post">
-            <label for="artist">
+          <label for="artist">
 
-              <!-- We use the handlebars "#if" statement so the form can adapt to its situation -->
-              {{#if artist_name}}
-                Try another artist?<br />
-              {{else}}
-                What's the artist's name?<br />
-              {{/if}}
-              <input id="artist" name="artist" required="required" type="text" />
-            </label>
+            <!-- We use the handlebars "#if" statement so the form can adapt to its situation -->
+            {{#if artist_name}}
+              Try another artist?<br />
+            {{else}}
+              What's the artist's name?<br />
+            {{/if}}
+            <input id="artist" name="artist" required="required" type="text" />
+          </label>
 
-            <!-- If the user submits a value through the form 
+          <!-- If the user submits a value through the form 
                  it'll be passed to the server in the request body  -->
-            <button type="submit">Submit</button>
-          </form>
+          <button type="button" id="artist-submit">Submit</button>
 
           <!-- This randomize link communicates with the server (server.js) 
                using a querystring and GET request instead of a form POST -->
@@ -73,19 +75,19 @@
         </div>
 
         <div class="illo-container">
-          
+
           {{#if artist_image}}
-          <img
-            src="{{artist_image}}"
-            class="illustration"
-            alt="{{artist_name}}"
-          />
+            <img
+              src="{{artist_image}}"
+              class="illustration"
+              alt="{{artist_name}}"
+            />
           {{else}}
-          <img
-            src="https://cdn.glitch.global/26dbc63d-4f2c-4201-be76-34e4291f6e34/Spotify_logo_without_text.svg?v=1674528395220"
-            class="illustration"
-            alt="Spotify logo"
-          />
+            <img
+              src="https://cdn.glitch.global/26dbc63d-4f2c-4201-be76-34e4291f6e34/Spotify_logo_without_text.svg?v=1674528395220"
+              class="illustration"
+              alt="Spotify logo"
+            />
           {{/if}}
         </div>
 
@@ -95,8 +97,9 @@
             How it works
           </h2>
           <p>
-            Using Spotify's developer API, the album's details and artwork can be fetched.
-            Image processing is used to create a standard paper-sized image with respective album details.
+            Using Spotify's developer API, the album's details and artwork can
+            be fetched. Image processing is used to create a standard
+            paper-sized image with respective album details.
           </p>
         </div>
       </div>
