@@ -4,7 +4,7 @@ $(document).ready(function () {
     $.post("", { artist: $("#artist").val() }, function (artist, status) {
       $.post("", { artistId: artist.id }, function (albums, status) {
         albums.items.forEach(function (album) {
-          $('#albums').prepend($('<img>',{src:album.images[0].}));
+          $('#albums').prepend($('<img>',{class:'album', src:album.images[0].url}));
         })
       });
     });
