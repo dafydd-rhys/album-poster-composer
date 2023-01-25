@@ -174,12 +174,12 @@ fastify.post("/", function (request, reply) {
       }
     );
   } else if (albumId) {
-    getArtistAlbums(artistId).then(
-      function (albums) {
+    spotifyApi.getAlbum('5U4W9E5WsYb2jUQWePT8Xm').then(
+      function (data) {
         return reply
           .code(200)
           .header("Content-Type", "application/json")
-          .send(albums);
+          .send(data.body);
       },
       function (error) {
         return reply.code(404).send();

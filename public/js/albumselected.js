@@ -1,9 +1,9 @@
 $(document).ready(function () {
-  $("#albumContainer").on("click", function () {
-    console.log("album selected");
+  $(document).on('click', '.albumContainer', function () {
+    console.log("album selected: " + $(this).attr("data-value"));
     $.post(
       "",
-      { album: $("this").attr("data-value") },
+      { album: $(this).attr("data-value") },
       function (album, status) {
         alert(album.name);
       }
