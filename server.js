@@ -202,7 +202,7 @@ async function getArtistAlbums(id) {
         })
       ).body;
 
-      albumsToAdd.items.forEach((item) => albumsToAdd.items.push(item));
+      albumsToAdd.items.forEach((item) => albums.items.push(item));
     }
   }
 
