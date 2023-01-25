@@ -115,6 +115,7 @@ fastify.post("/", function (request, reply) {
   let params = { seo: seo };
 
   let artist = request.body.artist;
+  let artistId = request.body.artistId;
 
   if (artist) {
     // Take our form submission, remove whitespace, and convert to lowercase
@@ -154,7 +155,7 @@ fastify.post("/", function (request, reply) {
         return reply.code(404).send();
       }
     );
-  }
+  } else if (artist) {
 });
 
 // Run the server and report out to the logs
