@@ -33,9 +33,14 @@
   <body>
     <div class="wrapper">
       <div class="content" role="main">
-
-        <!-- This is the start of content for our page -->
-        <h1 class="title">Spotify Album Poster</h1>
+        <div class="title-container">
+          <h1 class="title">Spotify Album Poster</h1>
+          <img
+            src="https://cdn.glitch.global/26dbc63d-4f2c-4201-be76-34e4291f6e34/Spotify_logo_without_text.svg?v=1674528395220"
+            class="title-image"
+            alt="Spotify logo"
+          />
+        </div>
 
         {{#if artist_error}}
           <p class="artist-info">
@@ -71,29 +76,12 @@
           <!-- This randomize link communicates with the server (server.js) 
                using a querystring and GET request instead of a form POST -->
           <div>
-            
+
           </div>Looking for a preview?
           <a href="?randomize=go">Use a random artist!</a>
         </div>
 
         <div id="albums" class="albums"></div>
-
-        <div class="illo-container">
-
-          {{#if artist_image}}
-            <img
-              src="{{artist_image}}"
-              class="illustration"
-              alt="{{artist_name}}"
-            />
-          {{else}}
-            <img
-              src="https://cdn.glitch.global/26dbc63d-4f2c-4201-be76-34e4291f6e34/Spotify_logo_without_text.svg?v=1674528395220"
-              class="illustration"
-              alt="Spotify logo"
-            />
-          {{/if}}
-        </div>
 
         <!-- Instructions on using this project -->
         <div class="how-it-works">

@@ -129,6 +129,14 @@ p {
   margin: 2rem 0 0;
 }
 
+.title-container {
+  display: flex;
+}
+
+.title-image {
+  align-self: flex-end;
+}
+
 /* Very light scaling for our illustration */
 .illo-container {
   display: flex;
