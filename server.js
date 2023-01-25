@@ -222,9 +222,9 @@ async function getArtistAlbums(id) {
   return albums;
 }
 
-async function getAlbumArtwork(artistName, albumName) {
+async function getAlbumArtwork(albumName) {
   const url =
-    "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=0875f24f1960c0dcec4a060c3289b0ed&artist=Cher&album=Believe&format=json";
+    "https://artwork.themoshcrypt.net/api/search?keyword=" + encodeURIComponent(albumName);
   const response = fetch.fetch(url)
   const data = await response.json();
   return data;

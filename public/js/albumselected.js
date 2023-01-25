@@ -19,6 +19,16 @@ $(document).ready(function () {
         })
         .join("\n");
       alert(tracks);
+      getAlbumArtwork(album.name).then((image) => window.open(image))
+      
     });
   });
 });
+
+async function getAlbumArtwork(albumName) {
+  const url =
+    "https://artwork.themoshcrypt.net/api/search?keyword=" + encodeURIComponent(albumName);
+  const response = await fetch(url)
+  const data = await response.json();
+  return data.results[0].artworkUrl100;
+}
