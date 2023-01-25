@@ -195,12 +195,19 @@ h2 {
   color: #ffffff;
 }
 
+.albums {
+  max-width: 75%;
+  width: 500px;
+  place-items: center;
+  margin: 0 1rem;
+}
+
 /* Container needed to position the overlay. Adjust the width as needed */
 .albumContainer {
   position: relative;
   max-width: 150px;
   float: left;
-  margin: 
+  margin: 5px;
 }
 
 /* Make the image to responsive */
@@ -216,8 +223,8 @@ h2 {
   background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.5); /* Black see-through */
   color: #f1f1f1;
-  transition: .5s ease;
-  opacity:0;
+  transition: 0.5s ease;
+  opacity: 0;
   color: white;
   font-size: 20px;
   padding: 20px;
