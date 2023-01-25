@@ -19,7 +19,8 @@ $(document).ready(function () {
         })
         .join("\n");
       alert(tracks);
-      const colours = getImageColourPalette(album.images[0].url);
+      console.log($(this).children('img:first').get());
+      const colours = getImageColourPalette($(this).children('img:first').get());
       console.log(colours);
       getAlbumArtwork(
         album.name,
@@ -31,16 +32,9 @@ $(document).ready(function () {
 });
 
 function getImageColourPalette(image) {
-  var img = document.createElement("img");
-  img.setAttribute("src", image);
-
-  img.addEventListener("load", function () {
-    var vibrant = new Vibrant(img);
-    var swatches = vibrant.swatches();
-    for (var swatch in swatches)
-      if (swatches.hasOwnProperty(swatch) && swatches[swatch])
-        console.log(swatch, swatches[swatch].getHex());
-  });
+  var vibrant = new Vibrant(image);
+  var swatches = vibrant.swatches();
+  return swatches;
 }
 
 async function getAlbumArtwork(albumName, artistName, albumThumbnail) {
