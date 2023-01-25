@@ -19,9 +19,11 @@ $(document).ready(function () {
         })
         .join("\n");
       alert(tracks);
-      getAlbumArtwork(album.name, album.artists[0].name, album.images[0].url).then((image) =>
-        window.open(image)
-      );
+      getAlbumArtwork(
+        album.name,
+        album.artists[0].name,
+        album.images[0].url
+      ).then((image) => window.open(image));
     });
   });
 });
@@ -52,12 +54,11 @@ async function getAlbumArtwork(albumName, artistName, albumThumbnail) {
           album.matchPercent = 100 - data.rawMisMatchPercentage;
         });
     });
-    data.results.sort((a,b) => b.matchPercent - a.matchPercent);
+    data.results.sort((a, b) => b.matchPercent - a.matchPercent);
     highestMatch = data.results[0];
     console.log("Found match with match percent: " + highestMatch.matchPercent);
-    console.log(highestMatch);
   }
-  
+
   console.log("Found " + highestMatch.collectionName);
 
   return highestMatch.artworkUrl100
