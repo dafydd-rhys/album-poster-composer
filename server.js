@@ -174,7 +174,7 @@ fastify.post("/", function (request, reply) {
       }
     );
   } else if (albumId) {
-    spotifyApi.getAlbum('5U4W9E5WsYb2jUQWePT8Xm').then(
+    spotifyApi.getAlbum(albumId).then(
       function (data) {
         return reply
           .code(200)

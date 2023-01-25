@@ -5,7 +5,7 @@ $(document).ready(function () {
       "",
       { album: $(this).attr("data-value") },
       function (album, status) {
-        alert(album.name);
+        alert(album.name + "\n" + album.total_tracks + "\n" + album.label + "\n" + album.release_date + "\n" + album.copyrights[0].text);
       }
     );
   });
