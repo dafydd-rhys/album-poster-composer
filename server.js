@@ -145,7 +145,7 @@ fastify.post("/", function (request, reply) {
     // Get an artist
     spotifyApi.searchArtists(artist).then(
       function (data) {
-        console.log("Artist information", data.body.artists.items[0]);
+        console.log("Artist information", data.body.artists.items[0].name);
         if (data.body.artists.items[0] !== undefined) {
           return reply
             .code(200)
@@ -161,11 +161,17 @@ fastify.post("/", function (request, reply) {
       }
     );
   } else if (artistId) {
-    const albums = getArtistAlbums(artistId);
-    return reply
-            .code(200)
-            .header("Content-Type", "application/json")
-            .send(albums);
+    getArtistAlbums(artistId).then(
+      function (albums) {
+        return reply
+          .code(200)
+          .header("Content-Type", "application/json")
+          .send(albums);
+      },
+      function (error) {
+        return reply.code(401).send();
+      }
+    );
   }
 });
 
@@ -182,22 +188,20 @@ fastify.listen(
 );
 
 async function getArtistAlbums(id) {
-  const albums = (await spotifyApi.getArtistAlbums(id), { limit: 50 }).body;
-
+  const albums = (
+    await spotifyApi.getArtistAlbums(id, { include_groups: "album", limit: 50 })
+  ).body;
+  
   if (albums.total > albums.limit) {
-    for (
-      let i = 1;
-      i < Math.ceil(albums.total / albums.limit);
-      i++
-    ) {
+    for (let i = 1; i < Math.ceil(albums.total / albums.limit); i++) {
       const albumsToAdd = (
         await spotifyApi.getArtistAlbums(id, {
+          include_groups: "album",
           limit: 50,
-          offset: albums.limit * i, // Offset each call by the limit * the call's index
+          offset: albums.limit * i,
         })
       ).body;
 
-      // Push the retreived tracks into the array
       albumsToAdd.items.forEach((item) => albumsToAdd.items.push(item));
     }
   }
