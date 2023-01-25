@@ -6,6 +6,8 @@ $(document).ready(function () {
       { album: $(this).attr("data-value") },
       function (album, status) {
         alert(album.name + "\n" + album.total_tracks + "\n" + album.label + "\n" + album.release_date + "\n" + album.copyrights[0].text);
+        const tracks = album.tracks.items.reduce(function (arr, track) {return arr.concat(track.name)}).join("\n");
+        alert(tracks);
       }
     );
   });
