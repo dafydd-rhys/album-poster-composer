@@ -81,6 +81,7 @@ fastify.get("/", function (request, reply) {
         params = {
           artist_name: data.body.name,
           artist_image: data.body.images[0].url,
+          artist_id: data.body.id,
           seo: seo,
         };
 
@@ -122,6 +123,7 @@ fastify.post("/", function (request, reply) {
           params = {
             artist_name: data.body.artists.items[0].name,
             artist_image: data.body.artists.items[0].images[0].url,
+            artist_id: data.body.id,
             seo: seo,
           };
           return reply.view("/src/pages/index.hbs", params);
