@@ -204,7 +204,7 @@ async function getArtistAlbums(id) {
   const albums = (
     await spotifyApi.getArtistAlbums(id, { include_groups: "album", limit: 50 })
   ).body;
-  
+
   if (albums.total > albums.limit) {
     for (let i = 1; i < Math.ceil(albums.total / albums.limit); i++) {
       const albumsToAdd = (
@@ -218,6 +218,18 @@ async function getArtistAlbums(id) {
       albumsToAdd.items.forEach((item) => albums.items.push(item));
     }
   }
+  
+  albums.items.forEach((item) => {
+    item.image = getAlbumArtwork('Dua Lipa', item.name);
+  });
 
   return albums;
+}
+
+async function getAlbumArtwork(artistName, albumName) {
+  const url =
+    "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=0875f24f1960c0dcec4a060c3289b0ed&artist=Cher&album=Believe&format=json";
+  const response = fetch.fetch(url)
+  const data = await response.json();
+  return data.;
 }
