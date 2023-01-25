@@ -2,36 +2,43 @@ $(document).ready(function () {
   $(document).on("click", ".albumContainer", function () {
     const albumContainer = $(this);
     console.log("album selected: " + albumContainer.attr("data-value"));
-    $.post("", { album: albumContainer.attr("data-value") }, function (album, status) {
-      alert(
-        album.name +
-          "\n" +
-          album.total_tracks +
-          "\n" +
-          album.label +
-          "\n" +
-          album.release_date +
-          "\n" +
-          album.copyrights[0].text
-      );
-      const tracks = album.tracks.items
-        .map(function (track) {
-          return track.track_number + " " + track.name.toUpperCase();
-        })
-        .join("\n");
-      alert(tracks);
-      
-      const colours = getImageColourPalette(albumContainer.children('img:first').get(0));
-      colours.forEach((colour => {
-        console.log(colour.getHex());
-      }))
-      
-      getAlbumArtwork(
-        album.name,
-        album.artists[0].name,
-        album.images[0].url
-      ).then((image) => window.open(image));
-    });
+    $.post(
+      "",
+      { album: albumContainer.attr("data-value") },
+      function (album, status) {
+        alert(
+          album.name +
+            "\n" +
+            album.total_tracks +
+            "\n" +
+            album.label +
+            "\n" +
+            album.release_date +
+            "\n" +
+            album.copyrights[0].text
+        );
+        const tracks = album.tracks.items
+          .map(function (track) {
+            return track.track_number + " " + track.name.toUpperCase();
+          })
+          .join("\n");
+        alert(tracks);
+
+        const swatches = getImageColourPalette(
+          albumContainer.children("img:first").get(0)
+        );
+        for (var swatch in swatches) {
+          if (swatches.hasOwnProperty(swatch) && swatches[swatch])
+            console.log(swatches[swatch].getHex());
+        }
+
+        getAlbumArtwork(
+          album.name,
+          album.artists[0].name,
+          album.images[0].url
+        ).then((image) => window.open(image));
+      }
+    );
   });
 });
 
