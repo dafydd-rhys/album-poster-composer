@@ -75,13 +75,20 @@ fastify.get("/", function (request, reply) {
     let currentArtist = allArtists[(allArtists.length * Math.random()) << 0];
 
     spotifyApi.getArtist(artists[currentArtist]).then(
-      function (data) {
-        console.log("Artist information", data.body);
+      function (artistData) {
+        console.log("Artist information requested for ", artistData.body.name);
+        
+        spotifyApi.getArtistAlbums(artistData.body.id).then(
+          function (albums) {
+            
+          }
+        )
+        
         // Add the artist properties to the params object
         params = {
-          artist_name: data.body.name,
-          artist_image: data.body.images[0].url,
-          artist_id: data.body.id,
+          artist_name: artistData.body.name,
+          artist_image: artistData.body.images[0].url,
+          artist_id: artistData.body.id,
           seo: seo,
         };
 
