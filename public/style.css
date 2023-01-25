@@ -206,9 +206,7 @@ h2 {
 
 .albums {
   max-width: 75%;
-  width: 500px;
   place-items: center;
-  margin: 0 1rem;
 }
 
 /* Container needed to position the overlay. Adjust the width as needed */

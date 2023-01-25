@@ -38,7 +38,19 @@ spotifyApi.clientCredentialsGrant().then(
 );
 
 function refreshToken() {
-  if (tokenExpirationEpoch - )
+  if (tokenExpirationEpoch < new Date().getTime() / 1000) {
+    // refresh token
+    spotifyApi.refreshAccessToken().then(
+      function(data) {
+        tokenExpirationEpoch =
+          new Date().getTime() / 1000 + data.body['expires_in'];
+        console.log('Refreshed token');
+      },
+      function(err) {
+        console.log('Could not refresh the token!', err.message);
+      }
+    )
+  }
 }
 
 // Require the fastify framework and instantiate it
@@ -90,10 +102,6 @@ fastify.get("/", function (request, reply) {
     spotifyApi.getArtist(artists[currentArtist]).then(
       function (artistData) {
         console.log("Artist information requested for ", artistData.body.name);
-
-        spotifyApi
-          .getArtistAlbums(artistData.body.id)
-          .then(function (albums) {});
 
         // Add the artist properties to the params object
         params = {
@@ -153,8 +161,15 @@ fastify.post("/", function (request, reply) {
       }
     );
   } else if (artistId) {
-    spotifyApi.getArtistAlbums(artistId).then(
+    spotifyApi.getArtistAlbums(artistId, {include_groups: 'album', limit: 50}).then(
       function (data) {
+        var albums = data.body
+        if (data.total > 50) {
+          spotifyApi.getArtistAlbums(artistId, {include_groups: 'album', limit: 50, offset: 50}).then(
+            function (data) {
+              
+            });
+        }
         return reply
           .code(200)
           .header("Content-Type", "application/json")
