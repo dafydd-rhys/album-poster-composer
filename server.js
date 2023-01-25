@@ -161,36 +161,11 @@ fastify.post("/", function (request, reply) {
       }
     );
   } else if (artistId) {
-    spotifyApi.getArtistAlbums(artistId, { limit: 50 }).then(
-      function (data) {
-        var totalAlbums = data.body.total;
-        console.log(totalAlbums);
-        var page = 1;
-        var offset = 0;
-        while (offset < totalAlbums) {
-          offset = page * 50 + 1;
-          page++;
-          console.log("New offset: " + offset);
-          spotifyApi
-            .getArtistAlbums(artistId, {
-              limit: 50,
-              offset: offset,
-            })
-            .then(function (data2) {
-              console.log("Fetched extra " + data2.body.items.length);
-              data.body.items.concat(data2.body.items);
-            });
-        }
-        return reply
-          .code(200)
-          .header("Content-Type", "application/json")
-          .send(data.body);
-      },
-      function (err) {
-        console.error(err);
-        return reply.code(404).send();
-      }
-    );
+    const albums = getArtistAlbums(artistId);
+    return reply
+            .code(200)
+            .header("Content-Type", "application/json")
+            .send(albums);
   }
 });
 
@@ -205,3 +180,27 @@ fastify.listen(
     console.log(`Your app is listening on ${address}`);
   }
 );
+
+async function getArtistAlbums(id) {
+  const albums = (await spotifyApi.getArtistAlbums(id), { limit: 50 }).body;
+
+  if (albums.total > albums.limit) {
+    for (
+      let i = 1;
+      i < Math.ceil(albums.total / albums.limit);
+      i++
+    ) {
+      const albumsToAdd = (
+        await spotifyApi.getArtistAlbums(id, {
+          limit: 50,
+          offset: albums.limit * i, // Offset each call by the limit * the call's index
+        })
+      ).body;
+
+      // Push the retreived tracks into the array
+      albumsToAdd.items.forEach((item) => albumsToAdd.items.push(item));
+    }
+  }
+
+  return albums;
+}
