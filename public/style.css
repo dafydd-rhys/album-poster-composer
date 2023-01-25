@@ -236,6 +236,7 @@ h2 {
   font-size: 20px;
   padding: 20px;
   text-align: center;
+  width: -webkit-fill-available;
 }
 
 /* When you mouse over the container, fade in the overlay title */

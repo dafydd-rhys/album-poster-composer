@@ -34,7 +34,7 @@ async function getAlbumArtwork(albumName, artistName, albumThumbnail) {
   const data = await response.json();
 
   console.log("Requested " + albumName + " from " + artistName);
-  const highestMatch = data.results.find(
+  var highestMatch = data.results.find(
     (album) =>
       album.collectionName.toUpperCase() == albumName.toUpperCase() &&
       album.artistName.toUpperCase() == artistName.toUpperCase()
@@ -42,19 +42,22 @@ async function getAlbumArtwork(albumName, artistName, albumThumbnail) {
 
   //use image recognition to find closest match if exact match from artist/album names cannot be found
   if (highestMatch == undefined) {
+    console.log("Could not find exact match, analysing album artwork");
     data.results.forEach((album) => {
       var diff = resemble(albumThumbnail)
         .compareTo(album.artworkUrl100)
         .scaleToSameSize()
         .ignoreColors()
         .onComplete(function (data) {
-          album.mismatchPercent = data.rawMisMatchPercentage;
+          album.matchPercent = 100 - data.rawMisMatchPercentage;
         });
     });
-    data.results.sort((a,b) => a.mismatchPercent - b.mismatchPercent);
+    data.results.sort((a,b) => b.matchPercent - a.matchPercent);
     highestMatch = data.results[0];
+    console.log("Found match with match percent: " + highestMatch.matchPercent);
+    console.log(highestMatch);
   }
-
+  
   console.log("Found " + highestMatch.collectionName);
 
   return highestMatch.artworkUrl100
