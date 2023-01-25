@@ -19,14 +19,14 @@ $(document).ready(function () {
         })
         .join("\n");
       alert(tracks);
-      getAlbumArtwork(album.name, album.artists[0].name).then((image) =>
+      getAlbumArtwork(album.name, album.artists[0].name, album.images[0].url).then((image) =>
         window.open(image)
       );
     });
   });
 });
 
-async function getAlbumArtwork(albumName, artistName) {
+async function getAlbumArtwork(albumName, artistName, albumThumbnail) {
   const url =
     "https://artwork.themoshcrypt.net/api/search?keyword=" +
     encodeURIComponent(albumName);
@@ -39,6 +39,22 @@ async function getAlbumArtwork(albumName, artistName) {
       album.collectionName.toUpperCase() == albumName.toUpperCase() &&
       album.artistName.toUpperCase() == artistName.toUpperCase()
   );
+
+  //use image recognition to find closest match if exact match from artist/album names cannot be found
+  if (highestMatch == undefined) {
+    data.results.forEach((album) => {
+      var diff = resemble(albumThumbnail)
+        .compareTo(album.artworkUrl100)
+        .scaleToSameSize()
+        .ignoreColors()
+        .onComplete(function (data) {
+          album.mismatchPercent = data.rawMisMatchPercentage;
+        });
+    });
+    data.results.sort((a,b) => a.mismatchPercent - b.mismatchPercent);
+    highestMatch = data.results[0];
+  }
+
   console.log("Found " + highestMatch.collectionName);
 
   return highestMatch.artworkUrl100
