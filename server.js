@@ -126,36 +126,33 @@ fastify.post("/", function (request, reply) {
       function (data) {
         console.log("Artist information", data.body.artists.items[0]);
         if (data.body.artists.items[0] !== undefined) {
-          params = {
-            artist_name: data.body.artists.items[0].name,
-            artist_image: data.body.artists.items[0].images[0].url,
-            artist_id: data.body.artists.items[0].id,
-            seo: seo,
-          };
           return reply
             .code(200)
             .header("Content-Type", "application/json")
             .send(data.body.artists.items[0]);
         } else {
-          params = {
-            artist_error: artist,
-            seo: seo,
-          };
-
           return reply.code(404).send();
         }
       },
       function (err) {
         console.error(err);
-        params = {
-          artist_error: artist,
-          seo: seo,
-        };
-
         return reply.code(404).send();
       }
     );
-  } else if (artist) {
+  } else if (artistId) {
+    spotifyApi.getArtistAlbums(artistId).then(
+      function (data) {
+        return reply
+          .code(200)
+          .header("Content-Type", "application/json")
+          .send(data.body);
+      },
+      function (err) {
+        console.error(err);
+        return reply.code(404).send();
+      }
+    );
+  }
 });
 
 // Run the server and report out to the logs
