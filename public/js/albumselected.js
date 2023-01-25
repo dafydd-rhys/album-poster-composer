@@ -19,44 +19,23 @@ $(document).ready(function () {
         })
         .join("\n");
       alert(tracks);
-      getAlbumArtwork(album.name, album.images[0].url).then((image) =>
+      getAlbumArtwork(album.name).then((image) =>
         window.open(image)
       );
     });
   });
 });
 
-async function getAlbumArtwork(albumName, albumImage) {
+async function getAlbumArtwork(albumName) {
   const url =
     "https://artwork.themoshcrypt.net/api/search?keyword=" +
     encodeURIComponent(albumName);
   const response = await fetch(url);
   const data = await response.json();
-  await data.results.forEach((album) => {
-    var diff = resemble(album.artworkUrl100)
-      .compareTo(albumImage)
-      .ignoreColors()
-      .ignoreAntialiasing()
-      .scaleToSameSize()
-      .onComplete(function (data) {
-        album.matchPercent = data.misMatchPercentage;
-      });
-  });
   
-  
-  data.results.sort((a, b) => {
-    a.matchPercent > b.matchPercent
-      ? 1
-      : b.matchPercent > a.matchPercent
-      ? -1
-      : 0;
-  });
-  
-  const highestMatch = data.results[0];
-  
-  console.log(data.results.map(function (match) {
-    return match.collectionName + ": " + match.matchPercent
-  }));
+  console.log("Requested " + albumName);
+  const highestMatch = data.results.find(album => album.collectionName.toUpperCase() == albumName.toUpperCase());
+  console.log("Found " + highestMatch.collectionName);
 
   return highestMatch.artworkUrl100
     .replace(/(.*?)\d(.*?)(.*?)thumb\//, "http://a1.mzstatic.com/us/r1000/063/")
