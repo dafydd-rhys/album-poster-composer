@@ -166,16 +166,19 @@ fastify.post("/", function (request, reply) {
         var totalAlbums = data.body.total;
         console.log(totalAlbums);
         var page = 1;
-        while (data.body.offset < totalAlbums) {
+        var offset = 0;
+        while (offset < totalAlbums) {
+          offset = page * 50 + 1;
+          page++;
+          console.log("New offset: " + offset);
           spotifyApi
             .getArtistAlbums(artistId, {
-              include_groups: "album",
               limit: 50,
-              offset: page * 50 + 1,
+              offset: offset,
             })
             .then(function (data2) {
-              console.log("Fetched extra " + data2.body.total);
-              data.body.items += data2.body.items;
+              console.log("Fetched extra " + data2.body.items.length);
+              data.body.items.concat(data2.body.items);
             });
         }
         return reply
