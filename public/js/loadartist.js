@@ -2,6 +2,7 @@ $(document).ready(function () {
   $("#artist-submit").click(function () {
     $.post("", { artist: $("#artist").val() }, function (artist, status) {
       $.post("", { artistId: artist.id }, function (albums, status) {
+        $("#albums").empty();
         albums.items.forEach(function (album) {
           var container = $("<div>", {
             class: "albumContainer",
