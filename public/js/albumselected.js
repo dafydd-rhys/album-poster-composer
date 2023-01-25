@@ -1,3 +1,5 @@
+const resemble = require("resemble");
+
 $(document).ready(function () {
   $(document).on("click", ".albumContainer", function () {
     console.log("album selected: " + $(this).attr("data-value"));
@@ -19,16 +21,27 @@ $(document).ready(function () {
         })
         .join("\n");
       alert(tracks);
-      getAlbumArtwork(album.name).then((image) => window.open(image))
-      
+      getAlbumArtwork(album.name, album.images[0].url).then((image) => window.open(image));
     });
   });
 });
 
-async function getAlbumArtwork(albumName) {
+async function getAlbumArtwork(albumName, albumImage) {
   const url =
-    "https://artwork.themoshcrypt.net/api/search?keyword=" + encodeURIComponent(albumName);
-  const response = await fetch(url)
+    "https://artwork.themoshcrypt.net/api/search?keyword=" +
+    encodeURIComponent(albumName);
+  const response = await fetch(url);
   const data = await response.json();
-  return data.results[0].artworkUrl100.replace(/(.*?)\d(.*?)(.*?)thumb\//, 'http://a1.mzstatic.com/us/r1000/063/').replace("/100x100bb.jpg", "");
+  data.results.forEach((album) => {
+    var diff = resemble(album.artworkUrl100)
+      .compareTo(albumImage)
+      .ignoreColors()
+      .scaleToSameSize()
+      .onComplete(function (data) {
+        album.matchPercent = data.misMatchPercentage;
+      });
+  });
+  return data.results[0].artworkUrl100
+    .replace(/(.*?)\d(.*?)(.*?)thumb\//, "http://a1.mzstatic.com/us/r1000/063/")
+    .replace("/100x100bb.jpg", "");
 }
