@@ -32,22 +32,31 @@ async function getAlbumArtwork(albumName, albumImage) {
     encodeURIComponent(albumName);
   const response = await fetch(url);
   const data = await response.json();
-  data.results.forEach((album) => {
+  await data.results.forEach((album) => {
     var diff = resemble(album.artworkUrl100)
       .compareTo(albumImage)
       .ignoreColors()
+      .ignoreAntialiasing()
       .scaleToSameSize()
       .onComplete(function (data) {
         album.matchPercent = data.misMatchPercentage;
       });
   });
-  var highestMatch = data.results.sort((a, b) => {
+  
+  
+  data.results.sort((a, b) => {
     a.matchPercent > b.matchPercent
       ? 1
       : b.matchPercent > a.matchPercent
       ? -1
       : 0;
   });
+  
+  const highestMatch = data.results[0];
+  
+  console.log(data.results.map(function (match) {
+    return match.collectionName + ": " + match.matchPercent
+  }));
 
   return highestMatch.artworkUrl100
     .replace(/(.*?)\d(.*?)(.*?)thumb\//, "http://a1.mzstatic.com/us/r1000/063/")
