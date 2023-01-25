@@ -137,6 +137,7 @@ fastify.post("/", function (request, reply) {
 
   let artist = request.body.artist;
   let artistId = request.body.artistId;
+  let albumId = request.body.album;
 
   if (artist) {
     // Take our form submission, remove whitespace, and convert to lowercase
@@ -169,7 +170,19 @@ fastify.post("/", function (request, reply) {
           .send(albums);
       },
       function (error) {
-        return reply.code(401).send();
+        return reply.code(404).send();
+      }
+    );
+  } else if (albumId) {
+    getArtistAlbums(artistId).then(
+      function (albums) {
+        return reply
+          .code(200)
+          .header("Content-Type", "application/json")
+          .send(albums);
+      },
+      function (error) {
+        return reply.code(404).send();
       }
     );
   }
