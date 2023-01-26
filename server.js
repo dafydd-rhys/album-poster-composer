@@ -218,8 +218,6 @@ async function getArtistAlbums(id) {
       albumsToAdd.items.forEach((item) => albums.items.push(item));
     }
   }
-  
-  const 
   return albums;
 }
 
