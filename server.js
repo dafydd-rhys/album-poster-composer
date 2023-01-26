@@ -219,6 +219,7 @@ async function getArtistAlbums(id) {
     }
   }
 
+  albums = albums.filter(a => a)
   return albums;
 }
 
