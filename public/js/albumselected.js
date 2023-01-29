@@ -32,15 +32,16 @@ $(document).ready(function () {
             console.log(swatches[swatch].getHex());
         }
 
-        const artwork = getAlbumArtwork(
+        const artwork = await getAlbumArtwork(
           album.name,
           album.artists[0].name,
           album.images[0].url
         );
 
-        var w = window.open();
-        w.document.location.href = "poster_v1.html";
-        w.
+        var w = window.open("poster_v1.html");
+        w.addEventListener('load', function () {
+          w.document.getElementById("albumCover").src = artwork;
+        });
       }
     );
   });
