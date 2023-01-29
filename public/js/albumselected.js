@@ -41,10 +41,21 @@ $(document).ready(function () {
         ).then(function (image) {
           var w = window.open("poster_v1.html");
           w.addEventListener("load", function () {
+            //ARTWORK
             w.document.getElementById("albumCover").src = image;
+            
+            //RELEASED BY
             w.document.getElementById("albumReleasedBy").innerHTML = "AN ALBUM BY " + album.artists[0].name.toUpperCase();
-            w.document.getElementById("albumArtistAndName").innerHTML = album.artists[0].name.toUpperCase() + "\n" + album.name.toUpperCase();
+            
+            //ARTIST AND ALBUM NAME
+            w.document.getElementById("albumArtistAndName").innerHTML = album.artists[0].name.toUpperCase() + "<br>" + album.name.toUpperCase();
+            
+            //COPYRIGHT
+            
+            
+            //TRACK LENGTHS
 
+            //PALETTE
             for (var i = 0; i < 5; i++) {
               w.document.getElementById("paletteImage" + i).backgroundColor =
                 swatches[i].getHex();
