@@ -1,16 +1,24 @@
 <div
   id="poster"
-  style="border: solid 1px; width: 600px; height: 900px; position: relative"
+  style="border: solid 1px; width: 100%; height: 100%; position: relative"
 >
-  <img id="albumCover" alt="album cover" style="margin: 5%" />
+  <img
+    id="albumCover"
+    style="
+      position: absolute;
+      top: 40px;
+      left: 60px;
+      width: calc(100% - 120px);
+    "
+  />
   <table
     id="songsTable"
     style="
       position: absolute;
-      top: 545px;
+      top: calc(100% - (270px + 40px));
       left: 60px;
       width: 250px;
-      height: 235px;
+      height: 270px;
     "
   >
     <tr>
@@ -20,60 +28,92 @@
   <p id="albumLength" style="position: absolute; bottom: 40px; left: 60px">
     Some Text
   </p>
-  <div>
-    <div id="paletteImage0" style="width: 35px; height: 35px">
-      <div id="paletteImage1" style="width: 35px; height: 35px">
-        <div id="paletteImage2" style="width: 35px; height: 35px">
-          <div id="paletteImage3" style="width: 35px; height: 35px">
-            <div id="paletteImage4" style="width: 35px; height: 35px"></div>
-
-            <p
-              id="albumReleasedBy"
-              style="
-                position: absolute;
-                top: 570px;
-                right: 60px;
-                text-align: right;
-              "
-            >
-              Some Text
-            </p>
-            <img
-              id="spotifyCode"
-              alt="spotify code"
-              style="
-                position: absolute;
-                top: 610px;
-                right: 60px;
-                width: 35px;
-                height: 35px;
-              "
-            />
-            <p
-              id="releaseDate"
-              style="
-                position: absolute;
-                top: 670px;
-                right: 60px;
-                text-align: right;
-              "
-            >
-              Some Text
-            </p>
-            <p
-              id="albumArtistAndName"
-              style="
-                position: absolute;
-                bottom: 40px;
-                right: 60px;
-                text-align: right;
-              "
-            >
-              Some Text
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <img
+    id="paletteImage1"
+    style="
+      position: absolute;
+      top: calc(100% - (270px + 75px));
+      left: calc(100% - (75px + 60px));
+      width: 35px;
+      height: 35px;
+    "
+  />
+  <img
+    id="paletteImage2"
+    style="
+      position: absolute;
+      top: calc(100% - (270px + 75px));
+      left: calc(100% - (120px + 60px));
+      width: 35px;
+      height: 35px;
+    "
+  />
+  <img
+    id="paletteImage3"
+    style="
+      position: absolute;
+      top: calc(100% - (270px + 75px));
+      left: calc(100% - (165px + 60px));
+      width: 35px;
+      height: 35px;
+    "
+  />
+  <img
+    id="paletteImage4"
+    style="
+      position: absolute;
+      top: calc(100% - (270px + 75px));
+      left: calc(100% - (210px + 60px));
+      width: 35px;
+      height: 35px;
+    "
+  />
+  <img
+    id="paletteImage5"
+    style="
+      position: absolute;
+      top: calc(100% - (270px + 75px));
+      left: calc(100% - (255px + 60px));
+      width: 35px;
+      height: 35px;
+    "
+  />
+  <p
+    id="albumReleasedBy"
+    style="
+      position: absolute;
+      top: calc(100% - (245px + 40px));
+      right: 60px;
+      text-align: right;
+    "
+  >
+    Some Text
+  </p>
+  <img
+    id="spotifyCode"
+    style="
+      position: absolute;
+      top: calc(100% - (185px + 40px));
+      right: 60px;
+      width: 35px;
+      height: 35px;
+    "
+  />
+  <p
+    id="releaseDate"
+    style="
+      position: absolute;
+      top: calc(100% - (125px + 40px));
+      right: 60px;
+      text-align: right;
+    "
+  >
+    Some Text
+  </p>
+  <p
+    id="albumArtistAndName"
+    style="position: absolute; bottom: 40px; right: 60px; text-align: right"
+  >
+    Some Text
+  </p>
 </div>
