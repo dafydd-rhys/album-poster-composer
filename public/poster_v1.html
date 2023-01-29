@@ -1,118 +1,40 @@
-<div
-  id="poster"
-  style="border: solid 1px; width: 100%; height: 100%; position: relative"
->
-  <img
-    id="albumCover"
-    style="
-      position: absolute;
-      top: 40px;
-      left: 60px;
-      width: calc(100% - 120px);
-    "
-  />
+<div id="poster" style="border: solid 1px; width: 21cm; height: 29.7cm">
+  <img id="albumCover" alt="album cover" style="margin: 5%; display: block" />
   <table
     id="songsTable"
-    style="
-      position: absolute;
-      top: calc(100% - (270px + 40px));
-      left: 60px;
-      width: 250px;
-      height: 270px;
-    "
+    style="top: 545px; left: 60px; width: 250px; height: 235px"
   >
     <tr>
       <td id="table-text">Some Text</td>
     </tr>
   </table>
-  <p id="albumLength" style="position: absolute; bottom: 40px; left: 60px">
-    Some Text
-  </p>
-  <img
-    id="paletteImage1"
-    style="
-      position: absolute;
-      top: calc(100% - (270px + 75px));
-      left: calc(100% - (75px + 60px));
-      width: 35px;
-      height: 35px;
-    "
-  />
-  <img
-    id="paletteImage2"
-    style="
-      position: absolute;
-      top: calc(100% - (270px + 75px));
-      left: calc(100% - (120px + 60px));
-      width: 35px;
-      height: 35px;
-    "
-  />
-  <img
-    id="paletteImage3"
-    style="
-      position: absolute;
-      top: calc(100% - (270px + 75px));
-      left: calc(100% - (165px + 60px));
-      width: 35px;
-      height: 35px;
-    "
-  />
-  <img
-    id="paletteImage4"
-    style="
-      position: absolute;
-      top: calc(100% - (270px + 75px));
-      left: calc(100% - (210px + 60px));
-      width: 35px;
-      height: 35px;
-    "
-  />
-  <img
-    id="paletteImage5"
-    style="
-      position: absolute;
-      top: calc(100% - (270px + 75px));
-      left: calc(100% - (255px + 60px));
-      width: 35px;
-      height: 35px;
-    "
-  />
-  <p
-    id="albumReleasedBy"
-    style="
-      position: absolute;
-      top: calc(100% - (245px + 40px));
-      right: 60px;
-      text-align: right;
-    "
-  >
+  <div style="display: flex; flex-flow: row">
+    <div id="paletteImage0" style="width: 35px; height: 35px" />
+    <div id="paletteImage1" style="width: 35px; height: 35px" />
+    <div id="paletteImage2" style="width: 35px; height: 35px" />
+    <div id="paletteImage3" style="width: 35px; height: 35px" />
+    <div id="paletteImage4" style="width: 35px; height: 35px" />
+  </div>
+  <p id="albumReleasedBy" style="top: 570px; right: 60px; text-align: right">
     Some Text
   </p>
   <img
     id="spotifyCode"
-    style="
-      position: absolute;
-      top: calc(100% - (185px + 40px));
-      right: 60px;
-      width: 35px;
-      height: 35px;
-    "
+    alt="spotify code"
+    style="top: 610px; right: 60px; width: 35px; height: 35px"
   />
-  <p
-    id="releaseDate"
-    style="
-      position: absolute;
-      top: calc(100% - (125px + 40px));
-      right: 60px;
-      text-align: right;
-    "
-  >
+  <p id="releaseDate" style="top: 670px; right: 60px; text-align: right">
     Some Text
   </p>
+  <p id="albumLength" style="left: 60px">Some Text</p>
   <p
     id="albumArtistAndName"
-    style="position: absolute; bottom: 40px; right: 60px; text-align: right"
+    style="
+      bottom: 40px;
+      right: 60px;
+      text-align: right;
+      justify-content: flex-end;
+    "
   >
     Some Text
   </p>

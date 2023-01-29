@@ -38,7 +38,7 @@ spotifyApi.clientCredentialsGrant().then(
 );
 
 function refreshToken() {
-  if (tokenExpirationEpoch < new Date().getTime() / 1000) {
+  if (tokenExpirationEpoch > new Date().getTime() / 1000) {
     // refresh token
     spotifyApi.refreshAccessToken().then(
       function (data) {
