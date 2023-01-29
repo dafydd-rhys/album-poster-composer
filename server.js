@@ -28,6 +28,7 @@ spotifyApi.clientCredentialsGrant().then(
       new Date().getTime() / 1000 + data.body["expires_in"];
 
     console.log("Got an access token: " + spotifyApi.getAccessToken());
+    console.log("Got a refresh token: " + spotifyApi.getRefreshToken());
   },
   function (err) {
     console.log(
@@ -38,12 +39,14 @@ spotifyApi.clientCredentialsGrant().then(
 );
 
 function refreshToken() {
-  if (tokenExpirationEpoch > new Date().getTime() / 1000) {
+  if (tokenExpirationEpoch < new Date().getTime() / 1000) {
     // refresh token
     spotifyApi.refreshAccessToken().then(
       function (data) {
         tokenExpirationEpoch =
           new Date().getTime() / 1000 + data.body["expires_in"];
+        
+        spotifyApi.setAccessToken(data.body['access_token']);
         console.log("Refreshed token");
       },
       function (err) {
@@ -138,6 +141,8 @@ fastify.post("/", function (request, reply) {
   let artist = request.body.artist;
   let artistId = request.body.artistId;
   let albumId = request.body.album;
+  
+  refreshToken();
 
   if (artist) {
     // Take our form submission, remove whitespace, and convert to lowercase

@@ -194,10 +194,10 @@ label {
 }
 
 /* Instructions */
-.instructions {
+.how-it-works {
   margin: 1rem auto 0;
 }
-.instructions p {
+.how-it-works p {
   font-size: 1rem;
 }
 h2 {
@@ -207,6 +207,7 @@ h2 {
 .albums {
   max-width: 75%;
   place-items: center;
+  margin: 1rem auto 0;
 }
 
 /* Container needed to position the overlay. Adjust the width as needed */

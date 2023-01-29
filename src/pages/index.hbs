@@ -52,7 +52,6 @@
             <!-- The server script passes artistError if the user submission can't be matched -->
             Hmm. Couldn't find
             <b>"{{artist_error}}"</b>.
-            <a href="?randomize=go">Try a random artist?</a>
           </p>
         {{/if}}
 
@@ -76,13 +75,6 @@
           <!-- If the user submits a value through the form 
                  it'll be passed to the server in the request body  -->
           <button type="button" id="artist-submit">Submit</button>
-
-          <!-- This randomize link communicates with the server (server.js) 
-               using a querystring and GET request instead of a form POST -->
-          <div>
-
-          </div>Looking for a preview?
-          <a href="?randomize=go">Use a random artist!</a>
         </div>
 
         <div id="albums" class="albums"></div>
