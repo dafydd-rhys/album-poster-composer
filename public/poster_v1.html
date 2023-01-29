@@ -1,29 +1,30 @@
 <style>
-	.paletteColour {
-		width: 35px;
-		height: 35px;
-	}
+.paletteColour {
+    width: 35px;
+    height: 35px;
+}
 </style>
 
 <div id="poster" style="border: solid 1px; width:21cm; height:29.7cm;"> 
 	<img id="albumCover" alt="album cover" style="margin: 5%; width: -webkit-fill-available; max-width: -webkit-fill-available">
- 	<table id="songsTable" style="margin-left: 5%;">
-		<tr>
-			<td id="table-text">Track title</td>
-		</tr>
-	</table>
-	<div style="display: flex; flex-flow:row; float: right">
-		<div class="paletteColour" id="paletteColour0"></div>
-		<div class="paletteColour" id="paletteColour1"></div>
-		<div class="paletteColour" id="paletteColour2"></div>
-		<div class="paletteColour" id="paletteColour3"></div>
-		<div class="paletteColour" id="paletteColour4"></div>
-	</div>
-	<div style="display: inline-block; float: right">
-		<p id="albumReleasedBy" style="text-align: right">AN ALBUM BY ...</p>
-		<img id="spotifyCode" alt="spotify code" style="">
-	</div>
-	<p id="releaseDate" style="text-align: right; float: right">Some Text</p>
-	<p id="albumLength" style="float: left">Some Text</p>
-	<p id="albumArtistAndName" style="float: right">Some Text</p>
+  <div id="infoContainer" style="margin: 5%; width: -webkit-fill-available">
+    <table id="songsTable" style="margin-left: 5%;">
+      <tr>
+        <td id="table-text">Track title</td>
+      </tr>
+    </table>
+    <div style="display: flex; flex-flow:row; float: right">
+      <div class="paletteColour" id="paletteColour0"></div>
+      <div class="paletteColour" id="paletteColour1"></div>
+      <div class="paletteColour" id="paletteColour2"></div>
+      <div class="paletteColour" id="paletteColour3"></div>
+      <div class="paletteColour" id="paletteColour4"></div>
+    </div>
+    <div style="display: block; float: right">
+      <p id="albumReleasedBy" style="text-align: right">AN ALBUM BY ...</p>
+      <img id="spotifyCode" alt="spotify code" style=""> </div>
+    <p id="releaseDate" style="text-align: right; float: right">Some Text</p>
+    <p id="albumLength" style="float: left">Some Text</p>
+    <p id="albumArtistAndName" style="float: right">Some Text</p>
+  </div>
 </div>
