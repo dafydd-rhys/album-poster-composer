@@ -59,6 +59,7 @@ $(document).ready(function () {
             for (var i = 0; i < 5; i++) {
               w.document.getElementById("paletteImage" + i).backgroundColor =
                 swatches[i].getHex();
+              console.log(swatches[i].getHex());
             }
           });
         });
