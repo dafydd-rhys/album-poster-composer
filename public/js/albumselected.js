@@ -32,11 +32,15 @@ $(document).ready(function () {
             console.log(swatches[swatch].getHex());
         }
 
-        getAlbumArtwork(
+        const artwork = getAlbumArtwork(
           album.name,
           album.artists[0].name,
           album.images[0].url
-        ).then((image) => window.open(image));
+        );
+
+        var w = window.open();
+        w.document.location.href = "poster_v1.html";
+        w.
       }
     );
   });
