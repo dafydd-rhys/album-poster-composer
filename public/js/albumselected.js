@@ -27,20 +27,28 @@ $(document).ready(function () {
         const swatches = getImageColourPalette(
           albumContainer.children("img:first").get(0)
         );
+        
+        swatches.sort((a, b) => {
+          swatches[a].getPopulation() > swatches[b].getPopulation();
+        });
+        
         for (var swatch in swatches) {
-          if (swatches.hasOwnProperty(swatch) && swatches[swatch])
+          if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
             console.log(swatches[swatch].getHex());
+          }
         }
 
-        const artwork = await getAlbumArtwork(
+        getAlbumArtwork(
           album.name,
           album.artists[0].name,
           album.images[0].url
-        );
-
-        var w = window.open("poster_v1.html");
-        w.addEventListener('load', function () {
-          w.document.getElementById("albumCover").src = artwork;
+        ).then(function (image) {
+          var w = window.open("poster_v1.html");
+          w.addEventListener("load", function () {
+            w.document.getElementById("albumCover").src = image;
+            
+            
+          });
         });
       }
     );
