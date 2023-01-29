@@ -22,15 +22,17 @@ $(document).ready(function () {
             return track.track_number + " " + track.name.toUpperCase();
           })
           .join("\n");
-        alert(tracks);
 
         const swatches = getImageColourPalette(
           albumContainer.children("img:first").get(0)
         );
+        
+        var artworkColours = [];
 
         for (var swatch in swatches) {
           if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
             console.log(swatches[swatch].getHex());
+            artworkColours.push(swatches[swatch].getHex());
           }
         }
 
@@ -56,11 +58,14 @@ $(document).ready(function () {
             //TRACK LENGTHS
 
             //PALETTE
-            for (var i = 0; i < 5; i++) {
-              w.document.getElementById("paletteImage" + i).backgroundColor =
-                swatches[i].getHex();
-              console.log(swatches[i].getHex());
+            for (var i = 0; i < artworkColours.length; i++) {
+              w.document.getElementById("paletteImage" + i).style.backgroundColor =
+                artworkColours[i];
+              console.log(artworkColours[i]);
             }
+            
+            //TRACKS
+            //tracks
           });
         });
       }
