@@ -27,11 +27,7 @@ $(document).ready(function () {
         const swatches = getImageColourPalette(
           albumContainer.children("img:first").get(0)
         );
-        
-        swatches.sort((a, b) => {
-          swatches[a].getPopulation() > swatches[b].getPopulation();
-        });
-        
+
         for (var swatch in swatches) {
           if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
             console.log(swatches[swatch].getHex());
@@ -46,8 +42,13 @@ $(document).ready(function () {
           var w = window.open("poster_v1.html");
           w.addEventListener("load", function () {
             w.document.getElementById("albumCover").src = image;
-            
-            
+            w.document.getElementById("albumReleasedBy").innerHTML = "AN ALBUM BY " + album.artists[0].name.toUpperCase();
+            w.document.getElementById("albumArtistAndName").innerHTML = album.artists[0].name.toUpperCase() + "\n" + album.name.toUpperCase();
+
+            for (var i = 0; i < 5; i++) {
+              w.document.getElementById("paletteImage" + i).backgroundColor =
+                swatches[i].getHex();
+            }
           });
         });
       }
