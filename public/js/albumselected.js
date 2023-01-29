@@ -59,7 +59,7 @@ $(document).ready(function () {
 
             //PALETTE
             for (var i = 0; i < artworkColours.length; i++) {
-              w.document.getElementById("paletteImage" + i).style.backgroundColor =
+              w.document.getElementById("paletteColour" + i).style.backgroundColor =
                 artworkColours[i];
               console.log(artworkColours[i]);
             }
