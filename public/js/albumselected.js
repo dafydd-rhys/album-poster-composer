@@ -26,22 +26,24 @@ $(document).ready(function () {
         console.log(album);
         
         //ALBUM DURATION
-        let trackDuration = 0;
+        let albumDuration = 0;
         
         for (const track of album.tracks.items) {
-          trackDuration = trackDuration + track.duration_ms;
+          albumDuration = albumDuration + track.duration_ms;
         }
         
         //HH:SS
-        let trackMinutes = (trackDuration/60)/1000;
-        let trackMinutesFloor = Math.floor(trackMinutes);
-        let trackSeconds = Math.floor((trackMinutes - trackMinutesFloor) * 60);
-        let trackDurationString = trackMinutesFloor + ":" + trackSeconds;
+        let albumMinutes = (albumDuration/60)/1000;
+        let albumMinutesFloor = Math.floor(albumMinutes);
+        let albumSeconds = Math.floor((albumMinutes - albumMinutesFloor) * 60);
+        let albumDurationLength = albumMinutesFloor + ":" + albumSeconds;
         
-        //ALBUM 
+        let albumReleaseYear = album.release_date.substr(0, 4);
+        let workYear = parseInt(albumReleaseYear) - 1;
         
-        console.log(trackDurationString);
-        
+        //ALBUM LENGTH AND RELEASE YEAR
+        console.log(albumDurationLength + " " + workYear + "-" + albumReleaseYear);
+            
         const swatches = getImageColourPalette(
           albumContainer.children("img:first").get(0)
         );
