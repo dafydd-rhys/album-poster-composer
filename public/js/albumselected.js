@@ -114,14 +114,20 @@ function getAlbumNumber(number) {
   let albumNumber = "";
   let lastDigit = number % 10;
   
-  if (lastDigit == 1) {
-    albumNumber = number + "st";
-  } else if (lastDigit == 2) {
-    albumNumber = number + "nd";
-  } else if (lastDigit == 3) {
-    albumNumber = number + "rd";
-  } else {
-    albumNumber = number + "th";
+  switch (lastDigit) {
+    case 1:
+      albumNumber = number + "st";
+      break;
+    case 2:
+      albumNumber = number + "nd";
+      break;
+    case 3:
+      albumNumber = number + "rd";
+      break;
+    default:
+      albumNumber = number + "th";
+      break;
+      
   }
 
   return albumNumber + " STUDIO ALBUM";
