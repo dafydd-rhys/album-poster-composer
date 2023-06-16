@@ -63,13 +63,16 @@ $(document).ready(function () {
             w.document.getElementById("albumCover").src = image;
             
             //RELEASED BY
-            w.document.getElementById("albumReleasedBy").innerHTML = "AN ALBUM BY " + album.artists[0].name.toUpperCase();
+            w.document.getElementById("albumArtistBy").innerHTML = "AN ALBUM BY " + album.artists[0].name.toUpperCase();
+            
+            //RELEASED BY
+            w.document.getElementById("albumReleasedBy").innerHTML = "RELEASED BY " + album.label.toUpperCase();
             
             //ARTIST AND ALBUM NAME
             w.document.getElementById("albumArtistAndName").innerHTML = album.artists[0].name.toUpperCase() + "<br>" + album.name.toUpperCase();
             
             //COPYRIGHT
-            
+            //album.copyrights[0].text
             
             //TRACK NAMES
             w.document.getElementById("songsTitles").innerHTML = tracks;
@@ -82,7 +85,7 @@ $(document).ready(function () {
             }
             
             //CODE
-            w.document.getElementById("spotifyCode").src = "https://scannables.scdn.co/uri/plain/png/ffffff/black/320/" + album.uri;
+            w.document.getElementById("spotifyCode").src = "https://scannables.scdn.co/uri/plain/png/ffffff/black/256/" + album.uri;
           });
         });
       }

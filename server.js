@@ -125,6 +125,7 @@ fastify.get("/", function (request, reply) {
     params = {
       seo: seo,
     };
+    refreshToken();
     return reply.view("/src/pages/index.hbs", params);
   }
 });
