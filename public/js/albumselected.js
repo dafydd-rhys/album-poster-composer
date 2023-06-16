@@ -32,6 +32,13 @@ $(document).ready(function () {
           trackDuration = trackDuration + track.duration_ms;
         }
         
+        let trackMinutes = (trackDuration/60)/1000;
+        let trackMinutesFloor = Math.floor(trackMinutes);
+        let trackSeconds = Math.floor((trackMinutes - trackMinutesFloor) * 60);
+        let trackDurationString = trackMinutesFloor + ":" + trackSeconds;
+        
+        console.log(trackDurationString);
+        
         const swatches = getImageColourPalette(
           albumContainer.children("img:first").get(0)
         );
@@ -65,7 +72,7 @@ $(document).ready(function () {
             
             
             //TRACK NAMES
-            
+            w.document.getElementById("songsTitles").innerHTML = tracks;
 
             //PALETTE
             for (var i = 0; i < artworkColours.length; i++) {
@@ -76,17 +83,12 @@ $(document).ready(function () {
             
             //CODE
             w.document.getElementById("spotifyCode").src = "https://scannables.scdn.co/uri/plain/png/ffffff/black/320/" + album.uri;
-            
-            //TRACKS
-            w.document.getElementById("albumReleasedBy").innerHTML = tracks
           });
         });
       }
     );
   });
 });
-
-function
 
 function getImageColourPalette(image) {
   var vibrant = new Vibrant(image);
