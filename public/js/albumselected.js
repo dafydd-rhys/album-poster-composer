@@ -75,7 +75,7 @@ $(document).ready(function () {
             w.document.getElementById("albumCover").src = image;
             
             //RELEASED BY
-            w.document.getElementById("albumArtistBy").innerHTML = "AN ALBUM BY " + album.artists[0].name.toUpperCase();
+            w.document.getElementById("albumBy").innerHTML = "AN ALBUM BY " + album.artists[0].name.toUpperCase();
             
             //RELEASED BY
             w.document.getElementById("albumReleasedBy").innerHTML = "RELEASED BY " + album.label.toUpperCase();
@@ -106,8 +106,18 @@ $(document).ready(function () {
 });
 
 function getAlbumNumber(number) {
-  let album
-  date.setMonth(monthNumber - 1);
+  let albumNumber = "";
+  let lastDigit = number % 10;
+  
+  if (lastDigit == 1) {
+    albumNumber = number + "st";
+  } else if (lastDigit == 2) {
+    albumNumber = number + "nd";
+  } else if (lastDigit == 3) {
+    albumNumber = number + "rd";
+  } else {
+    albumNumber = number + "th";
+  }
 
   return albumNumber + " STUDIO ALBUM";
 }
