@@ -23,9 +23,16 @@ $(document).ready(function () {
           })
           .join("\n");
         
-        console.log(album);
+        let trackDuration = 0;
         
-
+        console.log(album.tracks.items);
+        
+        for (const track of album.tracks.items) {
+          console.log(track);
+          trackDuration = trackDuration + track.duration_ms;
+        }
+        
+        console.log(trackDuration);
 
         const swatches = getImageColourPalette(
           albumContainer.children("img:first").get(0)
