@@ -1,5 +1,6 @@
 $(document).ready(function () {
   $(document).on("click", ".albumContainer", function () {
+    let albumNumber = $(this).index();
     const albumContainer = $(this);
     console.log("album selected: " + albumContainer.attr("data-value"));
     $.post(
@@ -48,7 +49,7 @@ $(document).ready(function () {
         //ALBUM LENGTH AND RELEASE DATE/YEAR
         console.log(albumDurationLength + " " + workYear + "-" + albumReleaseYear);
         console.log("OUT NOW / " + getMonthName(parseInt(albumReleaseMonth)) + " " + albumReleaseDay + ", " + albumReleaseYear);
-        console.log(" S");
+        console.log(getAlbumNumber(albumNumber + 1));
         
         const swatches = getImageColourPalette(
           albumContainer.children("img:first").get(0)
@@ -103,6 +104,13 @@ $(document).ready(function () {
     );
   });
 });
+
+function getAlbumNumber(number) {
+  let album
+  date.setMonth(monthNumber - 1);
+
+  return albumNumber + " STUDIO ALBUM";
+}
 
 function getMonthName(monthNumber) {
   const date = new Date();
