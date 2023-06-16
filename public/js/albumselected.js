@@ -22,7 +22,7 @@ $(document).ready(function () {
           .map(function (track) {
             return track.track_number + " " + track.name.toUpperCase();
           })
-          .join("\n");
+          .join("<br>");
         
         console.log(album);
         
