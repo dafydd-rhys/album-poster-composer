@@ -70,34 +70,40 @@ $(document).ready(function () {
           album.images[0].url
         ).then(function (image) {
           var w = window.open("poster_v1.html");
-          w.addEventListener("load", function () {
+          w.addEventListener("load", function () {     
             //ARTWORK
             w.document.getElementById("albumCover").src = image;
             
-            //RELEASED BY
-            w.document.getElementById("albumBy").innerHTML = "AN ALBUM BY " + album.artists[0].name.toUpperCase();
-            
-            //RELEASED BY
-            w.document.getElementById("albumReleasedBy").innerHTML = "RELEASED BY " + album.label.toUpperCase();
-            
-            //ARTIST AND ALBUM NAME
-            w.document.getElementById("albumArtistAndName").innerHTML = album.artists[0].name.toUpperCase() + "<br>" + album.name.toUpperCase();
-            
-            //COPYRIGHT
-            //album.copyrights[0].text
-            
+            //------ LEFT SIDE ------       
             //TRACK NAMES
-            w.document.getElementById("songsTitles").innerHTML = tracks;
-
+            w.document.getElementById("songsTitles").innerHTML = tracks; 
+            //LENGTH AND WORK YEARS
+            w.document.getElementById("albumLengthAndDate").innerHTML = albumDurationLength + " " + workYear + "-" + albumReleaseYear;
+            //RELEASED BY (LABEL)
+            w.document.getElementById("albumReleasedByLeft").innerHTML = "RELEASED BY " + album.label.toUpperCase();
+            
+            
+            //------ RIGHT SIDE ------
             //PALETTE
             for (var i = 0; i < artworkColours.length; i++) {
               w.document.getElementById("paletteColour" + i).style.backgroundColor =
                 artworkColours[i];
               console.log(artworkColours[i]);
-            }
-            
-            //CODE
+            }         
+            //RELEASED BY (ARTIST)
+            w.document.getElementById("albumBy").innerHTML = "AN ALBUM BY " + album.artists[0].name.toUpperCase();       
+            //SPOTIFY URL CODE
             w.document.getElementById("spotifyCode").src = "https://scannables.scdn.co/uri/plain/png/ffffff/black/256/" + album.uri;
+            //RELEASE DATE
+            w.document.getElementById("albumReleasedDate").innerHTML = "OUT NOW / " + getMonthName(parseInt(albumReleaseMonth)) + " " + albumReleaseDay + ", " + albumReleaseYear;
+            //RELEASED BY (LABEL)
+            w.document.getElementById("albumReleasedBy").innerHTML = "RELEASED BY " + album.label.toUpperCase();
+            //ALBUM NUMBER
+            w.document.getElementById("albumNumber").innerHTML = getAlbumNumber(albumNumber + 1);
+            //ARTIST NAME
+            w.document.getElementById("albumArtist").innerHTML = album.artists[0].name.toUpperCase();
+            //ALBUM NAME
+            w.document.getElementById("albumArtist").innerHTML = album.name.toUpperCase();          
           });
         });
       }
