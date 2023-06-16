@@ -38,12 +38,18 @@ $(document).ready(function () {
         let albumSeconds = Math.floor((albumMinutes - albumMinutesFloor) * 60);
         let albumDurationLength = albumMinutesFloor + ":" + albumSeconds;
         
+        //PARSING DATE FROM JSON
         let albumReleaseYear = album.release_date.substr(0, 4);
+        let albumReleaseMonth = album.release_date.substr(5, 7);
+        let albumReleaseDay = album.release_date.substr(8, 10);
+        
         let workYear = parseInt(albumReleaseYear) - 1;
         
-        //ALBUM LENGTH AND RELEASE YEAR
+        //ALBUM LENGTH AND RELEASE DATE/YEAR
         console.log(albumDurationLength + " " + workYear + "-" + albumReleaseYear);
-            
+        console.log("OUT NOW / " + getMonthName(parseInt(albumReleaseMonth)) + " " + albumReleaseDay + ", " + albumReleaseYear);
+        console.log(" S");
+        
         const swatches = getImageColourPalette(
           albumContainer.children("img:first").get(0)
         );
@@ -97,6 +103,13 @@ $(document).ready(function () {
     );
   });
 });
+
+function getMonthName(monthNumber) {
+  const date = new Date();
+  date.setMonth(monthNumber - 1);
+
+  return date.toLocaleString('en-US', { month: 'long' }).toUpperCase();
+}
 
 function getImageColourPalette(image) {
   var vibrant = new Vibrant(image);
