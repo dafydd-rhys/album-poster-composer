@@ -78,11 +78,10 @@ $(document).ready(function () {
             //TRACK NAMES
             w.document.getElementById("songsTitles").innerHTML = tracks; 
             //LENGTH AND WORK YEARS
-            w.document.getElementById("albumLengthAndDate").innerHTML = albumDurationLength + " " + workYear + "-" + albumReleaseYear;
+            w.document.getElementById("albumLengthAndYear").innerHTML = albumDurationLength + " " + workYear + "-" + albumReleaseYear;
             //RELEASED BY (LABEL)
             w.document.getElementById("albumReleasedByLeft").innerHTML = "RELEASED BY " + album.label.toUpperCase();
-            
-            
+                   
             //------ RIGHT SIDE ------
             //PALETTE
             for (var i = 0; i < artworkColours.length; i++) {
@@ -95,7 +94,7 @@ $(document).ready(function () {
             //SPOTIFY URL CODE
             w.document.getElementById("spotifyCode").src = "https://scannables.scdn.co/uri/plain/png/ffffff/black/256/" + album.uri;
             //RELEASE DATE
-            w.document.getElementById("albumReleasedDate").innerHTML = "OUT NOW / " + getMonthName(parseInt(albumReleaseMonth)) + " " + albumReleaseDay + ", " + albumReleaseYear;
+            w.document.getElementById("albumReleaseDate").innerHTML = "OUT NOW / " + getMonthName(parseInt(albumReleaseMonth)) + " " + albumReleaseDay + ", " + albumReleaseYear;
             //RELEASED BY (LABEL)
             w.document.getElementById("albumReleasedBy").innerHTML = "RELEASED BY " + album.label.toUpperCase();
             //ALBUM NUMBER
@@ -103,7 +102,7 @@ $(document).ready(function () {
             //ARTIST NAME
             w.document.getElementById("albumArtist").innerHTML = album.artists[0].name.toUpperCase();
             //ALBUM NAME
-            w.document.getElementById("albumArtist").innerHTML = album.name.toUpperCase();          
+            w.document.getElementById("albumName").innerHTML = album.name.toUpperCase();          
           });
         });
       }
