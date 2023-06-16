@@ -23,7 +23,7 @@ $(document).ready(function () {
           })
           .join("\n");
         
-        console.log(album.uri);
+        console.log(album);
         
         //ALBUM DURATION
         let trackDuration = 0;
@@ -64,7 +64,8 @@ $(document).ready(function () {
             //COPYRIGHT
             
             
-            //TRACK LENGTHS
+            //TRACK NAMES
+            
 
             //PALETTE
             for (var i = 0; i < artworkColours.length; i++) {
@@ -74,16 +75,18 @@ $(document).ready(function () {
             }
             
             //CODE
-            w.document.getElementById("spotifyCode").src = "https://scannables.scdn.co/uri/plain/png/ffffff/black/640/spotifyCode/" + album.uri;
+            w.document.getElementById("spotifyCode").src = "https://scannables.scdn.co/uri/plain/png/ffffff/black/320/" + album.uri;
             
             //TRACKS
-            //tracks
+            w.document.getElementById("albumReleasedBy").innerHTML = tracks
           });
         });
       }
     );
   });
 });
+
+function
 
 function getImageColourPalette(image) {
   var vibrant = new Vibrant(image);
