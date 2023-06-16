@@ -4,38 +4,51 @@
     height: 35px;
 }
 
+#albumCover {
+    margin: 0 10% 0 10%;
+    width: -webkit-fill-available;
+    max-width: -webkit-fill-available;
+}
+
+#infoContainer {
+    margin: 0 10% 0 10%;
+    width: -webkit-fill-available;
+}
+
 #songsTitles,
 #albumLengthAndYear,
 #albumReleasedByLeft {
     margin: 0;
-    padding: 2;
-    font-size: 14px;
-    font-family: "Franko";
+    padding: 0;
+    font-size: 16px;
+    font-family: "Franko", Arial, sans-serif;
 }
 </style>
 
-<div id="poster" style="border: solid 1px; width:21cm; height:29.7cm;"> 
-	<img id="albumCover" alt="album cover" style="margin-left: 10%; margin-right: 10%; margin-top: 6.25%; width: -webkit-fill-available; max-width: -webkit-fill-available">
-  <div id="infoContainer" style="margin: 10%; width: -webkit-fill-available">
-    <!-- Left side data -->
-    <p id="songsTitles" style="width: 50px; white-space: pre"/>
-    <p id="albumLengthAndYear" style="text-align: left;">MM:SS YYYY-YYYY</p>
-    <p id="albumReleasedByLeft" style="text-align: left;">RELEASED BY ...</p>
-    <!-- Right side data -->
-    <div style="display: flex; flex-flow:row; float: right; grid-column-gap: 10px">
-      <div class="paletteColour" id="paletteColour0"></div>
-      <div class="paletteColour" id="paletteColour1"></div>
-      <div class="paletteColour" id="paletteColour2"></div>
-      <div class="paletteColour" id="paletteColour3"></div>
-      <div class="paletteColour" id="paletteColour4"></div>
+<div id="poster" style="border: solid 1px; width:21cm; height:29.7cm;">
+    <img id="albumCover" alt="album cover">
+    <div id="infoContainer">
+        <!-- Left side data -->
+        <p id="songsTitles" style="width: 50px; white-space: pre"></p>
+        <p id="albumLengthAndYear" style="text-align: left;">MM:SS YYYY-YYYY</p>
+        <p id="albumReleasedByLeft" style="text-align: left;">RELEASED BY ...</p>
+        <!-- Right side data -->
+        <div style="display: flex; flex-flow:row; float: right; grid-column-gap: 10px">
+            <div class="paletteColour" id="paletteColour0"></div>
+            <div class="paletteColour" id="paletteColour1"></div>
+            <div class="paletteColour" id="paletteColour2"></div>
+            <div class="paletteColour" id="paletteColour3"></div>
+            <div class="paletteColour" id="paletteColour4"></div>
+        </div>
+        <div style="display: block; float: right">
+            <p id="albumBy" style="text-align: right">AN ALBUM BY ...</p>
+            <img id="spotifyCode" alt="spotify code">
+        </div>
+        <p id="albumReleaseDate" style="text-align: right">OUT NOW / ...</p>
+        <p id="albumReleasedBy" style="text-align: right">RELEASED BY ...</p>
+        <p id="albumNumber" style="text-align: right">... STUDIO ALBUM</p>
+        <p id="albumArtist" style="text-align: right">ARTIST NAME</p>
+        <p id="albumName" style="text-align: right">ALBUM NAME</p>
     </div>
-    <div style="display: block; float: right">
-      <p id="albumBy" style="text-align: right">AN ALBUM BY ...</p>
-      <img id="spotifyCode" alt="spotify code" style=""> </div>
-      <p id="albumReleaseDate" style="text-align: right">OUT NOW / ...</p>
-      <p id="albumReleasedBy" style="text-align: right">RELEASED BY ...</p>
-      <p id="albumNumber" style="text-align: right">... STUDIO ALBUM</p>
-      <p id="albumArtist" style="float: right">ARTIST NAME</p>
-      <p id="albumName" style="float: right">ALBUM NAME</p>
-  </div>
 </div>
+
