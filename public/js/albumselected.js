@@ -32,10 +32,13 @@ $(document).ready(function () {
           trackDuration = trackDuration + track.duration_ms;
         }
         
+        //HH:SS
         let trackMinutes = (trackDuration/60)/1000;
         let trackMinutesFloor = Math.floor(trackMinutes);
         let trackSeconds = Math.floor((trackMinutes - trackMinutesFloor) * 60);
         let trackDurationString = trackMinutesFloor + ":" + trackSeconds;
+        
+        //ALBUM 
         
         console.log(trackDurationString);
         
