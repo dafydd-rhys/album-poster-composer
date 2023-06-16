@@ -22,6 +22,10 @@ $(document).ready(function () {
             return track.track_number + " " + track.name.toUpperCase();
           })
           .join("\n");
+        
+        console.log(album);
+        
+
 
         const swatches = getImageColourPalette(
           albumContainer.children("img:first").get(0)
