@@ -50,10 +50,8 @@ $(document).ready(function () {
         );
         
         var artworkColours = [];
-
         for (var swatch in swatches) {
           if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
-            console.log(swatches[swatch].getRgb());
             artworkColours.push(swatches[swatch].getRgb());
           }
         }
@@ -89,7 +87,7 @@ $(document).ready(function () {
               // Set the fill color to black
               console.log("oi" + artworkColours[i].r)
               
-              context.fillStyle = "rgb(" + redValue + ", " + greenValue + ", " + blueValue + ")";
+              context.fillStyle = "rgb(" + artworkColours[i][] + ", " + artworkColours[i].g + ", " + artworkColours[i].b + ")";
 
               // Fill the entire canvas with black color
               context.fillRect(0, 0, canvas.width, canvas.height);
