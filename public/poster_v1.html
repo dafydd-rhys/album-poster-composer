@@ -1,66 +1,278 @@
 <style>
-.paletteColour {
-    width: 44px;
-    height: 44px;
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Inter:400,700");
+/* The following line is used to measure usage of this code. You can remove it if you want. */
+@import url("https://px.animaapp.com/648d215ff54ade17cf7651ca.648d2160b28ec4c8efe5b7a3.648d216299d0ec1b8c284cc4.hcp.png");
+
+.screen a {
+  display: contents;
+  text-decoration: none;
 }
 
-#albumCover {
-    margin: 6.25% 10% 6.25% 10%;
-    width: -webkit-fill-available;
-    max-width: -webkit-fill-available;
+.container-center-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  pointer-events: none;
+  width: 100%;
 }
 
-#infoContainer {
-    margin: 0 10% 0 10%;
-    width: -webkit-fill-available;
+.container-center-horizontal > * {
+  flex-shrink: 0;
+  pointer-events: auto;
 }
 
-#songsTitles,
-#albumLengthAndYear,
-#albumReleasedByLeft {
-    margin: 0;
-    padding: 0;
-    font-family: "Franko", Arial, sans-serif;
+* {
+  box-sizing: border-box;
 }
 
-#songsTitles {
-    margin-bottom: 5px;
-    font-size: 12px;
+.index {
+  align-items: flex-end;
+  background-color: #ffffff;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  height: 594px;
+  padding: 23px 39px;
+  width: 420px;
 }
 
-#albumLengthAndYear {
-    margin: 2px 0;
-    font-size: 10px;
+.index .image-3 {
+  height: 341px;
+  margin-top: 4px;
+  object-fit: cover;
+  width: 341px;
 }
-  
-#albumReleasedByLeft {
-    font-size: 10px;
+
+.index .flex-row {
+  align-items: center;
+  display: flex;
+  gap: 73px;
+  height: 185px;
+  margin-right: 1px;
+  min-width: 337px;
 }
+
+.index .flex-col {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 185px;
+  width: 105px;
+}
+
+.index .address {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 7.6px;
+  min-height: 167px;
+  width: 105px;
+}
+
+.index .x5848-2019-2020-re {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 7.6px;
+  min-height: 15px;
+  width: 105px;
+}
+
+.index .flex-col-1 {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.0px;
+  min-height: 178px;
+  width: 159px;
+}
+
+.index .image-container {
+  align-items: flex-start;
+  display: flex;
+  margin-right: 1px;
+  min-width: 149px;
+}
+
+.index .image-4 {
+  height: 24px;
+  object-fit: cover;
+  width: 24px;
+}
+
+.index .image {
+  height: 24px;
+  margin-left: 7px;
+  object-fit: cover;
+  width: 24px;
+}
+
+.index .image-6 {
+  height: 24px;
+  margin-left: 8px;
+  object-fit: cover;
+  width: 24px;
+}
+
+.index .album-by-juice-wrld {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+  letter-spacing: 0.28px;
+  line-height: 7.6px;
+  margin-top: 6px;
+  text-align: right;
+  white-space: nowrap;
+  width: 105px;
+}
+
+.index .image-10 {
+  height: 12px;
+  margin-right: 1px;
+  margin-top: 7px;
+  object-fit: cover;
+  width: 63px;
+}
+
+.index .out-now-july-10-2 {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 9.5px;
+  margin-right: 1px;
+  margin-top: 15px;
+  min-height: 23px;
+  text-align: right;
+  width: 140px;
+}
+
+.index .juice-wrld {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxl);
+  font-weight: 400;
+  letter-spacing: 0.44px;
+  line-height: 7.6px;
+  margin-right: 3px;
+  margin-top: 53px;
+  min-height: 10px;
+  text-align: right;
+  width: 74px;
+}
+
+.index .legends-never-die {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxl);
+  font-weight: 700;
+  letter-spacing: 0.77px;
+  line-height: 7.6px;
+  margin-right: 3px;
+  margin-top: 10px;
+  min-height: 11px;
+  text-align: right;
+  width: 156px;
+}
+
+:root { 
+  --black: #000000;
+ 
+  --font-size-l: 6.5px;
+  --font-size-m: 5px;
+  --font-size-xl: 7px;
+  --font-size-xxl: 11px;
+  --font-size-xxxl: 14px;
+ 
+  --font-family-inter: "Inter", Helvetica;
+}
+
 </style>
 
-<div id="poster" style="border: solid 1px; width:21cm; height:29.7cm;">
-    <img id="albumCover" alt="album cover">
-    <div id="infoContainer">
-        <!-- Left side data -->
-        <p id="songsTitles" style="width: 50px; white-space: pre"></p>
-        <p id="albumLengthAndYear" style="text-align: left;">MM:SS YYYY-YYYY</p>
-        <p id="albumReleasedByLeft" style="text-align: left;">RELEASED BY ...</p>
-        <!-- Right side data -->
-        <div style="display: flex; flex-flow:row; float: right; grid-column-gap: 14px">
-            <div class="paletteColour" id="paletteColour0"></div>
-            <div class="paletteColour" id="paletteColour1"></div>
-            <div class="paletteColour" id="paletteColour2"></div>
-            <div class="paletteColour" id="paletteColour3"></div>
-            <div class="paletteColour" id="paletteColour4"></div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!--<meta name=description content="This site was generated with Anima. www.animaapp.com"/>-->
+    <!-- <link rel="shortcut icon" type=image/png href="https://animaproject.s3.amazonaws.com/home/favicon.png" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="https://animaproject.s3.amazonaws.com/home/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="stylesheet" type="text/css" href="styleguide.css" />
+    <link rel="stylesheet" type="text/css" href="globals.css" />
+  </head>
+  <body style="margin: 0; background: #ffffff; border: solid 1px; width:21cm; height:29.7cm;">
+    <input type="hidden" id="anPageName" name="page" value="index" />
+    <div class="container-center-horizontal">
+      <div class="index screen">
+        <img
+          class="image-3"
+          src="https://anima-uploads.s3.amazonaws.com/projects/648d216299d0ec1b8c284cc4/releases/648d21b54b3241ce2bdde590/img/image-3@2x.png"
+          alt="image 3"
+        />
+        <div class="flex-row">
+          <div class="flex-col">
+            <p class="address">
+              1 ANXIETY - INTRO<br />2 CONVERSATIONS<br />3 TITANIC<br />4 BAD ENERGY<br />5 RIGHTEOUS<br />6 BLOOD ON
+              MY JEANS<br />7 SLIME<br />8 TELL ME U LUV ME<br />9 HATE THE OTHER SIDE<br />10 GET THROUGH IT<br />11
+              LIFE’S A MESS<br />12 COME &amp; GO<br />13 I WANT IT<br />14 FIGHTING DEMONS<br />15 WISHING WELL<br />16
+              SCREW JUICE<br />17 UP UP AND AWAY<br />18 THE MAN, THE MYTH, THE LEGEND<br />19 STAY HIGH<br />20 CAN’T
+              DIE<br />21 MAN OF THE YEAR<br />22 JUICE WRLD SPEAKS FROM HEAVEN
+            </p>
+            <p class="x5848-2019-2020-re">58:48 2019 - 2020<br />RELEASED BY GRADE A &amp; INTERSCOPE</p>
+          </div>
+          <div class="flex-col-1">
+            <div class="image-container">
+              <img
+                class="image-4"
+                src="https://anima-uploads.s3.amazonaws.com/projects/648d216299d0ec1b8c284cc4/releases/648d21b54b3241ce2bdde590/img/image-4@2x.png"
+                alt="image 4"
+              />
+              <img
+                class="image"
+                src="https://anima-uploads.s3.amazonaws.com/projects/648d216299d0ec1b8c284cc4/releases/648d21b54b3241ce2bdde590/img/image-5@2x.png"
+                alt="image 5"
+              />
+              <img
+                class="image-6"
+                src="https://anima-uploads.s3.amazonaws.com/projects/648d216299d0ec1b8c284cc4/releases/648d21b54b3241ce2bdde590/img/image-6@2x.png"
+                alt="image 6"
+              />
+              <img
+                class="image"
+                src="https://anima-uploads.s3.amazonaws.com/projects/648d216299d0ec1b8c284cc4/releases/648d21b54b3241ce2bdde590/img/image-7@2x.png"
+                alt="image 7"
+              />
+              <img
+                class="image"
+                src="https://anima-uploads.s3.amazonaws.com/projects/648d216299d0ec1b8c284cc4/releases/648d21b54b3241ce2bdde590/img/image-8@2x.png"
+                alt="image 8"
+              />
+            </div>
+            <div class="album-by-juice-wrld">ALBUM BY JUICE WRLD</div>
+            <img
+              class="image-10"
+              src="https://anima-uploads.s3.amazonaws.com/projects/648d216299d0ec1b8c284cc4/releases/648d21b54b3241ce2bdde590/img/image-10@2x.png"
+              alt="image 10"
+            />
+            <p class="out-now-july-10-2">
+              OUT NOW / JULY 10, 2020<br />RELEASED BY GRADE A &amp; INTERSCOPE<br />3rd STUDIO ALBUM
+            </p>
+            <div class="juice-wrld">JUICE WRLD</div>
+            <div class="legends-never-die">LEGENDS NEVER DIE</div>
+          </div>
         </div>
-        <div style="display: block; float: right">
-            <p id="albumBy" style="text-align: right">AN ALBUM BY ...</p>
-            <img id="spotifyCode" alt="spotify code">
-        </div>
-        <p id="albumReleaseDate" style="text-align: right">OUT NOW / ...</p>
-        <p id="albumReleasedBy" style="text-align: right">RELEASED BY ...</p>
-        <p id="albumNumber" style="text-align: right">... STUDIO ALBUM</p>
-        <p id="albumArtist" style="text-align: right">ARTIST NAME</p>
-        <p id="albumName" style="text-align: right">ALBUM NAME</p>
+      </div>
     </div>
-</div>
+  </body>
+</html>
