@@ -52,13 +52,11 @@ $(document).ready(function () {
         var artworkColours = [];
 
         for (var swatch in swatches) {
-  if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
-    var color = swatches[swatch].getHex();
-    var convertedColor = tinycolor(color).toHexString();
-    console.log(convertedColor);
-    artworkColours.push(convertedColor);
-  }
-}
+          if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
+            console.log(swatches[swatch].getRgb());
+            artworkColours.push(swatches[swatch].getRgb());
+          }
+        }
 
         getAlbumArtwork(
           album.name,
@@ -89,7 +87,9 @@ $(document).ready(function () {
               var context = canvas.getContext("2d");
 
               // Set the fill color to black
-              context.fillStyle = artworkColours[i];
+              console.log("oi" + artworkColours[i].r)
+              
+              context.fillStyle = "rgb(" + redValue + ", " + greenValue + ", " + blueValue + ")";
 
               // Fill the entire canvas with black color
               context.fillRect(0, 0, canvas.width, canvas.height);
