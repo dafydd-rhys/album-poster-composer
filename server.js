@@ -163,7 +163,7 @@ fastify.post("/", function (request, reply) {
         }
       },
       function (err) {
-        console.error(err);
+        console.log(err);
         return reply.code(404).send();
       }
     );
