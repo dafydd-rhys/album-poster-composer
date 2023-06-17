@@ -42,14 +42,8 @@ $(document).ready(function () {
         //PARSING DATE FROM JSON
         let albumReleaseYear = album.release_date.substr(0, 4);
         let albumReleaseMonth = album.release_date.substr(5, 7);
-        let albumReleaseDay = album.release_date.substr(8, 10);
-        
+        let albumReleaseDay = album.release_date.substr(8, 10); 
         let workYear = parseInt(albumReleaseYear) - 1;
-        
-        //ALBUM LENGTH AND RELEASE DATE/YEAR
-        console.log(albumDurationLength + " " + workYear + "-" + albumReleaseYear);
-        console.log("OUT NOW / " + getMonthName(parseInt(albumReleaseMonth)) + " " + albumReleaseDay + ", " + albumReleaseYear);
-        console.log(getAlbumNumber(albumNumber + 1));
         
         const swatches = getImageColourPalette(
           albumContainer.children("img:first").get(0)
