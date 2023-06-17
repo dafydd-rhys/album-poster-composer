@@ -78,7 +78,7 @@ $(document).ready(function () {
             //TRACK NAMES
             w.document.getElementById("songsTitles").innerHTML = tracks; 
             //LENGTH AND WORK YEARS
-            w.document.getElementById("albumLengthAndYear").innerHTML = albumDurationLength + " " + workYear + "-" + albumReleaseYear;
+            w.document.querySelector(".albumLengthAndYear").innerHTML = albumDurationLength + " " + workYear + "oi-" + albumReleaseYear;
             //RELEASED BY (LABEL)
             w.document.getElementById("albumReleasedByLeft").innerHTML = "RELEASED BY " + album.label.toUpperCase();
                    
