@@ -87,13 +87,11 @@ $(document).ready(function () {
               var context = canvas.getContext("2d");
 
               // Set the fill color to black
-              context.fillStyle = "black";
+              context.fillStyle = artworkColours[i];
 
               // Fill the entire canvas with black color
               context.fillRect(0, 0, canvas.width, canvas.height);
               w.document.querySelector(".paletteColour" + i).src = canvas.toDataURL("image/png"); 
-
-              w.document.querySelector(".paletteColour" + i).style.backgroundColor = artworkColours[i];
             }         
             //RELEASED BY (ARTIST)
             w.document.querySelector(".albumBy").innerHTML = "AN ALBUM BY " + album.artists[0].name.toUpperCase();       
