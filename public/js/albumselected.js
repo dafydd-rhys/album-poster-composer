@@ -79,7 +79,7 @@ $(document).ready(function () {
               + "<br /> RELEASED BY " + album.label.toUpperCase();
             //------ LEFT SIDE ------       
             //TRACK NAMES
-            w.document.querySelector(".songsTitles").innerHTML = tracks; 
+            w.document.querySelector(".songTitles").innerHTML = tracks; 
                    
             //------ RIGHT SIDE ------
             //PALETTE
