@@ -22,7 +22,7 @@ $(document).ready(function () {
           .map(function (track) {
             return track.track_number + " " + cutName(track.name.toUpperCase());
           })
-          .join("<br>");
+          .join("<br />");
         
         console.log(album);
         
@@ -71,40 +71,33 @@ $(document).ready(function () {
         ).then(function (image) {
           var w = window.open("poster_v1.html");
           w.addEventListener("load", function () {     
+            
+            //ARTWORK
+            w.document.querySelector(".albumCover").src = image;
             //LENGTH AND WORK YEARS
             w.document.querySelector(".albumLengthAndYear").innerHTML = albumDurationLength + " " + workYear + "-" + albumReleaseYear 
               + "<br /> RELEASED BY " + album.label.toUpperCase();
-            //ARTWORK
-            w.document.getElementById("albumCover").src = image;
-            
             //------ LEFT SIDE ------       
             //TRACK NAMES
-            w.document.getElementById("songsTitles").innerHTML = tracks; 
-            
-            //RELEASED BY (LABEL)
-            w.document.getElementById("albumReleasedByLeft").innerHTML = "RELEASED BY " + album.label.toUpperCase();
+            w.document.querySelector(".songsTitles").innerHTML = tracks; 
                    
             //------ RIGHT SIDE ------
             //PALETTE
             for (var i = 0; i < artworkColours.length; i++) {
-              w.document.getElementById("paletteColour" + i).style.backgroundColor =
+              w.document.querySelector(".paletteColour" + i).style.backgroundColor =
                 artworkColours[i];
-              console.log(artworkColours[i]);
             }         
             //RELEASED BY (ARTIST)
-            w.document.getElementById("albumBy").innerHTML = "AN ALBUM BY " + album.artists[0].name.toUpperCase();       
+            w.document.querySelector(".albumBy").innerHTML = "AN ALBUM BY " + album.artists[0].name.toUpperCase();       
             //SPOTIFY URL CODE
-            w.document.getElementById("spotifyCode").src = "https://scannables.scdn.co/uri/plain/png/ffffff/black/256/" + album.uri;
-            //RELEASE DATE
-            w.document.getElementById("albumReleaseDate").innerHTML = "OUT NOW / " + getMonthName(parseInt(albumReleaseMonth)) + " " + albumReleaseDay + ", " + albumReleaseYear;
-            //RELEASED BY (LABEL)
-            w.document.getElementById("albumReleasedBy").innerHTML = "RELEASED BY " + album.label.toUpperCase();
-            //ALBUM NUMBER
-            w.document.getElementById("albumNumber").innerHTML = getAlbumNumber(albumNumber + 1);
+            w.document.querySelector(".spotifyCode").src = "https://scannables.scdn.co/uri/plain/png/ffffff/black/256/" + album.uri;
+            //RELEASED BY (DATE, LABEL, NUMBER)
+            w.document.querySelector(".albumRelease").innerHTML = "OUT NOW / " + getMonthName(parseInt(albumReleaseMonth)) + " " + albumReleaseDay + ", " + albumReleaseYear
+            + "<br />" + "RELEASED BY " + album.label.toUpperCase() + "<br />" + getAlbumNumber(albumNumber + 1);
             //ARTIST NAME
-            w.document.getElementById("albumArtist").innerHTML = album.artists[0].name.toUpperCase();
+            w.document.querySelector(".albumArtist").innerHTML = album.artists[0].name.toUpperCase();
             //ALBUM NAME
-            w.document.getElementById("albumName").innerHTML = album.name.toUpperCase();          
+            w.document.querySelector(".albumName").innerHTML = album.name.toUpperCase();          
           });
         });
       }
