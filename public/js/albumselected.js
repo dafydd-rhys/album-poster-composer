@@ -76,11 +76,35 @@ $(document).ready(function () {
             w.document.querySelector(".songTitles").innerHTML = tracks; 
                    
             //------ RIGHT SIDE ------
-            //PALETTE
-            for (var i = 0; i < artworkColours.length; i++) {
-              w.document.querySelector(".paletteColour" + i).style.backgroundColor =
-                artworkColours[i];
-            }         
+// PALETTE
+for (var i = 0; i < artworkColours.length; i++) {
+  var images = w.document.querySelectorAll(".paletteColour" + i);
+  images.forEach(function (image) {
+    var img = new Image();
+    img.crossOrigin = "anonymous"; // Allow cross-origin image manipulation
+    img.onload = function () {
+      var canvas = document.createElement("canvas");
+      var context = canvas.getContext("2d");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      context.drawImage(img, 0, 0);
+
+      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      var pixels = imageData.data;
+
+      for (var j = 0; j < pixels.length; j += 4) {
+        pixels[j] = artworkColours[i].r;     // Red component
+        pixels[j + 1] = artworkColours[i].g; // Green component
+        pixels[j + 2] = artworkColours[i].b; // Blue component
+        // pixels[j + 3] is the alpha channel, we're not modifying it here
+      }
+
+      context.putImageData(imageData, 0, 0);
+      image.src = canvas.toDataURL("image/png");
+    };
+    img.src = image.src;
+  });
+}
             //RELEASED BY (ARTIST)
             w.document.querySelector(".albumBy").innerHTML = "AN ALBUM BY " + album.artists[0].name.toUpperCase();       
             //SPOTIFY URL CODE
