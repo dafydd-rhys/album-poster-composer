@@ -20,7 +20,7 @@ $(document).ready(function () {
         );
         const tracks = album.tracks.items
           .map(function (track) {
-            return track.track_number + " " + track.name.toUpperCase();
+            return track.track_number + " " + cutName(track.name.toUpperCase());
           })
           .join("<br>");
         
@@ -131,6 +131,17 @@ function getAlbumNumber(number) {
   }
 
   return albumNumber + " STUDIO ALBUM";
+}
+
+function cutName(songName) {
+  let bracketSplit = songName.split('(');
+  let hyphenSplit = songName.split('-');
+  
+  if (bracketSplit[0].length > hyphenSplit[0].length) {
+    return hyphenSplit[0];
+  } else {
+    return bracketSplit[0];
+  }
 }
 
 function getMonthName(monthNumber) {
