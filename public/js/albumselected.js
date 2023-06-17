@@ -52,11 +52,13 @@ $(document).ready(function () {
         var artworkColours = [];
 
         for (var swatch in swatches) {
-          if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
-            console.log(swatches[swatch].getHex());
-            artworkColours.push(swatches[swatch].getHex());
-          }
-        }
+  if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
+    var color = swatches[swatch].getHex();
+    var convertedColor = tinycolor(color).toHexString();
+    console.log(convertedColor);
+    artworkColours.push(convertedColor);
+  }
+}
 
         getAlbumArtwork(
           album.name,

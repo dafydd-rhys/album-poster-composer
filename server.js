@@ -164,7 +164,7 @@ fastify.post("/", function (request, reply) {
       },
       function (err) {
         console.log(err);
-        return err;
+        return reply.code(404).send();
       }
     );
   } else if (artistId) {
