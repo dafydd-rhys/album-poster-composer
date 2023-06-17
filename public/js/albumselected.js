@@ -71,14 +71,16 @@ $(document).ready(function () {
         ).then(function (image) {
           var w = window.open("poster_v1.html");
           w.addEventListener("load", function () {     
+            //LENGTH AND WORK YEARS
+            w.document.querySelector(".albumLengthAndYear").innerHTML = albumDurationLength + " " + workYear + "-" + albumReleaseYear 
+              + "<br /> RELEASED BY " + album.label.toUpperCase();
             //ARTWORK
             w.document.getElementById("albumCover").src = image;
             
             //------ LEFT SIDE ------       
             //TRACK NAMES
             w.document.getElementById("songsTitles").innerHTML = tracks; 
-            //LENGTH AND WORK YEARS
-            w.document.querySelector(".albumLengthAndYear").innerHTML = albumDurationLength + " " + workYear + "oi-" + albumReleaseYear;
+            
             //RELEASED BY (LABEL)
             w.document.getElementById("albumReleasedByLeft").innerHTML = "RELEASED BY " + album.label.toUpperCase();
                    
