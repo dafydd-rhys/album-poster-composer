@@ -50,7 +50,7 @@ function refreshToken() {
         console.log("Refreshed token");
       },
       function (err) {
-        console.log("Could not refresh the token.", err.message);
+        console.log("Could not refresh the token!", err.message);
       }
     );
   }

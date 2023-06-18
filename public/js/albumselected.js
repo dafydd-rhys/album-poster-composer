@@ -105,21 +105,16 @@ $(document).ready(function () {
             + "<br />" + "RELEASED BY " + album.label.toUpperCase() + "<br />" + getAlbumNumber(albumNumber + 1);
             //ARTIST NAME
             let albumArtist = w.document.querySelector(".albumArtist");
-            albumArtist.innerHTML = album.artists[0].name.toUpperCase();
+            
             //ALBUM NAME
             let lines = Math.ceil(album.name.length / 16);
-            let margin = 10;
-            
             if (lines < 4) {
               let margin = 127 - ((lines-1) * 43.5)
+              albumArtist.style.marginTop = margin + "px";
             }
             
-            
-            w.document.querySelector(".albumName").innerHTML = album.name.toUpperCase();  
-            //1 = 25
-            //2 = 10
-            //3 = 55
-            
+            albumArtist.innerHTML = album.artists[0].name.toUpperCase();
+            w.document.querySelector(".albumName").innerHTML = album.name.toUpperCase();      
           });
         });
       }
