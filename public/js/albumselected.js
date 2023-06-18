@@ -55,22 +55,6 @@ $(document).ready(function () {
             artworkColours.push(swatches[swatch].getRgb());
           }
         }
-
-        var colorThief = new ColorThief();
-
-var sourceImage = document.getElementById("image");
-
-// Display main color
-// e.g [125, 189, 193]
-console.log(
-    colorThief.getColor(sourceImage)
-);
-
-// Display palette of colors
-// e.g [[55,37,29],[213,193,136],[110,204,223]]
-console.log(
-    colorThief.getPalette(sourceImage)
-);
         
         getAlbumArtwork(
           album.name,
@@ -93,6 +77,22 @@ console.log(
             songTitles.style.lineHeight = spacing + "px";
             songTitles.innerHTML = tracks; 
             
+            
+            var colorThief = new ColorThief();
+
+var sourceImage = document.getElementById("image");
+
+// Display main color
+// e.g [125, 189, 193]
+console.log(
+    colorThief.getColor(sourceImage)
+);
+
+// Display palette of colors
+// e.g [[55,37,29],[213,193,136],[110,204,223]]
+console.log(
+    colorThief.getPalette(sourceImage)
+);
                    
             //------ RIGHT SIDE ------
             //PALETTE
