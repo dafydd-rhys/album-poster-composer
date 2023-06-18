@@ -81,13 +81,23 @@
   min-width: 679px;
 }
 
-.index .flex-col {
-  align-items: flex-start;
+.songContainer {
   display: flex;
   flex-direction: column;
-  gap: 11px;
-  min-height: 368px;
-  width: 286px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.songContainer > * {
+  margin-bottom: 20px;
+}
+
+.songContainer.large-spacing > * {
+  margin-bottom: 40px;
+}
+
+.songContainer.small-spacing > * {
+  margin-bottom: 10px;
 }
 
 .index .songTitles {

@@ -71,51 +71,20 @@ $(document).ready(function () {
               + "<br /> RELEASED BY " + album.label.toUpperCase();
             //------ LEFT SIDE ------       
             //TRACK NAMES
-            // Update song names and adjust vertical spacing
-const updateSongTitles = () => {
-  const tracks = album.tracks.items.map(function (track) {
-    return track.track_number + " " + cutName(track.name.toUpperCase());
-  });
+const songContainer = w.document.querySelector(".songTitles");
+songContainer.innerHTML = tracks;
 
-  const songTitlesContainer = w.document.querySelector(".songTitles");
-  songTitlesContainer.innerHTML = '';
+// Determine the number of songs
+const numberOfSongs = album.tracks.items.length;
 
-  for (const track of tracks) {
-    const songTitle = document.createElement('p');
-    songTitle.innerText = track;
-    songTitlesContainer.appendChild(songTitle);
-  }
-
-  adjustVerticalSpacing();
-};
-
-// Adjust vertical spacing
-const adjustVerticalSpacing = () => {
-  const songTitlesContainer = w.document.querySelector(".songTitles");
-  const containerHeight = songTitlesContainer.offsetHeight;
-  const songTitles = songTitlesContainer.getElementsByTagName("p");
-  const numTitles = songTitles.length;
-
-  // Reset margin bottom
-  for (let i = 0; i < numTitles - 1; i++) {
-    songTitles[i].style.marginBottom = "0";
-  }
-
-  // Calculate new spacing
-  const totalHeight = songTitlesContainer.scrollHeight;
-  const spacing = (containerHeight - totalHeight) / (numTitles - 1);
-
-  // Set new spacing
-  for (let i = 0; i < numTitles - 1; i++) {
-    songTitles[i].style.marginBottom = spacing + "px";
-  }
-};
-
-// Call the function after the content is added
-updateSongTitles();
-
-// Adjust spacing on window resize
-window.addEventListener("resize", adjustVerticalSpacing);
+// Update the spacing class based on the number of songs
+if (numberOfSongs <= 10) {
+  songContainer.classList.add("large-spacing");
+  songContainer.classList.remove("small-spacing");
+} else {
+  songContainer.classList.remove("large-spacing");
+  songContainer.classList.add("small-spacing");
+}
                    
             //------ RIGHT SIDE ------
             //PALETTE
