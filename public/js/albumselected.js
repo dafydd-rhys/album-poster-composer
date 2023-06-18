@@ -54,6 +54,9 @@ $(document).ready(function () {
           if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
             artworkColours.push(swatches[swatch].getRgb());
           }
+          if (artworkColours.length >= 5) {
+            break; // Stop adding colors once we reach 5
+          }
         }
 
         getAlbumArtwork(
