@@ -70,8 +70,31 @@ $(document).ready(function () {
             w.document.querySelector(".albumLengthAndYear").innerHTML = albumDurationLength + " " + workYear + "-" + albumReleaseYear 
               + "<br /> RELEASED BY " + album.label.toUpperCase();
             //------ LEFT SIDE ------       
-            //TRACK NAMES
-            w.document.querySelector(".songTitles").innerHTML = tracks; 
+            const songTitlesContainer = w.document.querySelector(".songTitles");
+songTitlesContainer.innerHTML = tracks.join("<br />");
+
+const adjustVerticalSpacing = () => {
+  const containerHeight = songTitlesContainer.offsetHeight;
+  const songTitles = songTitlesContainer.getElementsByTagName("p");
+  const numTitles = songTitles.length;
+
+  const totalTitlesHeight = Array.from(songTitles).reduce(
+    (acc, title) => acc + title.offsetHeight,
+    0
+  );
+
+  const spacing = (containerHeight - totalTitlesHeight) / (numTitles - 1);
+
+  for (let i = 0; i < numTitles - 1; i++) {
+    songTitles[i].style.marginBottom = spacing + "px";
+  }
+};
+
+// Call the function after the content is added
+adjustVerticalSpacing();
+
+// Adjust spacing on window resize
+window.addEventListener("resize", adjustVerticalSpacing);
                    
             //------ RIGHT SIDE ------
             //PALETTE
