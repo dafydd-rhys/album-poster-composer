@@ -71,20 +71,14 @@ $(document).ready(function () {
               + "<br /> RELEASED BY " + album.label.toUpperCase();
             //------ LEFT SIDE ------       
             //TRACK NAMES
-const songContainer = w.document.querySelector(".songTitles");
-songContainer.innerHTML = tracks;
-
-// Determine the number of songs
-const numberOfSongs = album.tracks.items.length;
-
-// Update the spacing class based on the number of songs
-if (numberOfSongs <= 10) {
-  songContainer.classList.add("large-spacing");
-  songContainer.classList.remove("small-spacing");
-} else {
-  songContainer.classList.remove("large-spacing");
-  songContainer.classList.add("small-spacing");
-}
+            let songTitles = w.document.querySelector(".songTitles");
+          
+            //17 = 
+            //22 = 15
+            //30 = 11
+            songTitles.style.lineHeight = '11px';
+            songTitles.innerHTML = tracks; 
+            
                    
             //------ RIGHT SIDE ------
             //PALETTE
