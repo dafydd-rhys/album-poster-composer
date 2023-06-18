@@ -70,28 +70,49 @@ $(document).ready(function () {
             w.document.querySelector(".albumLengthAndYear").innerHTML = albumDurationLength + " " + workYear + "-" + albumReleaseYear 
               + "<br /> RELEASED BY " + album.label.toUpperCase();
             //------ LEFT SIDE ------       
-            const songTitlesContainer = w.document.querySelector(".songTitles");
-songTitlesContainer.innerHTML = tracks.join("<br />");
+            //TRACK NAMES
+            // Update song names and adjust vertical spacing
+const updateSongTitles = () => {
+  const tracks = album.tracks.items.map(function (track) {
+    return track.track_number + " " + cutName(track.name.toUpperCase());
+  });
 
+  const songTitlesContainer = w.document.querySelector(".songTitles");
+  songTitlesContainer.innerHTML = '';
+
+  for (const track of tracks) {
+    const songTitle = document.createElement('p');
+    songTitle.innerText = track;
+    songTitlesContainer.appendChild(songTitle);
+  }
+
+  adjustVerticalSpacing();
+};
+
+// Adjust vertical spacing
 const adjustVerticalSpacing = () => {
+  const songTitlesContainer = w.document.querySelector(".songTitles");
   const containerHeight = songTitlesContainer.offsetHeight;
   const songTitles = songTitlesContainer.getElementsByTagName("p");
   const numTitles = songTitles.length;
 
-  const totalTitlesHeight = Array.from(songTitles).reduce(
-    (acc, title) => acc + title.offsetHeight,
-    0
-  );
+  // Reset margin bottom
+  for (let i = 0; i < numTitles - 1; i++) {
+    songTitles[i].style.marginBottom = "0";
+  }
 
-  const spacing = (containerHeight - totalTitlesHeight) / (numTitles - 1);
+  // Calculate new spacing
+  const totalHeight = songTitlesContainer.scrollHeight;
+  const spacing = (containerHeight - totalHeight) / (numTitles - 1);
 
+  // Set new spacing
   for (let i = 0; i < numTitles - 1; i++) {
     songTitles[i].style.marginBottom = spacing + "px";
   }
 };
 
 // Call the function after the content is added
-adjustVerticalSpacing();
+updateSongTitles();
 
 // Adjust spacing on window resize
 window.addEventListener("resize", adjustVerticalSpacing);
