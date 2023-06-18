@@ -113,17 +113,18 @@ $(document).ready(function () {
             let albumArtist = w.document.querySelector(".albumArtist");
             
             //ALBUM NAME
-            let lines = Math.ceil(cutName(album.name).trim().length / 16);
+            let lines = Math.ceil(cutName(album.name).trim().length / 20);
             let margin = 10;
             if (lines < 4) {
-              margin = 120 - ((lines-1) * 40);
+              margin = 115 - ((lines-1) * 30);
               if (lines == 3) {
-                margin += 5;
+                margin += 10;
               }
             }
             if (increase == true) {
               margin -= 15;
             }
+            console.log(margin);
             albumArtist.style.marginTop = margin + "px";
             
             albumArtist.innerHTML = album.artists[0].name.toUpperCase();
