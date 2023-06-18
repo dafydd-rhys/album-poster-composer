@@ -114,12 +114,15 @@ $(document).ready(function () {
             
             //ALBUM NAME
             let lines = Math.ceil(cutName(album.name).trim().length / 16);
-            let margin = 127;
+            let margin = 10;
             if (lines < 4) {
-              margin = 127 - ((lines-1) * 43.5)
+              margin = 120 - ((lines-1) * 40);
+              if (lines == 3) {
+                margin += 5;
+              }
             }
             if (increase == true) {
-              margin += 0;
+              margin -= 15;
             }
             albumArtist.style.marginTop = margin + "px";
             
