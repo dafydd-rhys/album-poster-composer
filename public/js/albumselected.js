@@ -106,7 +106,9 @@ $(document).ready(function () {
             //ARTIST NAME
             w.document.querySelector(".albumArtist").innerHTML = album.artists[0].name.toUpperCase();
             //ALBUM NAME
-            w.document.querySelector(".albumName").innerHTML = album.name.toUpperCase();          
+            let albumName = w.document.querySelector(".songTitles");
+            w.document.querySelector(".albumName").innerHTML = album.name.toUpperCase();      
+            
           });
         });
       }
