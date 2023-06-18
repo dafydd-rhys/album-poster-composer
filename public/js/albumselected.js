@@ -72,10 +72,7 @@ $(document).ready(function () {
             //------ LEFT SIDE ------       
             //TRACK NAMES
             let songTitles = w.document.querySelector(".songTitles");
-          
-            //17 = 17
-            //22 = 15
-            //30 = 11  
+            
             let spacing = Math.floor((-0.4 * album.total_tracks) + 23.8);
             songTitles.style.lineHeight = spacing + "px";
             songTitles.innerHTML = tracks; 
@@ -137,7 +134,7 @@ function getAlbumNumber(number) {
       
   }
 
-  return albumNumber + " STUDIO ALBUM";
+  return albumNumber + " STUDIO PROJECT";
 }
 
 function cutName(songName) {
