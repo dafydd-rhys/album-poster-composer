@@ -102,18 +102,26 @@ $(document).ready(function () {
             w.document.querySelector(".spotifyCode").src = "https://scannables.scdn.co/uri/plain/png/ffffff/black/256/" + album.uri;
             //RELEASED BY (DATE, LABEL, NUMBER)
             let label = "RELEASED BY " + album.label.toUpperCase();
-            let lbl = "RELEASED BY GGGGGGGGGGGGGGGGGGGGGGGGG";
+            let increase = false;
+            
+            if (label.length > 40) {
+              increase = true;
+            }
             w.document.querySelector(".albumRelease").innerHTML = "OUT NOW / " + getMonthName(parseInt(albumReleaseMonth)) + " " + albumReleaseDay + ", " + albumReleaseYear
-            + "<br />" + lbl + "<br />" + getAlbumNumber(albumNumber + 1);
+            + "<br />" + label + "<br />" + getAlbumNumber(albumNumber + 1);
             //ARTIST NAME
             let albumArtist = w.document.querySelector(".albumArtist");
             
             //ALBUM NAME
             let lines = Math.ceil(cutName(album.name).trim().length / 16);
+            let margin = 127;
             if (lines < 4) {
-              let margin = 127 - ((lines-1) * 43.5)
-              albumArtist.style.marginTop = margin + "px";
+              margin = 127 - ((lines-1) * 43.5)
             }
+            if (increase == true) {
+              margin += 0;
+            }
+            albumArtist.style.marginTop = margin + "px";
             
             albumArtist.innerHTML = album.artists[0].name.toUpperCase();
             w.document.querySelector(".albumName").innerHTML = cutName(album.name.toUpperCase()).trim();      
