@@ -77,16 +77,7 @@ $(document).ready(function () {
             songTitles.style.lineHeight = spacing + "px";
             songTitles.innerHTML = tracks; 
             
-            
-            //var colorThief = new ColorThief();
-            //var sourceImage = document.getElementById("image");
-            //let  oi = colorThief.getPalette(sourceImage)
-
-var colorThief = new ColorThief();
-
-console.log(
-    colorThief.getPalette(image)
-);
+      
                    
             //------ RIGHT SIDE ------
             //PALETTE
