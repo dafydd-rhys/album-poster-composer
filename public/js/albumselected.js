@@ -200,7 +200,6 @@ async function getAlbumArtwork(albumName, artistName, albumThumbnail) {
   const response = await fetch(url);
   const data = await response.json();
 
-  console.log("Requested " + albumName + " from " + artistName);
   var highestMatch = data.results.find(
     (album) =>
       album.collectionName.toUpperCase() == albumName.toUpperCase() &&
@@ -209,7 +208,6 @@ async function getAlbumArtwork(albumName, artistName, albumThumbnail) {
 
   //use image recognition to find closest match if exact match from artist/album names cannot be found
   if (highestMatch == undefined) {
-    console.log("Could not find exact match, analysing album artwork");
     data.results.forEach((album) => {
       var diff = resemble(albumThumbnail)
         .compareTo(album.artworkUrl100)
