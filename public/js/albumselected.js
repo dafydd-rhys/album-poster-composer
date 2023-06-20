@@ -2,7 +2,6 @@ $(document).ready(function () {
   $(document).on("click", ".albumContainer", function () {
     let albumNumber = $(this).index();
     const albumContainer = $(this);
-    console.log("album selected: " + albumContainer.attr("data-value"));
     $.post(
       "",
       { album: albumContainer.attr("data-value") },
@@ -23,8 +22,6 @@ $(document).ready(function () {
             return track.track_number + " " + cutName(track.name.toUpperCase());
           })
           .join("<br />");
-        
-        console.log(album);
         
         //ALBUM DURATION
         let albumDuration = 0;
@@ -125,7 +122,6 @@ $(document).ready(function () {
             if (increase == true) {
               margin -= 15;
             }
-            console.log(margin);
             albumArtist.style.marginTop = margin + "px";
             
             albumArtist.innerHTML = album.artists[0].name.toUpperCase();
@@ -140,22 +136,27 @@ $(document).ready(function () {
 function getAlbumNumber(number) {
   let albumNumber = "";
   let lastDigit = number % 10;
+  let lastTwoDigits = number % 100;
   
-  switch (lastDigit) {
-    case 1:
-      albumNumber = number + "st";
-      break;
-    case 2:
-      albumNumber = number + "nd";
-      break;
-    case 3:
-      albumNumber = number + "rd";
-      break;
-    default:
-      albumNumber = number + "th";
-      break;
-      
-  }
+  console.log(lastTwoDigits);
+  if (lastTwoDigits != 11 && lastTwoDigits != 12 && lastTwoDigits != 13) {
+      switch (lastDigit) {
+      case 1:
+        albumNumber = number + "st";
+        break;
+      case 2:
+        albumNumber = number + "nd";
+        break;
+      case 3:
+        albumNumber = number + "rd";
+        break;
+      default:
+        albumNumber = number + "th";
+        break;
+    }
+  } else {
+    albumNumber = number + "th";
+  } 
 
   return albumNumber + " STUDIO PROJECT";
 }
@@ -210,10 +211,7 @@ async function getAlbumArtwork(albumName, artistName, albumThumbnail) {
     });
     data.results.sort((a, b) => b.matchPercent - a.matchPercent);
     highestMatch = data.results[0];
-    console.log("Found match with match percent: " + highestMatch.matchPercent);
   }
-
-  console.log("Found " + highestMatch.collectionName);
 
   return highestMatch.artworkUrl100
     .replace(/(.*?)\d(.*?)(.*?)thumb\//, "http://a1.mzstatic.com/us/r1000/063/")
