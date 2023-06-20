@@ -1,4 +1,21 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.0/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.2/tinycolor.min.js"></script>
+
+<script>
+  // Function to save the poster as an image
+  function savePoster() {
+    html2canvas(document.getElementById("poster")).then(function (canvas) {
+      var image = canvas.toDataURL("image/png");
+      var link = document.createElement("a");
+      link.href = image;
+      link.download = "poster.png";
+      link.click();
+    });
+  }
+
+  // Attach the savePoster function to the save button
+  document.getElementById("saveButton").addEventListener("click", savePoster);
+</script>
 
 <style>
 
@@ -293,6 +310,7 @@
                 </p>
                 <div class="albumArtist">JUICE WRLD</div>
                 <h1 class="albumName">LEGENDS NEVER DIE</h1>
+                <button id="saveButton">Save Poster</button>
               </div>
             </div>
           </div>

@@ -32,7 +32,7 @@ spotifyApi.clientCredentialsGrant().then(
   },
   function (err) {
     console.log(
-      "Something went wrong when retrieving an access token.",
+      "Something went wrong when retrieving an access token!",
       err.message
     );
   }

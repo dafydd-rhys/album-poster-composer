@@ -130,32 +130,8 @@ $(document).ready(function () {
         });
       }
     );
-    savePoster();
   });
 });
-
-function savePoster() {
-      const posterElement = document.getElementById('poster');
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-
-      // Set the canvas dimensions to match the poster
-      canvas.width = 500;
-      canvas.height = 500;
-
-      // Draw the poster on the canvas
-      context.drawSvg(posterElement.innerHTML, 0, 0, canvas.width, canvas.height);
-
-      // Create a temporary link element
-      const link = document.createElement('a');
-      link.href = canvas.toDataURL(); // Convert canvas to data URL
-      link.download = 'poster.png'; // Set the filename for the downloaded image
-      link.click(); // Trigger the download
-
-      // Cleanup
-      link.remove();
-      canvas.remove();
-    }
 
 function getAlbumNumber(number) {
   let albumNumber = "";
