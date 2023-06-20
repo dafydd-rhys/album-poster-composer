@@ -138,8 +138,9 @@ function getAlbumNumber(number) {
   let lastDigit = number % 10;
   let lastTwoDigits = number % 100;
   
-  console.log(lastTwoDigits);
+  //11th - 21st - 31st
   if (lastTwoDigits != 11 && lastTwoDigits != 12 && lastTwoDigits != 13) {
+    //1st - 2nd - 3rd - 4th
       switch (lastDigit) {
       case 1:
         albumNumber = number + "st";
