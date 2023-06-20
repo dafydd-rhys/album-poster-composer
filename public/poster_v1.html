@@ -4,16 +4,15 @@
 <script>
   // Function to save the poster as an image
   function savePoster() {
-    var image = new Image();
-    image.src = document.querySelector(".albumCover").src;
-    image.onload = function() {
-      html2canvas(document.getElementById('poster')).then(function(canvas) {
+    html2canvas(document.getElementById('poster'), {
+      useCORS: true,
+      onrendered: function(canvas) {
         var link = document.createElement('a');
         link.href = canvas.toDataURL('image/png');
         link.download = 'poster.png';
         link.click();
-      });
-    };
+      }
+    });
   }
 </script>
 
