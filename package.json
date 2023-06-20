@@ -15,7 +15,8 @@
     "fetch": "^1.1.0",
     "spotify-web-api-node": "^5.0.2",
     "resemble": "^1.4.0",
-    "node-vibrant": "^3.1.6"
+    "node-vibrant": "^3.1.6",
+    "jspdf": "^2.5.1"
   },
   "engines": {
     "node": "14.x"
