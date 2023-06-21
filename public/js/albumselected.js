@@ -42,16 +42,10 @@ $(document).ready(function () {
         let albumReleaseDay = album.release_date.substr(8, 10);     
         let workYear = parseInt(albumReleaseYear) - 1;
         
-        const swatches = getImageColourPalette(
-          albumContainer.children("img:first").get(0)
-        );
+        var colorThief = new ColorThief();
+        const swatches = colorThief.getPalette(albumContainer.children("img:first").get(0));
         
-        var artworkColours = [];
-        for (var swatch in swatches) {
-          if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
-            artworkColours.push(swatches[swatch].getRgb());
-          }
-        }
+        console.log(swatches);
         
         getAlbumArtwork(
           album.name,
@@ -74,11 +68,11 @@ $(document).ready(function () {
             songTitles.style.lineHeight = spacing + "px";
             songTitles.innerHTML = tracks; 
             
-      
+    
                    
             //------ RIGHT SIDE ------
             //PALETTE
-            for (var i = 0; i < artworkColours.length; i++) {
+            for (var i = 0; i < 5; i++) {
               // Create a canvas element
               var canvas = document.createElement("canvas");
               canvas.width = 46;

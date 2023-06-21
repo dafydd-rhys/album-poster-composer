@@ -16,7 +16,8 @@
     "spotify-web-api-node": "^5.0.2",
     "resemble": "^1.4.0",
     "node-vibrant": "^3.1.6",
-    "jspdf": "^2.5.1"
+    "jspdf": "^2.5.1",
+    "colorthief": "^2.4.0"
   },
   "engines": {
     "node": "14.x"
