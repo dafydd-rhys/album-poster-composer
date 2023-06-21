@@ -82,7 +82,7 @@ $(document).ready(function () {
               var context = canvas.getContext("2d");
 
               // Set the fill color to rbg of swatch
-              context.fillStyle = "rgb(" + artworkColours[i][0] + ", " + artworkColours[i][1] + ", " + artworkColours[i][2] + ")";
+              context.fillStyle = "rgb(" + swatches[i][0] + ", " + swatches[i][1] + ", " + swatches[i][2] + ")";
 
               // Fill the entire canvas with black color
               context.fillRect(0, 0, canvas.width, canvas.height);
