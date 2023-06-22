@@ -42,10 +42,8 @@ $(document).ready(function () {
         let albumReleaseDay = album.release_date.substr(8, 10);     
         let workYear = parseInt(albumReleaseYear) - 1;
         
-        var colorThief = new ColorThief();
-        const swatches = colorThief.getPalette(albumContainer.children("img:first").get(0));
+        const swatches = getImageColourPalette(albumContainer.children("img:first").get(0));
         
-        console.log(swatches);
         
         getAlbumArtwork(
           album.name,
@@ -68,7 +66,6 @@ $(document).ready(function () {
             songTitles.style.lineHeight = spacing + "px";
             songTitles.innerHTML = tracks; 
             
-    
                    
             //------ RIGHT SIDE ------
             //PALETTE
@@ -173,7 +170,15 @@ function getMonthName(monthNumber) {
 function getImageColourPalette(image) {
   var vibrant = new Vibrant(image);
   var swatches = vibrant.swatches();
-  return swatches;
+  var swatchesArray = [];
+  
+  for (var key in swatches) {
+    if (swatches.hasOwnProperty(key) && swatches[key]) {
+      swatchesArray.push(swatches[key].getRgb());
+    }
+  }
+  
+  return swatchesArray;
 }
 
 async function getAlbumArtwork(albumName, artistName, albumThumbnail) {
