@@ -1,19 +1,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.0/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.2/tinycolor.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
   // Function to save the poster as an image
-  function savePoster() {
-    html2canvas(document.getElementById('poster'), {
-      useCORS: true,
-      onrendered: function(canvas) {
-        var link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png');
-        link.download = 'poster.png';
-        link.click();
-      }
-    });
-  }
+function savePoster() {
+  const pdf = new jsPDF();
+  const posterElement = document.getElementById('poster');
+  
+  pdf.html(posterElement, {
+    callback: function () {
+      pdf.save('poster.pdf');
+    },
+    x: 10,
+    y: 10
+  });
+}
+
 </script>
 
 
