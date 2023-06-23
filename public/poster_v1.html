@@ -3,27 +3,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-  // Function to save the poster as an image
+// Function to save the poster as an image
 function savePoster() {
   window.jsPDF = window.jspdf.jsPDF;
+  var doc = new jsPDF();
+  var elementHTML = document.querySelector("#poster");
 
-var doc = new jsPDF();
-	
-// Source HTMLElement or a string containing HTML.
-var elementHTML = document.querySelector("#poster");
-
-doc.html(elementHTML, {
+  doc.html(elementHTML, {
     callback: function(doc) {
         // Save the PDF
-        doc.save('sample-document.pdf');
+        doc.save('poster.pdf');
     },
-    x: 40,
-    y: 0,
+    x: 23,
+    y: -5,
     width: 165, //target width in the PDF document
     windowWidth: 650 //window width in CSS pixels
-});
+  });
 }
-
 </script>
 
 <style>
