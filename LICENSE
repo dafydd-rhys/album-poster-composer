@@ -28,13 +28,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-
-
-
 ******************************************************************************
 
 THIRD-PARTY SOFTWARE
-
 
 1. fastify: Fastify is a web framework focused on developer experience.
 2. fastify/static: Plugin for serving static files as fast as possible.
@@ -42,11 +38,12 @@ THIRD-PARTY SOFTWARE
 4. fastify/view: Templates rendering plugin support for Fastify.
 5. HK Grotesk: The font we're using. 
 
-
 ******************************************************************************
+
 1. fastify (also applies to fastify-formbody)
 URL: https://www.fastify.io/
      https://github.com/fastify/fastify
+     
 ******************************************************************************
 MIT License
 
@@ -72,6 +69,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 ******************************************************************************
 END, fastify
 ******************************************************************************

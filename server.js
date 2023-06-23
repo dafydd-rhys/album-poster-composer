@@ -177,8 +177,7 @@ async function getArtistAlbums(id) {
 }
 
 async function getAlbumArtwork(albumName) {
-  const url =
-    "https://artwork.themoshcrypt.net/api/search?keyword=" + encodeURIComponent(albumName);
+  const url = "https://artwork.themoshcrypt.net/api/search?keyword=" + encodeURIComponent(albumName);
   const response = fetch.fetch(url);
   const data = await response.json();
   return data;
