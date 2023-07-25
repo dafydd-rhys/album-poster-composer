@@ -1,0 +1,7 @@
+{
+  "glitch-help-instructions": "For a custom domain, change the 'url' parameter from 'glitch-default' to your domain _without_ a traling slash, like 'https://www.example.com'",
+  "title": "Spotify Album Poster Generator",
+  "description": "Create your own album poster from your favourite Spotify album!",
+  "url": "glitch-default",
+  "image": "https://cdn.glitch.global/26dbc63d-4f2c-4201-be76-34e4291f6e34/Spotify_logo_without_text.svg?v=1674528395220"
+}
