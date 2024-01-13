@@ -160,7 +160,8 @@ function getImageColourPalette(image) {
 }
 
 async function getAlbumArtwork(albumName, artistName, albumThumbnail) {
-    const url = "https://artwork.themoshcrypt.net/api/search?keyword=" + encodeURIComponent(albumName);
+    //const url = "https://artwork.themoshcrypt.net/api/search?keyword=" + encodeURIComponent(albumName);
+  const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(albumName);
     const response = await fetch(url);
     const data = await response.json();
 
