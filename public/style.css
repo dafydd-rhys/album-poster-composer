@@ -302,6 +302,13 @@ h2 {
     transition: background-color 0.3s ease;
 }
 
+#proceed:disabled {
+    background-color: #cccccc; /* Grey background */
+    color: #666666;           /* Grey text */
+    cursor: not-allowed;      /* Change cursor to indicate disabled state */
+    opacity: 0.6;             /* Reduce opacity */
+}
+
 .pagination button:hover {
   background-color: #d0fff1;
 }

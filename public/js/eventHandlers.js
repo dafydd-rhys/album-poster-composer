@@ -13,6 +13,7 @@ export function handleAlbumClick(event) {
     selectedAlbum = $(event.currentTarget).data('value'); // 'value' is used here because jQuery automatically maps data-value to .data('value')
 
     console.log("Selected Album Value:", selectedAlbum); // Debugging line
+  checkIfProceedEnabled();
 }
 
 export function handleDesignSelection(event) {
@@ -24,6 +25,13 @@ export function handleDesignSelection(event) {
     selectedDesign = $(event.currentTarget).data('design'); // Extract data-design
 
     console.log("Selected Design:", selectedDesign); // Debugging line
+    checkIfProceedEnabled();
+  
+}
+
+function checkIfProceedEnabled() {
+    // Enable or disable the proceed button based on album and design selection
+    $('#proceed').prop('disabled', !(selectedAlbum && selectedDesign));
 }
 
 export async function handleAlbumProceed() {
