@@ -1,30 +1,21 @@
+// Updated JavaScript
+
 $(document).ready(function () {
-  // Handle click on Submit button
-    $("#artist-submit").click(function () {
-        submitArtist();
-    });
+    let currentPage = 1;
+    const albumsPerPage = 16; // 8 albums per row * 2 rows
 
-    // Handle Enter key press in the artist input field
-    $("#artist").keydown(function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault(); // Prevent form submission if inside a form element
-            submitArtist();
-        }
-    });
-  
-  // Function to handle artist submission
-    function submitArtist() {
-        const artistName = $("#artist").val();
-        if (!artistName) {
-            alert("Please enter an artist name.");
-            return;
-        }
-
-        $.post("", { artist: artistName }, function (artist, status) {
+    // Function to fetch and display albums
+    function fetchAlbums(page) {
+        $.post("", { artist: $("#artist").val() }, function (artist, status) {
             $.post("", { artistId: artist.id }, function (albums, status) {
+                const totalAlbums = albums.items.length;
+                const start = (page - 1) * albumsPerPage;
+                const end = Math.min(start + albumsPerPage, totalAlbums);
+                const albumsToShow = albums.items.slice(start, end);
+
                 $("#albums").empty();
 
-                albums.items.forEach(function (album) {
+                albumsToShow.forEach(function (album) {
                     var container = $("<div>", {
                         class: "albumContainer",
                         "data-value": album.id,
@@ -39,12 +30,40 @@ $(document).ready(function () {
 
                     var overlay = $("<div>", { class: "overlay", text: album.name });
 
-                    $("#albums").prepend(container);
+                    $("#albums").append(container);
                     container.append(albumImage);
                     container.append(overlay);
                 });
+
+                $("#prev-page").prop("disabled", page <= 1);
+                $("#next-page").prop("disabled", end >= totalAlbums);
             });
         });
     }
-});
 
+    // Handle click on Submit button
+    $("#artist-submit").click(function () {
+        fetchAlbums(currentPage);
+    });
+
+    // Handle Enter key press in the artist input field
+    $("#artist").keydown(function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent form submission if inside a form element
+            fetchAlbums(currentPage);
+        }
+    });
+
+    // Handle pagination controls
+    $("#prev-page").click(function () {
+        if (currentPage > 1) {
+            currentPage--;
+            fetchAlbums(currentPage);
+        }
+    });
+
+    $("#next-page").click(function () {
+        currentPage++;
+        fetchAlbums(currentPage);
+    });
+});

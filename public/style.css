@@ -209,39 +209,67 @@ h2 {
   color: #ffffff;
 }
 
+/* Albums Grid Layout */
 .albums {
-  max-width: 75%;
-  place-items: center;
+  max-width: 100%;
   margin: 1rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px; /* Adjust the spacing between albums */
 }
 
 .albumContainer {
   position: relative;
-  max-width: 150px;
-  float: left;
-  margin: 5px;
+  max-width: 100%;
+  margin: 0; /* Remove margin to use grid gap instead */
 }
 
 .album {
   display: block;
   max-height: 150px;
+  width: 100%; /* Make sure images are responsive */
+  height: auto;
 }
 
 .overlay {
   position: absolute;
   bottom: 0;
-  background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.5); /* Black see-through */
   color: #f1f1f1;
   transition: 0.5s ease;
   opacity: 0;
-  color: white;
   font-size: 20px;
   padding: 20px;
   text-align: center;
-  width: -webkit-fill-available;
+  width: 100%; /* Fill the container */
 }
 
 .albumContainer:hover .overlay {
   opacity: 1;
+}
+
+/* Pagination Controls */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.pagination button {
+  background: var(--color-bg-accent);
+  border: 1px solid var(--color-bg-accent);
+  padding: 0.5rem 1rem;
+  margin: 0 5px;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination button:hover {
+  background-color: #d0fff1;
 }
