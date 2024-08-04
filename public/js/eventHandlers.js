@@ -10,7 +10,7 @@ export function handleAlbumClick(event) {
 
     // Add 'selected' class to the clicked album
     $(event.currentTarget).addClass('selected');
-    selectedAlbum = $(event.currentTarget).data('album-id'); // Assuming you have a data attribute for album ID
+    selectedAlbum = $(event.currentTarget).data('data-value'); // Assuming you have a data attribute for album ID
 
     console.log("Selected Album ID:", selectedAlbum); // Debugging line
 
