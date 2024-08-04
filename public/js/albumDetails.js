@@ -1,8 +1,6 @@
 import { cutName, getAlbumNumber, getMonthName, getImageColourPalette } from './utils.js';
 import { getAlbumArtwork } from './api.js';
 
-const corsProxy = "https://cors-anywhere.herokuapp.com/";
-
 export async function updateAlbumUI(album, albumContainer, albumNumber) {
     alert(`${album.name}\n${album.total_tracks}\n${album.label}\n${album.release_date}\n${album.copyrights[0].text}`);
 
@@ -25,15 +23,19 @@ export async function updateAlbumUI(album, albumContainer, albumNumber) {
 
     const swatches = getImageColourPalette(albumContainer.children("img:first").get(0));
 
-    const imageUrl = corsProxy + album.images[0].url;
-    const image = await getAlbumArtwork(album.name, album.artists[0].name, imageUrl);
+    // Convert image URL to Base64
+    const imageUrl = album.images[0].url;
+    const base64Image = await convertImageToBase64(imageUrl);
+
     var w = window.open("poster_v1.html");
 
     if (w) {
         w.addEventListener("load", function () {
             // ARTWORK
             const albumCover = w.document.querySelector(".albumCover");
-            if (albumCover) albumCover.src = imageUrl;
+            if (albumCover) {
+                albumCover.src = base64Image;
+            }
 
             // LENGTH AND WORK YEARS
             const albumLengthAndYear = w.document.querySelector(".albumLengthAndYear");
@@ -75,7 +77,7 @@ export async function updateAlbumUI(album, albumContainer, albumNumber) {
 
             // SPOTIFY URL CODE
             const spotifyCode = w.document.querySelector(".spotifyCode");
-            if (spotifyCode) spotifyCode.src = corsProxy + `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
+            if (spotifyCode) spotifyCode.src = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
 
             // RELEASED BY (DATE, LABEL, NUMBER)
             const albumRelease = w.document.querySelector(".albumRelease");
@@ -109,4 +111,17 @@ export async function updateAlbumUI(album, albumContainer, albumNumber) {
     } else {
         console.error("Failed to open the new window.");
     }
+}
+
+// Function to convert image URL to Base64
+async function convertImageToBase64(imageUrl) {
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
+    const reader = new FileReader();
+    
+    return new Promise((resolve, reject) => {
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+    });
 }
