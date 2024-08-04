@@ -1,6 +1,7 @@
 // Updated JavaScript
 
 $(document).ready(function () {
+  console.log("dsds");
     let currentPage = 1;
     const albumsPerPage = 16; // 8 albums per row * 2 rows
 
