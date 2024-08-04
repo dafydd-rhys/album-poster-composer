@@ -133,6 +133,9 @@ p {
 
 .title-image {
   justify-self: flex-end;
+  margin-top: 30px;
+  width: 150px;
+  height: 150px;
 }
 
 .illo-container {
@@ -210,7 +213,7 @@ h2 {
 }
 
 .poster-description {
-  margin-bottom: 65px; /* Adjust the value to your preference */
+  margin-bottom: 50px; /* Adjust the value to your preference */
   font-size: 31px;
 }
 
@@ -274,6 +277,19 @@ h2 {
 .pagination button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+#proceed {
+  width: 130px;
+  margin-top: 20px; /* Adjust as needed */
+  align-self: flex-end; /* Aligns the button to the end of its flex container */
+  display: block; /* Ensures the button is displayed as a block-level element */
+  background: var(--color-bg-accent);
+  padding: 0.5rem 1rem;
+  margin: 0 5px;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
 }
 
 .pagination button:hover {
