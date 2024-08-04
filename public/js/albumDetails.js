@@ -1,6 +1,8 @@
 import { cutName, getAlbumNumber, getMonthName, getImageColourPalette } from './utils.js';
 import { getAlbumArtwork } from './api.js';
 
+const corsProxy = "https://cors-anywhere.herokuapp.com/";
+
 export async function updateAlbumUI(album, albumContainer, albumNumber) {
     alert(`${album.name}\n${album.total_tracks}\n${album.label}\n${album.release_date}\n${album.copyrights[0].text}`);
 
@@ -8,14 +10,14 @@ export async function updateAlbumUI(album, albumContainer, albumNumber) {
         .map(track => `${track.track_number} ${cutName(track.name.toUpperCase())}`)
         .join("<br />");
 
-    //ALBUM DURATION
+    // ALBUM DURATION
     let albumDuration = album.tracks.items.reduce((sum, track) => sum + track.duration_ms, 0);
     let albumMinutes = albumDuration / 60 / 1000;
     let albumMinutesFloor = Math.floor(albumMinutes);
     let albumSeconds = Math.floor((albumMinutes - albumMinutesFloor) * 60);
     let albumDurationLength = `${albumMinutesFloor}:${albumSeconds}`;
 
-    //PARSING DATE FROM JSON
+    // PARSING DATE FROM JSON
     let albumReleaseYear = album.release_date.substr(0, 4);
     let albumReleaseMonth = album.release_date.substr(5, 7);
     let albumReleaseDay = album.release_date.substr(8, 10);
@@ -23,23 +25,24 @@ export async function updateAlbumUI(album, albumContainer, albumNumber) {
 
     const swatches = getImageColourPalette(albumContainer.children("img:first").get(0));
 
-    const image = await getAlbumArtwork(album.name, album.artists[0].name, album.images[0].url);
+    const imageUrl = corsProxy + album.images[0].url;
+    const image = await getAlbumArtwork(album.name, album.artists[0].name, imageUrl);
     var w = window.open("poster_v1.html");
 
     if (w) {
         w.addEventListener("load", function () {
-            //ARTWORK
+            // ARTWORK
             const albumCover = w.document.querySelector(".albumCover");
-            if (albumCover) albumCover.src = image;
+            if (albumCover) albumCover.src = imageUrl;
 
-            //LENGTH AND WORK YEARS
+            // LENGTH AND WORK YEARS
             const albumLengthAndYear = w.document.querySelector(".albumLengthAndYear");
             if (albumLengthAndYear) {
                 albumLengthAndYear.innerHTML = `${albumDurationLength} ${workYear}-${albumReleaseYear}<br /> RELEASED BY ${album.label.toUpperCase()}`;
             }
             
             //------ LEFT SIDE ------
-            //TRACK NAMES
+            // TRACK NAMES
             const songTitles = w.document.querySelector(".songTitles");
             if (songTitles) {
                 let spacing = Math.floor(-0.4 * album.total_tracks + 23.8);
@@ -48,7 +51,7 @@ export async function updateAlbumUI(album, albumContainer, albumNumber) {
             }
 
             //------ RIGHT SIDE ------
-            //PALETTE
+            // PALETTE
             for (var i = 0; i < 5; i++) {
                 const paletteColour = w.document.querySelector(`.paletteColour${i}`);
                 if (paletteColour) {
@@ -58,7 +61,7 @@ export async function updateAlbumUI(album, albumContainer, albumNumber) {
                     canvas.height = 48;
                     // Get the canvas context
                     var context = canvas.getContext("2d");
-                    // Set the fill color to rbg of swatch
+                    // Set the fill color to rgb of swatch
                     context.fillStyle = `rgb(${swatches[i][0]}, ${swatches[i][1]}, ${swatches[i][2]})`;
                     // Fill the entire canvas with color
                     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -66,15 +69,15 @@ export async function updateAlbumUI(album, albumContainer, albumNumber) {
                 }
             }
             
-            //RELEASED BY (ARTIST)
+            // RELEASED BY (ARTIST)
             const albumBy = w.document.querySelector(".albumBy");
             if (albumBy) albumBy.innerHTML = `AN ALBUM BY ${album.artists[0].name.toUpperCase()}`;
 
-            //SPOTIFY URL CODE
+            // SPOTIFY URL CODE
             const spotifyCode = w.document.querySelector(".spotifyCode");
-            if (spotifyCode) spotifyCode.src = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
+            if (spotifyCode) spotifyCode.src = corsProxy + `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
 
-            //RELEASED BY (DATE, LABEL, NUMBER)
+            // RELEASED BY (DATE, LABEL, NUMBER)
             const albumRelease = w.document.querySelector(".albumRelease");
             var label = "";
             if (albumRelease) {
@@ -82,10 +85,10 @@ export async function updateAlbumUI(album, albumContainer, albumNumber) {
                 albumRelease.innerHTML = `OUT NOW / ${getMonthName(parseInt(albumReleaseMonth))} ${albumReleaseDay}, ${albumReleaseYear}<br />${label}<br />${getAlbumNumber(albumNumber + 1)}`;
             }
 
-            //ARTIST NAME
+            // ARTIST NAME
             const albumArtist = w.document.querySelector(".albumArtist");
             if (albumArtist) {
-                //ALBUM NAME
+                // ALBUM NAME
                 let lines = Math.ceil(cutName(album.name).trim().length / 20);
                 let margin = 10;
                 if (lines < 4) {
