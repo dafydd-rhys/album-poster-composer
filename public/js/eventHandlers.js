@@ -2,20 +2,22 @@ import { updateAlbumUI } from './albumDetails.js';
 
 let selectedAlbum = null;
 let selectedDesign = null;
-
 export function handleAlbumClick(event) {
     // Remove 'selected' class from any previously selected album
     $('.albumContainer').removeClass('selected');
 
     // Add 'selected' class to the clicked album
     $(event.currentTarget).addClass('selected');
-    selectedAlbum = $(event.currentTarget).data('value'); // Extract data-value
+    
+    // Extract the data-value from the clicked album container
+    selectedAlbum = $(event.currentTarget).data('value'); // 'value' is used here because jQuery automatically maps data-value to .data('value')
 
     console.log("Selected Album Value:", selectedAlbum); // Debugging line
 
     // Check if album is selected
     checkIfProceedEnabled();
 }
+
 
 export function handleDesignSelection(event) {
     // Remove 'selected' class from any previously selected design
