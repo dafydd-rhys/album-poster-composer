@@ -1,12 +1,24 @@
 import { fetchAlbumDetails } from './api.js';
 import { updateAlbumUI } from './albumDetails.js';
 
-export function handleAlbumClick(event) {
-    // Remove the border from any previously selected album
-    $(".albumContainer").removeClass("selected");
+// albumSelected.js
+let selectedAlbum = null;
 
-    // Add the border to the clicked album
-    $(event.currentTarget).addClass("selected");
+export function handleAlbumClick(event) {
+    // Remove 'selected' class from any previously selected album
+    $('.albumContainer').removeClass('selected');
+
+    // Add 'selected' class to the clicked album
+    $(event.currentTarget).addClass('selected');
+    selectedAlbum = $(event.currentTarget).data('album-id'); // Assuming you have a data attribute for album ID
+
+    // Check if album is selected
+    checkIfProceedEnabled();
+}
+
+function checkIfProceedEnabled() {
+    // Enable or disable the proceed button based on album selection
+    $('#proceed').prop('disabled', !selectedAlbum);
 }
 
 export function handleAlbumProceed() {

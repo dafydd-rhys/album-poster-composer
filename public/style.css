@@ -233,6 +233,12 @@ h2 {
   margin: 0; /* Remove margin to use grid gap instead */
 }
 
+.albumContainer:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional shadow effect on hover */
+    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
+
 .albumContainer.selected {
     border: 3px solid #ff0000; /* Red border for selected album, adjust as needed */
     /* Optionally add other styles such as box-shadow or outline */
@@ -285,16 +291,15 @@ h2 {
 }
 
 #proceed {
-  width: 130px;
-  margin-top: 20px; /* Adjust as needed */
-  align-self: flex-end; /* Aligns the button to the end of its flex container */
-  display: block; /* Ensures the button is displayed as a block-level element */
-  background: var(--color-bg-accent);
-  padding: 0.5rem 1rem;
-  margin: 0 5px;
-  border-radius: 4px;
-  color: #ffffff;
-  cursor: pointer;
+    background-color: #007bff; /* Default color */
+    color: white;
+    border: none;
+  width 100px;
+  align-self: flex-end;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .pagination button:hover {
