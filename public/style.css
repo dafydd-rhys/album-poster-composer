@@ -233,6 +233,11 @@ h2 {
   margin: 0; /* Remove margin to use grid gap instead */
 }
 
+.albumContainer.selected {
+    border: 3px solid #ff0000; /* Red border for selected album, adjust as needed */
+    /* Optionally add other styles such as box-shadow or outline */
+}
+
 .album {
   display: block;
   max-height: 150px;
