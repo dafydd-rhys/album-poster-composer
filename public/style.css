@@ -339,3 +339,22 @@ h2 {
 .design:hover {
   background-color: var(--color-bg-accent);
 }
+
+ /* Custom Context Menu Styles */
+      .custom-menu {
+        position: absolute;
+        display: none;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+      .custom-menu a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: #000;
+      }
+      .custom-menu a:hover {
+        background-color: #eee;
+      }
