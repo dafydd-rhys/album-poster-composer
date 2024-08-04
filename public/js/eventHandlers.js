@@ -13,9 +13,6 @@ export function handleAlbumClick(event) {
     selectedAlbum = $(event.currentTarget).data('value'); // 'value' is used here because jQuery automatically maps data-value to .data('value')
 
     console.log("Selected Album Value:", selectedAlbum); // Debugging line
-
-    // Check if album is selected
-    checkIfProceedEnabled();
 }
 
 export function handleDesignSelection(event) {
@@ -27,28 +24,19 @@ export function handleDesignSelection(event) {
     selectedDesign = $(event.currentTarget).data('design'); // Extract data-design
 
     console.log("Selected Design:", selectedDesign); // Debugging line
-
-    // Check if proceed button can be enabled
-    checkIfProceedEnabled();
-}
-
-function checkIfProceedEnabled() {
-    // Enable or disable the proceed button based on album and design selection
-    $('#proceed').prop('disabled', !(selectedAlbum && selectedDesign));
 }
 
 export async function handleAlbumProceed() {
-  console.log("preswsed");
     let albumNumber = $('.albumContainer.selected').index(); // Assuming you need index of selected album
     const albumContainer = $('.albumContainer.selected');
     
     // Load the appropriate HTML based on selected design
     let htmlFile = `public/posters/designs/${selectedDesign}.html`; // Update the path based on your setup
-    console.log(htmlFile);
 
     $.post("", { album: selectedAlbum }, async function (album, status) {
         await updateAlbumUI(album, albumContainer, albumNumber);
         
+        console.log(htmlFile);
         // Load the HTML file
         window.open(htmlFile, '_blank'); // Opens the HTML file in a new tab
     });

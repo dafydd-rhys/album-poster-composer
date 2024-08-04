@@ -1,7 +1,7 @@
-import { handleAlbumClick, handleAlbumProceed } from './eventHandlers.js';
+import { handleAlbumClick, handleAlbumProceed, handleDesignSelection } from './eventHandlers.js';
 
 $(document).ready(function () {
     $(document).on("click", ".albumContainer", handleAlbumClick);
-    $('#proceed').on('click', handleAlbumProceed);
-    $('#proceed').prop('disabled', true); // Ensure button is disabled initially
+    $(document).on("click", ".design", handleDesignSelection); // Bind design selection
+    $('#proceed').on('click', handleAlbumProceed); // Bind proceed button
 });
