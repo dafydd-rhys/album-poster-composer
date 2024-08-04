@@ -332,7 +332,7 @@
       const poster = document.getElementById('poster');
       
       // Use html2canvas to capture the poster as an image
-      const canvas = await html2canvas(poster);
+      const canvas = await html2canvas(poster, { allowTaint: true });
       const imgData = canvas.toDataURL('image/png');
 
       // Create a new jsPDF instance
