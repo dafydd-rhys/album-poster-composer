@@ -1,0 +1,215 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Inter:400,700");
+@import url("https://px.animaapp.com/648d215ff54ade17cf7651ca.648d2160b28ec4c8efe5b7a3.648d216299d0ec1b8c284cc4.hcp.png");
+
+.screen a {
+  display: contents;
+  text-decoration: none;
+}
+
+.container-center-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  pointer-events: none;
+  width: 100%;
+}
+
+.container-center-horizontal > * {
+  flex-shrink: 0;
+  pointer-events: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.saveButton {
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --font-size-xl: 23px;
+  --font-size-xxl: 30px; 
+  --font-size-xxl2: 8.5px;
+  --font-size-xxxxl: 10px;
+  --font-size-xxxxxl: 13px;
+  --font-family-inter: Arial, sans-serif;
+}
+
+.inter-normal-black-13px {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxxxl);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.index {
+  align-items: center;
+  background-color: var(--white);
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  height: 1188px;
+  padding: 53px 0;
+  width: 840px;
+}
+
+.index .albumCover {
+  height: 672px;
+  margin-top: 7px;
+  object-fit: cover;
+  width: 686px;
+}
+
+.index .flex-row {
+  align-items: center;
+  display: flex;
+  gap: 61px;
+  height: 368px;
+  margin-left: 5px;
+  min-width: 679px;
+}
+
+.index .flex-col {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  min-height: 368px;
+  width: 286px;
+}
+
+.index .songTitles {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxxl);
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  line-height: 15px;
+  min-height: 328px;
+  width: 286px;
+}
+
+.index .albumLengthAndYear {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxl2);
+  font-weight: 400;
+  letter-spacing: 0.26px;
+  line-height: 14px;
+  min-height: 29px;
+  width: 300px;
+}
+
+.index .flex-col-1 {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  min-height: 358px;
+  width: 332px;
+}
+
+.index .image-container {
+  align-items: flex-start;
+  display: flex;
+  margin-right: 3px;
+  min-width: 300px;
+}
+
+.index .paletteColour0 {
+  height: 46px;
+  object-fit: cover;
+  width: 48px;
+}
+
+.index .paletteColour1 {
+  height: 46px;
+  margin-left: 14px;
+  object-fit: cover;
+  width: 49px;
+}
+
+.index .paletteColour2 {
+  height: 46px;
+  margin-left: 16px;
+  object-fit: cover;
+  width: 50px;
+}
+
+.index .paletteColour3 {
+  height: 46px;
+  margin-left: 13px;
+  object-fit: cover;
+  width: 48px;
+}
+
+.index .paletteColour4 {
+  height: 46px;
+  margin-left: 13px;
+  object-fit: cover;
+  width: 49px;
+}
+
+.index .albumBy {
+  font-family: var(--font-family-inter);
+  letter-spacing: 0.52px;
+  line-height: 7.6px;
+  margin-top: 20px;
+  min-height: 8px;
+  text-align: right;
+  white-space: nowrap;
+  width: 303px;
+}
+
+.index .spotifyCode {
+  height: 27px;
+  margin-top: 14px;
+  object-fit: cover;
+  width: 146px;
+}
+
+.index .albumRelease {
+  font-family: var(--font-family-inter);
+  letter-spacing: 0;
+  line-height: 19px;
+  margin-right: 3px;
+  margin-top: 25px;
+  min-height: 46px;
+  text-align: right;
+  width: 390px;
+}
+
+.index .albumArtist {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+  left: 358px;
+  letter-spacing: 0.23px;
+  line-height: 7.6px;
+  margin-right: 8px;
+  margin-top: 10px;
+  min-height: 18px;
+  text-align: right;
+}
+
+.index .albumName {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  min-height: 14px;
+  text-align: right;
+  margin-right: 8px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  width: 375px;
+}
