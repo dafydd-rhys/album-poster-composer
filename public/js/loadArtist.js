@@ -1,6 +1,26 @@
 $(document).ready(function () {
+  // Handle click on Submit button
     $("#artist-submit").click(function () {
-        $.post("", { artist: $("#artist").val() }, function (artist, status) {
+        submitArtist();
+    });
+
+    // Handle Enter key press in the artist input field
+    $("#artist").keydown(function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent form submission if inside a form element
+            submitArtist();
+        }
+    });
+  
+  // Function to handle artist submission
+    function submitArtist() {
+        const artistName = $("#artist").val();
+        if (!artistName) {
+            alert("Please enter an artist name.");
+            return;
+        }
+
+        $.post("", { artist: artistName }, function (artist, status) {
             $.post("", { artistId: artist.id }, function (albums, status) {
                 $("#albums").empty();
 
@@ -25,6 +45,6 @@ $(document).ready(function () {
                 });
             });
         });
-    });
+    }
 });
 
