@@ -291,17 +291,17 @@ h2 {
 }
 
 .design {
-  border: 2px solid transparent;
   border-radius: 8px;
   margin: 0.5rem;
   padding: 0.5rem;
   cursor: pointer;
   text-align: center;
+  
 }
 
 .design img {
-  max-width: 100px;
-  max-height: 100px;
+  max-width: 150px;
+  max-height: 150px;
   display: block;
   margin: 0 auto;
 }
@@ -312,6 +312,7 @@ h2 {
 
 .design.selected {
   border-color: var(--color-primary);
+  background-color: var(--color-bg-accent);
 }
 
 .design:hover {
