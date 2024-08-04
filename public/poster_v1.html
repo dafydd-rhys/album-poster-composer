@@ -3,20 +3,7 @@
 <script>
   // Function to save the poster as an image
   function savePoster() {
-    window.jsPDF = window.jspdf.jsPDF;
-    var doc = new jsPDF();
-    var elementHTML = document.querySelector("#poster");
-
-    doc.html(elementHTML, {
-      callback: function (doc) {
-        // Save the PDF
-        doc.save("poster.pdf");
-      },
-      x: 22.5,
-      y: -5,
-      width: 165,
-      windowWidth: 650,
-    });
+    console.log("dsdsds");
   }
 </script>
 
