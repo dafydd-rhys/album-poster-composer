@@ -12,9 +12,12 @@ export function handleAlbumClick(event) {
     $(event.currentTarget).addClass('selected');
     selectedAlbum = $(event.currentTarget).data('album-id'); // Assuming you have a data attribute for album ID
 
+    console.log("Selected Album ID:", selectedAlbum); // Debugging line
+
     // Check if album is selected
     checkIfProceedEnabled();
 }
+
 
 function checkIfProceedEnabled() {
     // Enable or disable the proceed button based on album selection

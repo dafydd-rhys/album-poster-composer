@@ -291,11 +291,11 @@ h2 {
 }
 
 #proceed {
-    background-color: #007bff; /* Default color */
+    background-color:  var(--color-bg-accent); /* Default color */
     color: white;
     border: none;
-  width 100px;
-  align-self: flex-end;
+    width 100px;
+    align-self: flex-end;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
