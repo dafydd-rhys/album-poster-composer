@@ -23,3 +23,6 @@ export async function getAlbumArtwork(albumName, artistName, albumThumbnail) {
     }
 
     return highestMatch.artworkUrl100
+        .replace(/(.*?)\d(.*?)(.*?)thumb\//, "http://a1.mzstatic.com/us/r1000/063/")
+        .replace("/100x100bb.jpg", "");
+}
