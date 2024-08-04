@@ -123,7 +123,7 @@ p {
   font-weight: bold;
   font-size: 100px;
   line-height: 105%;
-  margin: 2rem 0 0;
+  margin: 3.5rem 0 0;
 }
 
 .title-container {
@@ -209,6 +209,12 @@ h2 {
   color: #ffffff;
 }
 
+.poster-description {
+  margin-bottom: 65px; /* Adjust the value to your preference */
+  font-size: 31px;
+}
+
+
 /* Albums Grid Layout */
 .albums {
   max-width: 100%;
@@ -292,22 +298,21 @@ h2 {
 
 .design {
   border-radius: 8px;
-  margin: 0.5rem;
-  padding: 0.5rem;
+  padding: 1rem;
   cursor: pointer;
   text-align: center;
-  
 }
 
 .design img {
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 175px;
+  max-height: 175px;
   display: block;
   margin: 0 auto;
 }
 
 .design p {
-  margin: 0.5rem 0;
+  margin: 1.2rem 0;
+  height: 10px;
 }
 
 .design.selected {
