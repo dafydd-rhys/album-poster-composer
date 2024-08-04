@@ -18,7 +18,6 @@ export function handleAlbumClick(event) {
     checkIfProceedEnabled();
 }
 
-
 export function handleDesignSelection(event) {
     // Remove 'selected' class from any previously selected design
     $('.design').removeClass('selected');
@@ -39,16 +38,13 @@ function checkIfProceedEnabled() {
 }
 
 export async function handleAlbumProceed() {
-    if (!selectedAlbum || !selectedDesign) {
-        console.error("No album or design selected.");
-        return;
-    }
-
+  console.log("preswsed");
     let albumNumber = $('.albumContainer.selected').index(); // Assuming you need index of selected album
     const albumContainer = $('.albumContainer.selected');
     
     // Load the appropriate HTML based on selected design
-    let htmlFile = `designs/${selectedDesign}.html`; // Update the path based on your setup
+    let htmlFile = `public/posters/designs/${selectedDesign}.html`; // Update the path based on your setup
+    console.log(htmlFile);
 
     $.post("", { album: selectedAlbum }, async function (album, status) {
         await updateAlbumUI(album, albumContainer, albumNumber);
