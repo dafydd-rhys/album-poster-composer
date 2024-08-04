@@ -273,3 +273,47 @@ h2 {
 .pagination button:hover {
   background-color: #d0fff1;
 }
+
+.design-selection {
+  margin: 2rem 0;
+}
+
+.design-selection h2 {
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.designs {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.design {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.design img {
+  max-width: 100px;
+  max-height: 100px;
+  display: block;
+  margin: 0 auto;
+}
+
+.design p {
+  margin: 0.5rem 0;
+}
+
+.design.selected {
+  border-color: var(--color-primary);
+}
+
+.design:hover {
+  background-color: var(--color-bg-accent);
+}
