@@ -1,7 +1,7 @@
 // Updated JavaScript
 
 $(document).ready(function () {
-  console.log("dsds");
+  
     let currentPage = 1;
     const albumsPerPage = 16; // 8 albums per row * 2 rows
 
@@ -45,7 +45,7 @@ $(document).ready(function () {
     // Handle click on Submit button
     $("#artist-submit").click(function () {
         currentPage = 1;
-        fetchAlbums(currentPage);
+        fetchAlbums(currentPage);  
     });
 
     // Handle Enter key press in the artist input field
