@@ -326,7 +326,10 @@
   </div>
   <button class="saveButton" onclick="savePoster()">Save Poster</button>
 
-  <script>
+  <script>   
+    import html2canvas from 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js';
+    import jsPDF from 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    
     async function savePoster() {
       // Select the poster div
       const poster = document.getElementById('poster');
