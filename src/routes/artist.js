@@ -31,6 +31,7 @@ const artistRoute = async (fastify) => {
     } else if (artistId) {
       try {
         const albums = await getArtistAlbums(artistId);
+        
         return reply
           .code(200)
           .header("Content-Type", "application/json")
@@ -41,6 +42,7 @@ const artistRoute = async (fastify) => {
     } else if (albumId) {
       try {
         const data = await spotifyApi.getAlbum(albumId);
+        
         return reply
           .code(200)
           .header("Content-Type", "application/json")
