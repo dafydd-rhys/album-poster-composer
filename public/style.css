@@ -68,8 +68,7 @@
   border-top: 4px solid #fff;
 }
 
-.footer 
-a:not(.btn--remix):link,
+.footer a:not(.btn--remix):link,
 a:not(.btn--remix):visited {
   font-family: HK Grotesk;
   font-style: normal;
