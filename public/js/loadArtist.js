@@ -43,6 +43,7 @@ $(document).ready(function () {
 
     // Handle click on Submit button
     $("#artist-submit").click(function () {
+        currentPage = 1;
         fetchAlbums(currentPage);
     });
 
@@ -50,6 +51,7 @@ $(document).ready(function () {
     $("#artist").keydown(function (event) {
         if (event.key === "Enter") {
             event.preventDefault(); // Prevent form submission if inside a form element
+            currentPage = 1;
             fetchAlbums(currentPage);
         }
     });
