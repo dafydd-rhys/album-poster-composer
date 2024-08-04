@@ -39,13 +39,9 @@ export async function handleAlbumProceed() {
     const albumContainer = $('.albumContainer.selected');
     
     // Load the appropriate HTML based on selected design
-    let htmlFile = `public/posters/designs/${selectedDesign}.html`; // Update the path based on your setup
+    let htmlFile = `posters/designs/${selectedDesign}.html`; // Update the path based on your setup
 
     $.post("", { album: selectedAlbum }, async function (album, status) {
-        await updateAlbumUI(album, albumContainer, albumNumber);
-        
-        console.log(htmlFile);
-        // Load the HTML file
-        window.open(htmlFile, '_blank'); // Opens the HTML file in a new tab
+        await updateAlbumUI(album, albumContainer, albumNumber, htmlFile);
     });
 }

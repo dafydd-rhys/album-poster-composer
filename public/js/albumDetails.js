@@ -1,7 +1,7 @@
 import { cutName, getAlbumNumber, getMonthName, getImageColourPalette } from './utils.js';
 import { getAlbumArtwork } from './api.js';
 
-export async function updateAlbumUI(album, albumContainer, albumNumber) {
+export async function updateAlbumUI(album, albumContainer, albumNumber, htmlFile) {
     alert(`${album.name}\n${album.total_tracks}\n${album.label}\n${album.release_date}\n${album.copyrights[0].text}`);
 
     const tracks = album.tracks.items
@@ -27,7 +27,7 @@ export async function updateAlbumUI(album, albumContainer, albumNumber) {
     const imageUrl = album.images[0].url;
     const base64Image = await convertImageToBase64(imageUrl);
 
-    var w = window.open("poster_v1.html");
+    var w = window.open(htmlFile);
 
     if (w) {
         w.addEventListener("load", function () {
