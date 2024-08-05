@@ -165,19 +165,6 @@ export async function loadModern(album, albumContainer, albumNumber, htmlFile) {
       // ARTIST NAME
       const albumArtist = w.document.querySelector(".albumArtist");
       if (albumArtist) {
-        // ALBUM NAME
-        let lines = Math.ceil(cutName(album.name).trim().length / 20);
-        let margin = 10;
-        if (lines < 4) {
-          margin = 115 - (lines - 1) * 30;
-          if (lines === 3) {
-            margin += 10;
-          }
-        }
-        if (label.length > 40) {
-          margin -= 15;
-        }
-        albumArtist.style.marginTop = `${margin}px`;
         albumArtist.innerHTML = album.artists[0].name.toUpperCase();
         const albumName = w.document.querySelector(".albumName");
         if (albumName) {
