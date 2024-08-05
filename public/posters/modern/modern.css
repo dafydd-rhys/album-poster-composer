@@ -75,7 +75,6 @@
   margin-top: 20px;
   justify-content: space-between;
   width: 82.5%;
-  border: 2px solid green;
 }
 
 .index .albumName {
@@ -87,7 +86,6 @@
   text-align: left;
   margin-right: 4px;
   width: 150px;
-  border: 2px solid green;
 }
 
 .index .albumArtist {
@@ -98,19 +96,16 @@
   text-align: left;
   margin-right: 4px;
   width: 150px;
-  border: 2px solid green;
 }
 
 .index .playbackControls {
   height: 50px;
   width: 150px;
-  border: 2px solid green;
 }
 
 .index .spotifyCode {
-  height: 30px;
+  height: 35px;
   width: 150px;
-  border: 2px solid green;
 }
 
 .index .songPlayback {

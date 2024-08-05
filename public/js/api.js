@@ -1,12 +1,3 @@
-export async function fetchAlbumDetails(albumId) {
-    const url = `https://api.example.com/albums/${albumId}`; // Replace with actual URL
-    const response = await fetch(url);
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    return response.json();
-}
-
 export async function getAlbumArtwork(albumName, artistName, albumThumbnail) {
     const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(albumName);
     const response = await fetch(url);
