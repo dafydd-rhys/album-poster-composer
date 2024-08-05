@@ -73,16 +73,6 @@ export async function loadModern(album, albumContainer, albumNumber, htmlFile) {
         console.error("Element .albumCover not found.");
       }
 
-      // LENGTH AND WORK YEARS
-      const albumLengthAndYear = w.document.querySelector(
-        ".albumLengthAndYear"
-      );
-      if (albumLengthAndYear) {
-        albumLengthAndYear.innerHTML = `${albumDurationLength} ${workYear}-${albumReleaseYear}<br /> RELEASED BY ${album.label.toUpperCase()}`;
-      } else {
-        console.error("Element .albumLengthAndYear not found.");
-      }
-
       //------ LEFT SIDE ------
       // TRACK NAMES
       const maxSongsPerColumn = 12;
@@ -114,33 +104,7 @@ export async function loadModern(album, albumContainer, albumNumber, htmlFile) {
       }
 
       //------ RIGHT SIDE ------
-      // PALETTE
-      for (var i = 0; i < 5; i++) {
-        const paletteColour = w.document.querySelector(`.paletteColour${i}`);
-        if (paletteColour) {
-          // Create a canvas element
-          var canvas = document.createElement("canvas");
-          canvas.width = 46;
-          canvas.height = 48;
-          // Get the canvas context
-          var context = canvas.getContext("2d");
-          // Set the fill color to rgb of swatch
-          context.fillStyle = `rgb(${swatches[i][0]}, ${swatches[i][1]}, ${swatches[i][2]})`;
-          // Fill the entire canvas with color
-          context.fillRect(0, 0, canvas.width, canvas.height);
-          paletteColour.src = canvas.toDataURL("image/png");
-        } else {
-          console.error(`Element .paletteColour${i} not found.`);
-        }
-      }
 
-      // RELEASED BY (ARTIST)
-      const albumBy = w.document.querySelector(".albumBy");
-      if (albumBy) {
-        albumBy.innerHTML = `AN ALBUM BY ${album.artists[0].name.toUpperCase()}`;
-      } else {
-        console.error("Element .albumBy not found.");
-      }
 
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
@@ -174,6 +138,25 @@ export async function loadModern(album, albumContainer, albumNumber, htmlFile) {
         }
       } else {
         console.error("Element .albumArtist not found.");
+      }
+            // PALETTE
+      for (var i = 0; i < 5; i++) {
+        const paletteColour = w.document.querySelector(`.paletteColour${i}`);
+        if (paletteColour) {
+          // Create a canvas element
+          var canvas = document.createElement("canvas");
+          canvas.width = 46;
+          canvas.height = 48;
+          // Get the canvas context
+          var context = canvas.getContext("2d");
+          // Set the fill color to rgb of swatch
+          context.fillStyle = `rgb(${swatches[i][0]}, ${swatches[i][1]}, ${swatches[i][2]})`;
+          // Fill the entire canvas with color
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          paletteColour.src = canvas.toDataURL("image/png");
+        } else {
+          console.error(`Element .paletteColour${i} not found.`);
+        }
       }
     });
   } else {
@@ -250,23 +233,7 @@ export async function loadClassic(
       }
 
       //------ RIGHT SIDE ------
-      // PALETTE
-      for (var i = 0; i < 5; i++) {
-        const paletteColour = w.document.querySelector(`.paletteColour${i}`);
-        if (paletteColour) {
-          // Create a canvas element
-          var canvas = document.createElement("canvas");
-          canvas.width = 46;
-          canvas.height = 48;
-          // Get the canvas context
-          var context = canvas.getContext("2d");
-          // Set the fill color to rgb of swatch
-          context.fillStyle = `rgb(${swatches[i][0]}, ${swatches[i][1]}, ${swatches[i][2]})`;
-          // Fill the entire canvas with color
-          context.fillRect(0, 0, canvas.width, canvas.height);
-          paletteColour.src = canvas.toDataURL("image/png");
-        }
-      }
+
 
       // RELEASED BY (ARTIST)
       const albumBy = w.document.querySelector(".albumBy");
@@ -310,6 +277,23 @@ export async function loadClassic(
         const albumName = w.document.querySelector(".albumName");
         if (albumName)
           albumName.innerHTML = cutName(album.name.toUpperCase()).trim();
+      }
+            // PALETTE
+      for (var i = 0; i < 5; i++) {
+        const paletteColour = w.document.querySelector(`.paletteColour${i}`);
+        if (paletteColour) {
+          // Create a canvas element
+          var canvas = document.createElement("canvas");
+          canvas.width = 46;
+          canvas.height = 48;
+          // Get the canvas context
+          var context = canvas.getContext("2d");
+          // Set the fill color to rgb of swatch
+          context.fillStyle = `rgb(${swatches[i][0]}, ${swatches[i][1]}, ${swatches[i][2]})`;
+          // Fill the entire canvas with color
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          paletteColour.src = canvas.toDataURL("image/png");
+        }
       }
     });
   } else {
