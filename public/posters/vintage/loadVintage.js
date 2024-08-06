@@ -19,9 +19,9 @@ export async function loadVintage(
 
   const tracks = album.tracks.items
     .map(
-      (track) => `${track.track_number} ${cutName(track.name.toUpperCase())}`
+      (track) => `${cutName(track.name.toUpperCase())}`
     )
-    .join("<br />");
+  .join(', ')
 
   // Convert image URL to Base64
   const imageUrl = album.images[0].url;
@@ -34,12 +34,11 @@ export async function loadVintage(
       // ARTIST NAME
       const albumArtist = w.document.querySelector(".albumArtist");
       if (albumArtist) {
-        albumArtist.innerHTML = album.artists[0].name.toUpperCase();
+        albumArtist.innerHTML = 'Album by ' + album.artists[0].name.toUpperCase();
         const albumName = w.document.querySelector(".albumName");
         if (albumName)
           albumName.innerHTML = cutName(album.name.toUpperCase()).trim();
       }
-      
             
       // ARTWORK
       const albumCover = w.document.querySelector(".albumCover");

@@ -29,12 +29,13 @@ body {
   display: grid;
   grid-template-rows: repeat(3, auto);
   gap: 5px;
+  height: 130px;
+  border: 2px solid green;
 }
 .song-row {
   text-align: right;
   font-family: monospace;
   font-weight: bold;
-  height: 15px;
 }
 .songTitles {
   font-size: 15px;
@@ -43,5 +44,5 @@ body {
 .albumCover {
   display: block;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 15px;
 }
