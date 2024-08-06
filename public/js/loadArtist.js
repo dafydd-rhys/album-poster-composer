@@ -3,7 +3,7 @@
 $(document).ready(function () {
   
     let currentPage = 1;
-    const albumsPerPage = 16; // 8 albums per row * 2 rows
+    const albumsPerPage = 24; // 8 albums per row * 2 rows
 
     // Function to fetch and display albums
     function fetchAlbums(page) {

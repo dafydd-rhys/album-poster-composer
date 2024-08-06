@@ -5,7 +5,7 @@
   --color-primary: #ffffff;
   --wrapper-height: 87vh;
   --image-max-width: 300px;
-  --image-margin: 3rem;
+
   --font-family: "HK Grotesk";
   --font-family-header: "HK Grotesk";
 }
@@ -101,7 +101,7 @@ body {
   min-height: var(--wrapper-height);
   display: grid;
   place-items: center;
-  margin: 0 1rem;
+
 }
 
 .content {
@@ -116,26 +116,28 @@ p {
   font-size: 1.25rem;
 }
 
+.title-container {
+  display: flex;
+  align-items: flex-start; /* Align items at the top */
+  justify-content: space-between; /* Space items evenly with auto margins */
+  border: 2px solid green; /* For debugging, can be removed later */
+}
+
 .title {
   color: #ffffff;
-  font-family: HK Grotesk;
+  font-family: 'HK Grotesk', sans-serif; /* Ensure the font family is defined */
   font-style: normal;
   font-weight: bold;
   font-size: 70px;
   line-height: 105%;
-  margin: 3.5rem 0 0;
-}
-
-.title-container {
-  display: grid;
-  grid-template-columns: auto auto;
 }
 
 .title-image {
-  justify-self: flex-end;
-  margin-top: 50px;
   width: 100px;
   height: 100px;
+  border: 2px solid green; /* For debugging, can be removed later */
+  margin-left: auto; /* Push the image to the right */
+  align-self: flex-start; /* Ensure image aligns at the top */
 }
 
 .illo-container {
@@ -161,17 +163,10 @@ p {
  
 }
 
-.color-form button {
-  
-}
 
 .color-form button:hover {
   cursor: pointer;
   box-shadow: -8px 4px 20px #9be7d8;
-}
-
-form {
-
 }
 
 button,
@@ -212,7 +207,7 @@ h2 {
   max-width: 100%;
   margin: 1rem auto 0;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   gap: 10px; /* Adjust the spacing between albums */
 }
 
@@ -235,7 +230,7 @@ h2 {
 
 .album {
   display: block;
-  max-height: 150px;
+  max-height: 100px;
   width: 100%; /* Make sure images are responsive */
   height: auto;
 }
