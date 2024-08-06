@@ -55,3 +55,16 @@ export function getImageColourPalette(image) {
 
     return swatchesArray;
 }
+
+// Function to convert image URL to Base64
+async function convertImageToBase64(imageUrl) {
+  const response = await fetch(imageUrl);
+  const blob = await response.blob();
+  const reader = new FileReader();
+
+  return new Promise((resolve, reject) => {
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
