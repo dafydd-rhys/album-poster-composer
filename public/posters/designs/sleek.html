@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="shortcut icon" type="image/png" href="https://animaproject.s3.amazonaws.com/home/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="../sleek/sleek.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body
+  style="
+    margin: 0;
+    background: #ffffff;
+    border: solid 1px;
+    width: 22.3cm;
+    height: 31.5cm;
+  "
+>
+  <input type="hidden" id="anPageName" name="page" value="index" />
+  <div id="poster">
+    <div class="container-center-horizontal">
+      <div class="index screen">
+        <img
+          class="albumCover"
+          src="https://anima-uploads.s3.amazonaws.com/projects/648d216299d0ec1b8c284cc4/releases/648d35dd3a901f71153b1c8d/img/image-3.png"
+          alt="image 3"
+        />
+        <div class="album-details">
+          <h1 class="albumName">IGOR</h1>
+          <div class="albumArtist">By Tyler, The Creator - 2019</div>
+        </div>
+        <div class="song-list-container" id="song-list-container">
+          <p class="songTitles">
+            IGOR'S THEME<br />
+            CONVERSATIONS<br />
+            TITANIC<br />
+            BAD ENERGY<br />
+            RIGHTEOUS<br />
+            BLOOD ON MY JEANS<br />
+            SLIME<br />
+            TELL ME U LUV ME<br />
+            HATE THE OTHER SIDE<br />
+            GET THROUGH IT<br />
+            LIFE’S A MESS<br />
+            COME &amp; GO<br />
+            I WANT IT<br />
+          </p>
+        </div>
+        </div>
+      </div>
+    </div>
+  <button class="saveButton" onclick="savePoster()">Save Poster</button>
+  <script src="../classic/classic.js"></script>
+</body>
+</html>
