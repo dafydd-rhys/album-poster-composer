@@ -120,7 +120,6 @@ p {
   display: flex;
   align-items: flex-start; /* Align items at the top */
   justify-content: space-between; /* Space items evenly with auto margins */
-  border: 2px solid green; /* For debugging, can be removed later */
 }
 
 .title {
@@ -128,17 +127,18 @@ p {
   font-family: 'HK Grotesk', sans-serif; /* Ensure the font family is defined */
   font-style: normal;
   font-weight: bold;
-  font-size: 70px;
+  font-size: 80px;
   line-height: 105%;
+  margin: 0; /* Remove any default margin */
 }
 
 .title-image {
   width: 100px;
   height: 100px;
-  border: 2px solid green; /* For debugging, can be removed later */
   margin-left: auto; /* Push the image to the right */
   align-self: flex-start; /* Ensure image aligns at the top */
 }
+
 
 .illo-container {
   display: flex;
@@ -242,8 +242,8 @@ h2 {
   color: #f1f1f1;
   transition: 0.5s ease;
   opacity: 0;
-  font-size: 20px;
-  padding: 20px;
+  font-size: 10px;
+  padding: 10px;
   text-align: center;
   width: 100%; /* Fill the container */
 }
@@ -284,6 +284,7 @@ h2 {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
 #proceed:disabled {
