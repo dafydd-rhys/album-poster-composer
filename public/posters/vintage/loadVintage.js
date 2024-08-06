@@ -47,7 +47,7 @@ export async function loadVintage(
       }
       
       // TRACK NAMES
-      const songTitles = w.document.querySelector(".songTitles");
+      const songTitles = w.document.querySelector(".song-content");
       if (songTitles) {
         let spacing = Math.floor(-0.4 * album.total_tracks + 23.8);
         songTitles.style.lineHeight = `${spacing}px`;

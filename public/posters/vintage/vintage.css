@@ -31,9 +31,10 @@ body {
 }
 .song-list-container {
   overflow: hidden;
-  height: 130px;
+  height: auto;
   max-width: 100%;
   padding-top: 10px;
+  padding-bottom: 10px;
 }
 .song-content {
   text-align: right;
