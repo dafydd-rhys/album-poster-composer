@@ -61,7 +61,6 @@
 .footer {
   display: flex;
   justify-content: space-between;
-
   padding: 1rem 0 0.75rem 0;
   width: 100%;
   flex-wrap: wrap;
@@ -120,6 +119,7 @@ p {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  margin-top: 10px;
 }
 
 .title {
@@ -130,6 +130,7 @@ p {
   font-size: 80px;
   line-height: 105%;
   margin: 0;
+  margin-top: 5px;
   padding-right: 50px; /* Add padding to the right of the title */
 }
 
