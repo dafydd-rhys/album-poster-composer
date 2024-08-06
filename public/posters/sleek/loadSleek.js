@@ -51,7 +51,7 @@ export async function loadSleek(
       // ARTIST NAME
       const albumArtist = w.document.querySelector(".albumArtist");
       if (albumArtist) {
-        albumArtist.innerHTML = `By ${album.artists[0].name} - ${albumReleaseYear}`;;
+        albumArtist.innerHTML = `By ${album.artists[0].name} • ${albumReleaseYear}`;;
         const albumName = w.document.querySelector(".albumName");
         if (albumName)
           albumName.innerHTML = cutName(album.name.toUpperCase()).trim();
