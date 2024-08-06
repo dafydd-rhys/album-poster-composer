@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  background: #ffffff;
+  border: solid 1px;
+  width: 22.3cm;
+  height: 31.5cm;
+  display: flex;
+  justify-content: center;
+}
+#poster {
+  width: 97%;
+  text-align: left;
+  margin-top: 20px;
+}
+.albumName {
+  font-size: 8em;
+  font-weight: bolder;
+  text-align: left;
+  margin: 0;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.albumArtist {
+  font-size: 2em;
+  text-align: right;
+  margin: 0;
+  margin-top: 10px;
+}
+.song-list-container {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  gap: 5px;
+}
+.song-row {
+  text-align: right;
+  font-family: monospace;
+  font-weight: bold;
+  height: 15px;
+}
+.songTitles {
+  font-size: 15px;
+  font-weight: bold;
+}
+.albumCover {
+  display: block;
+  width: 100%;
+  margin-top: 40px;
+}

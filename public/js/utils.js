@@ -57,7 +57,7 @@ export function getImageColourPalette(image) {
 }
 
 // Function to convert image URL to Base64
-async function convertImageToBase64(imageUrl) {
+export async function convertImageToBase64(imageUrl) {
   const response = await fetch(imageUrl);
   const blob = await response.blob();
   const reader = new FileReader();
