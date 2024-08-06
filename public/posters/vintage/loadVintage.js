@@ -34,7 +34,7 @@ export async function loadVintage(
       // ARTIST NAME
       const albumArtist = w.document.querySelector(".albumArtist");
       if (albumArtist) {
-        albumArtist.innerHTML = 'Album by ' + album.artists[0].name.toUpperCase();
+        albumArtist.innerHTML = 'Album by <i>' + album.artists[0].name + '</i>';
         const albumName = w.document.querySelector(".albumName");
         if (albumName)
           albumName.innerHTML = cutName(album.name.toUpperCase()).trim();

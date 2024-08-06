@@ -24,7 +24,7 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 }
 .albumArtist {
-  font-size: 2em;
+  font-size: 1.7em;
   text-align: right;
   margin: 0;
   margin-top: 10px;
@@ -38,9 +38,7 @@ body {
 }
 .song-content {
   text-align: right;
-  font-family: monospace;
-  font-weight: bold;
-  font-size: 1.2em;
+  font-size: 0.9em;
 }
 .albumCover {
   display: block;
