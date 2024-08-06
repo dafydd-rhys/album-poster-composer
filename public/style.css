@@ -121,7 +121,7 @@ p {
   font-family: HK Grotesk;
   font-style: normal;
   font-weight: bold;
-  font-size: 100px;
+  font-size: 70px;
   line-height: 105%;
   margin: 3.5rem 0 0;
 }
@@ -214,9 +214,8 @@ h2 {
 
 .poster-description {
   margin-bottom: 50px; /* Adjust the value to your preference */
-  font-size: 31px;
+  font-size: 25px;
 }
-
 
 /* Albums Grid Layout */
 .albums {
