@@ -35,10 +35,12 @@ body {
   max-width: 100%;
   padding-top: 10px;
   padding-bottom: 10px;
+  
 }
 .song-content {
   text-align: right;
   font-size: 1.2em;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 .albumCover {
   display: block;
