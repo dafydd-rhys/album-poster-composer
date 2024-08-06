@@ -19,7 +19,7 @@ export async function loadVintage(
 
   const tracks = album.tracks.items
     .map(
-      (track) => `${cutName(track.name.toUpperCase())}`
+      (track) => `${cutName(track.name)}`
     )
   .join(', ')
 
