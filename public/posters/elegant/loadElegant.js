@@ -35,9 +35,6 @@ export async function loadElegant(
 
   // PARSING DATE FROM JSON
   let albumReleaseYear = album.release_date.substr(0, 4);
-  let albumReleaseMonth = album.release_date.substr(5, 7);
-  let albumReleaseDay = album.release_date.substr(8, 10);
-  let workYear = parseInt(albumReleaseYear) - 1;
 
   const swatches = getImageColourPalette(
     albumContainer.children("img:first").get(0)
@@ -57,15 +54,6 @@ export async function loadElegant(
         albumCover.src = base64Image;
       }
 
-      // LENGTH AND WORK YEARS
-      const albumLengthAndYear = w.document.querySelector(
-        ".albumLengthAndYear"
-      );
-      if (albumLengthAndYear) {
-        albumLengthAndYear.innerHTML = `${albumDurationLength} ${workYear}-${albumReleaseYear}<br /> RELEASED BY ${album.label.toUpperCase()}`;
-      }
-
-      //------ LEFT SIDE ------
       // TRACK NAMES
       const songTitles = w.document.querySelector(".songTitles");
       if (songTitles) {
@@ -74,53 +62,30 @@ export async function loadElegant(
         songTitles.innerHTML = tracks;
       }
 
-      //------ RIGHT SIDE ------
-
-
-      // RELEASED BY (ARTIST)
-      const albumBy = w.document.querySelector(".albumBy");
-      if (albumBy)
-        albumBy.innerHTML = `AN ALBUM BY ${album.artists[0].name.toUpperCase()}`;
-
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
       if (spotifyCode)
         spotifyCode.src = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
 
       // RELEASED BY (DATE, LABEL, NUMBER)
-      const albumRelease = w.document.querySelector(".albumRelease");
-      var label = "";
-      if (albumRelease) {
-        label = `RELEASED BY ${album.label.toUpperCase()}`;
-        albumRelease.innerHTML = `OUT NOW / ${getMonthName(
-          parseInt(albumReleaseMonth)
-        )} ${albumReleaseDay}, ${albumReleaseYear}<br />${label}<br />${getAlbumNumber(
-          albumNumber + 1
-        )}`;
-      }
+      const releaseDate = w.document.querySelector(".releaseDate");
+      const releaseLabel = w.document.querySelector(".releaseDate");
+      const albumLength = w.document.querySelector(".releaseDate");
+      
+      releaseDate.innerHTML = albumReleaseYear;
+      releaseLabel.innerHTML = album.label;
+      albumLength.innerHTML = albumDurationLength;
 
       // ARTIST NAME
       const albumArtist = w.document.querySelector(".albumArtist");
       if (albumArtist) {
-        // ALBUM NAME
-        let lines = Math.ceil(cutName(album.name).trim().length / 20);
-        let margin = 10;
-        if (lines < 4) {
-          margin = 115 - (lines - 1) * 30;
-          if (lines === 3) {
-            margin += 10;
-          }
-        }
-        if (label.length > 40) {
-          margin -= 15;
-        }
-        albumArtist.style.marginTop = `${margin}px`;
         albumArtist.innerHTML = album.artists[0].name.toUpperCase();
         const albumName = w.document.querySelector(".albumName");
         if (albumName)
           albumName.innerHTML = cutName(album.name.toUpperCase()).trim();
       }
-            // PALETTE
+      
+      // PALETTE
       for (var i = 0; i < 5; i++) {
         const paletteColour = w.document.querySelector(`.paletteColour${i}`);
         if (paletteColour) {
