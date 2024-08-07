@@ -5,7 +5,7 @@ import {
   getImageColourPalette,
   convertImageToBase64
 } from "../../js//utils.js";
-import { addTransparencyToSpotifyCode, getAlbumArtwork } from "../../js/api.js";
+import { getAlbumArtwork } from "../../js/api.js";
 
 export async function loadChoatic(
   album,
@@ -46,11 +46,9 @@ export async function loadChoatic(
   // Convert image URL to Base64
   const imageUrl = album.images[0].url;
   const base64Image = await convertImageToBase64(imageUrl);
-  
-  const spotifyCodeImageUrl = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
-  const transparentSpotifyCodeImage = await addTransparencyToSpotifyCode(spotifyCodeImageUrl);  
 
   var w = window.open(htmlFile);
+
   if (w) {
     w.addEventListener("load", function () {
       // ARTWORK
@@ -129,7 +127,7 @@ export async function loadChoatic(
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
       if (spotifyCode)      
-        spotifyCode.src = transparentSpotifyCodeImage;
+        spotifyCode.src = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
       
 
       // UPDATE RELEASE DETAILS
