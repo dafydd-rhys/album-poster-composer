@@ -47,3 +47,8 @@ body {
   width: 100%;
   margin-top: 10px;
 }
+.saveButton {
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}
