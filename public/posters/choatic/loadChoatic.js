@@ -56,9 +56,23 @@ export async function loadChoatic(
       if (albumCover) {
         albumCover.src = base64Image;
       }
+      
+      // Set background image with blur effect
+      const indexElement = w.document.querySelector(".index");
+      if (indexElement) {
+        const style = indexElement.style;
+        const beforeStyle = `
+          background-image: url(${base64Image});
+          background-size: cover;
+          background-position: center;
+        `;
+        indexElement.insertAdjacentHTML('beforeend', `<style>
+          .index::before { ${beforeStyle} }
+        </style>`);
+      }
 
       // TRACK NAMES
-      const maxSongsPerColumn = 15;
+      const maxSongsPerColumn = 12;
       const numberOfColumns = Math.ceil(trackArray.length / maxSongsPerColumn);
 
       const container = w.document.getElementById("song-list-container");
