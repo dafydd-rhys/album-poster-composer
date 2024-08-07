@@ -7,8 +7,8 @@ import {
 } from "../../js/utils.js";
 import { getAlbumArtwork } from "../../js/api.js";
 
-// Function to remove white background from a base64 image
-function makeWhiteBackgroundTransparent(base64) {
+// Function to remove black background from a base64 image
+function makeBlackBackgroundTransparent(base64) {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => {
@@ -24,8 +24,8 @@ function makeWhiteBackgroundTransparent(base64) {
           const r = imageData.data[offset];
           const g = imageData.data[offset + 1];
           const b = imageData.data[offset + 2];
-          // if it is pure white, change its alpha to 0
-          if (r === 255 && g === 255 && b === 255) {
+          // if it is pure black, change its alpha to 0
+          if (r === 0 && g === 0 && b === 0) {
             imageData.data[offset + 3] = 0;
           }
         }
@@ -36,6 +36,7 @@ function makeWhiteBackgroundTransparent(base64) {
     image.src = base64;
   });
 }
+
 
 export async function loadChoatic(
   album,
@@ -79,9 +80,9 @@ export async function loadChoatic(
 
   // Convert Spotify code image URL to Base64 and make it transparent
   console.log(album.uri);
-  const spotifyCodeUrl = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
+  const spotifyCodeUrl = `https://scannables.scdn.co/uri/plain/png/000000/white/256/${album.uri}`;
   const base64SpotifyCodeImage = await convertImageToBase64(spotifyCodeUrl);
-  const transparentSpotifyCodeImage = await makeWhiteBackgroundTransparent(base64SpotifyCodeImage);
+  const transparentSpotifyCodeImage = await makeBlackBackgroundTransparent(base64SpotifyCodeImage);
 
   var w = window.open(htmlFile);
 
