@@ -14,7 +14,7 @@ async function getTransparentImage(imageUrl) {
   const response = await fetch('https://api.remove.bg/v1.0/removebg', {
     method: 'POST',
     headers: {
-      'X-Api-Key': apiKey
+      'X-API-Key': apiKey
     },
     body: new URLSearchParams({
       'image_url': imageUrl // Pass the image URL to Remove.bg API
