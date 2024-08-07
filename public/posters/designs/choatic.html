@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="shortcut icon" type="image/png" href="https://animaproject.s3.amazonaws.com/home/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="../choatic/choatic.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body
+  style="
+    margin: 0;
+    background: #ffffff;
+    border: solid 1px;
+    width: 22.3cm;
+    height: 31.5cm;
+  "
+>
+  <input type="hidden" id="anPageName" name="page" value="index" />
+  <div id="poster">
+    <div class="container-center-horizontal">
+      <div class="index screen">
+        <img
+          class="albumCover"
+          src="https://anima-uploads.s3.amazonaws.com/projects/648d216299d0ec1b8c284cc4/releases/648d35dd3a901f71153b1c8d/img/image-3.png"
+          alt="image 3"
+        />
+        <div class="album-details">
+          <div>
+            <h1 class="albumName">LEGENDS NEVER DIE</h1>
+            <div class="albumArtist">JUICE WRLD</div>
+          </div>
+        </div>
+        <img
+          class="songPlayback"
+          src="https://cdn.glitch.global/26dbc63d-4f2c-4201-be76-34e4291f6e34/f42b2c31-994b-4b4f-a55f-2595dd398426.image-removebg-preview.png?v=1723057659453"
+          alt="Song Playback"
+        />
+        <div class="song-list-container" id="song-list-container">
+          <div class="song-column">
+            <p class="songTitles">
+              1 ANXIETY - INTRO<br />
+              2 CONVERSATIONS<br />
+              3 TITANIC<br />
+              4 BAD ENERGY<br />
+              5 RIGHTEOUS<br />
+              6 BLOOD ON MY JEANS<br />
+              7 SLIME<br />
+              8 TELL ME U LUV ME<br />
+              9 HATE THE OTHER SIDE<br />
+              10 GET THROUGH IT
+            </p>
+          </div>
+          <div class="song-column">
+            <p class="songTitles">
+              11 LIFE’S A MESS<br />
+              12 COME AND GO<br />
+              13 I WANT IT<br />
+              14 FIGHTING DEMONS<br />
+              15 WISHING WELL<br />
+              16 SCREW JUICE<br />
+              17 UP UP AND AWAY<br />
+              18 THE MAN, THE MYTH, THE LEGEND<br />
+              19 STAY HIGH<br />
+              20 CAN’T DIE<br />
+              21 MAN OF THE YEAR<br />
+              22 JUICE WRLD SPEAKS FROM HEAVEN
+            </p>
+          </div>
+          <div class="song-column">
+            <p class="albumRelease">
+              <strong>Release Date</strong><br />
+              <span id="releaseDate">19th of February, 2019</span><br /><br />
+              <strong>Release Label</strong><br />
+              <span id="releaseLabel">Interscope Label</span><br /><br />
+              <strong>Album Length</strong><br />
+              <span id="albumLength">57:48</span><br />
+            </p>
+          </div>
+        </div>
+        <div class="bottom-section">      
+          <img
+            class="spotifyCode"
+            src="https://anima-uploads.s3.amazonaws.com/projects/648d216299d0ec1b8c284cc4/releases/648d35dd3a901f71153b1c8d/img/image-10@2x.png"
+            alt="Spotify Code"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="saveButton" onclick="savePoster()">Save Poster</button>
+  <script src="../classic/classic.js"></script>
+</body>
+</html>

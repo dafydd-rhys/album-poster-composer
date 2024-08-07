@@ -10,6 +10,7 @@ import { loadModern } from "../../posters/modern/loadModern.js";
 import { loadVintage } from "../../posters/vintage/loadVintage.js";
 import { loadSleek } from "../../posters/sleek/loadSleek.js";
 import { loadElegant } from "../../posters/elegant/loadElegant.js";
+import { loadChoatic } from "../../posters/choatic/loadChoatic.js";
 
 export async function updateAlbumUI(
   album,
@@ -25,7 +26,9 @@ export async function updateAlbumUI(
     loadVintage(album, albumContainer, albumNumber, htmlFile);
   } else if (htmlFile.includes("sleek")) {
     loadSleek(album, albumContainer, albumNumber, htmlFile);
-  } else {
+  } else if (htmlFile.includes("elegant")) {
     loadElegant(album, albumContainer, albumNumber, htmlFile);
+  } else {
+    loadChoatic(album, albumContainer, albumNumber, htmlFile);
   }
 }
