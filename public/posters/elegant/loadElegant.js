@@ -62,8 +62,8 @@ export async function loadElegant(
       }
 
       // TRACK NAMES
-      const maxSongsPerColumn = 12;
-      const numberOfColumns = Math.ceil(tracks.length / maxSongsPerColumn);
+      const maxSongsPerColumn = 15;
+      const numberOfColumns = Math.ceil(trackArray.length / maxSongsPerColumn);
 
       const container = w.document.getElementById("song-list-container");
       if (container) {
@@ -74,11 +74,11 @@ export async function loadElegant(
           column.classList.add("song-column");
 
           const startIndex = i * maxSongsPerColumn;
-          const endIndex = Math.min(startIndex + maxSongsPerColumn, tracks.length);
+          const endIndex = Math.min(startIndex + maxSongsPerColumn, trackArray.length);
 
           const columnContent = document.createElement("p");
           columnContent.classList.add("songTitles");
-          columnContent.innerHTML = tracks
+          columnContent.innerHTML = trackArray
             .slice(startIndex, endIndex)
             .join("<br />");
 
@@ -88,15 +88,16 @@ export async function loadElegant(
       } else {
         console.error("Element #song-list-container not found.");
       }
+      
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
       if (spotifyCode)
         spotifyCode.src = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
 
       // RELEASED BY (DATE, LABEL, NUMBER)
-      const releaseDate = w.document.querySelector(".releaseDate");
-      const releaseLabel = w.document.querySelector(".releaseDate");
-      const albumLength = w.document.querySelector(".releaseDate");
+      const releaseDate = w.document.getElementById("releaseDate");
+      const releaseLabel = w.document.getElementById("releaseLabel");
+      const albumLength = w.document.getElementById("albumLength");
       
       releaseDate.innerHTML = albumReleaseYear;
       releaseLabel.innerHTML = album.label;
