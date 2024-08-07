@@ -7,46 +7,34 @@ import {
 } from "../../js/utils.js";
 import { getAlbumArtwork } from "../../js/api.js";
 
-// Function to fetch image from URL and convert to Blob
-async function fetchImageBlob(imageUrl) {
-  const response = await fetch(imageUrl);
-  if (!response.ok) {
-    throw new Error(`Error fetching image: ${response.statusText}`);
-  }
-  return await response.blob();
-}
-
-// Function to process image through Clipping Magic API
-async function getTransparentImage(imageUrl) {
-  const apiKey = 'a126rdt80furr1e1r9hn5a91dpqg6cukkckej355u3eudi1oq62u'; // Replace with your Clipping Magic API key
-
-  const imageBlob = await fetchImageBlob(imageUrl);
-
-  const formData = new FormData();
-  formData.append('image', imageBlob, 'image.jpg'); // Use any name for the file
-
-  const response = await fetch(`https://api.clippingmagic.com/v1/images?test=true`, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Basic ${btoa(apiKey + ':')}`
-    },
-    body: formData
+// Function to remove white background from a base64 image
+function makeWhiteBackgroundTransparent(base64) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = image.width;
+      canvas.height = image.height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(image, 0, 0);
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      for (let x = 0; x < imageData.width; x++) {
+        for (let y = 0; y < imageData.height; y++) {
+          const offset = (y * imageData.width + x) * 4;
+          const r = imageData.data[offset];
+          const g = imageData.data[offset + 1];
+          const b = imageData.data[offset + 2];
+          // if it is pure white, change its alpha to 0
+          if (r === 255 && g === 255 && b === 255) {
+            imageData.data[offset + 3] = 0;
+          }
+        }
+      }
+      ctx.putImageData(imageData, 0, 0);
+      resolve(canvas.toDataURL()); // Output base64
+    };
+    image.src = base64;
   });
-
-  if (!response.ok) {
-    throw new Error(`Error: ${response.statusText}`);
-  }
-
-  const result = await response.json();
-  const imageId = result.id;
-
-  const downloadResponse = await fetch(`https://api.clippingmagic.com/v1/images/${imageId}/result`);
-  if (!downloadResponse.ok) {
-    throw new Error(`Error: ${downloadResponse.statusText}`);
-  }
-
-  const resultBlob = await downloadResponse.blob();
-  return URL.createObjectURL(resultBlob); // Create an object URL for the transparent image
 }
 
 export async function loadChoatic(
@@ -65,7 +53,7 @@ export async function loadChoatic(
       (track) => `${track.track_number} ${cutName(track.name.toUpperCase())}`
     )
     .join("<br />");
-
+  
   // Convert the tracksString to an array using split
   const trackArray = tracksString
     .split("<br />")
@@ -89,26 +77,27 @@ export async function loadChoatic(
   const imageUrl = album.images[0].url;
   const base64Image = await convertImageToBase64(imageUrl);
 
-  // Spotify code image URL
+  // Convert Spotify code image URL to Base64 and make it transparent
   const spotifyCodeUrl = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
+  const base64SpotifyCodeImage = await convertImageToBase64(spotifyCodeUrl);
+  const transparentSpotifyCodeImage = await makeWhiteBackgroundTransparent(base64SpotifyCodeImage);
 
   var w = window.open(htmlFile);
 
   if (w) {
-    w.addEventListener("load", async function () {
+    w.addEventListener("load", function () {
       // ARTWORK
       const albumCover = w.document.querySelector(".albumCover");
       if (albumCover) {
         albumCover.src = base64Image;
       }
-
+      
       // Set background image with blur effect
       const indexElement = w.document.querySelector(".index");
       if (indexElement) {
-        const transparentImageUrl = await getTransparentImage(imageUrl); // Get transparent image
         const style = indexElement.style;
         const beforeStyle = `
-          background-image: url(${transparentImageUrl});
+          background-image: url(${base64Image});
           background-size: cover;
           background-position: center;
         `;
@@ -126,13 +115,13 @@ export async function loadChoatic(
         container.innerHTML = ""; // Clear any existing content
 
         for (let i = 0; i < numberOfColumns; i++) {
-          const column = w.document.createElement("div");
+          const column = document.createElement("div");
           column.classList.add("song-column");
 
           const startIndex = i * maxSongsPerColumn;
           const endIndex = Math.min(startIndex + maxSongsPerColumn, trackArray.length);
 
-          const columnContent = w.document.createElement("p");
+          const columnContent = document.createElement("p");
           columnContent.classList.add("songTitles");
           columnContent.innerHTML = trackArray
             .slice(startIndex, endIndex)
@@ -144,16 +133,16 @@ export async function loadChoatic(
 
         // Ensure there are at least two columns
         if (numberOfColumns < 2) {
-          const emptyColumn = w.document.createElement("div");
+          const emptyColumn = document.createElement("div");
           emptyColumn.classList.add("song-column");
           container.appendChild(emptyColumn);
         }
 
         // Add the album release details column
-        const releaseColumn = w.document.createElement("div");
+        const releaseColumn = document.createElement("div");
         releaseColumn.classList.add("song-column");
 
-        const releaseContent = w.document.createElement("p");
+        const releaseContent = document.createElement("p");
         releaseContent.classList.add("albumRelease");
         releaseContent.innerHTML = `
           <strong>Release Date</strong><br />
@@ -172,9 +161,8 @@ export async function loadChoatic(
 
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
-      if (spotifyCode) {
-        const transparentSpotifyCodeUrl = await getTransparentImage(spotifyCodeUrl); // Get transparent Spotify code image
-        spotifyCode.src = transparentSpotifyCodeUrl; // Set the transparent image URL
+      if (spotifyCode) {     
+        spotifyCode.src = transparentSpotifyCodeImage;
       }
 
       // UPDATE RELEASE DETAILS
