@@ -85,23 +85,48 @@ export async function loadElegant(
           column.appendChild(columnContent);
           container.appendChild(column);
         }
+
+        // Ensure there are at least two columns
+        if (numberOfColumns < 2) {
+          const emptyColumn = document.createElement("div");
+          emptyColumn.classList.add("song-column");
+          container.appendChild(emptyColumn);
+        }
+
+        // Add the album release details column
+        const releaseColumn = document.createElement("div");
+        releaseColumn.classList.add("song-column");
+
+        const releaseContent = document.createElement("p");
+        releaseContent.classList.add("albumRelease");
+        releaseContent.innerHTML = `
+          <strong>Release Date</strong><br />
+          <span id="releaseDate">${albumReleaseYear}</span><br /><br />
+          <strong>Release Label</strong><br />
+          <span id="releaseLabel">${album.label}</span><br /><br />
+          <strong>Album Length</strong><br />
+          <span id="albumLength">${albumDurationLength}</span><br />
+        `;
+
+        releaseColumn.appendChild(releaseContent);
+        container.appendChild(releaseColumn);
       } else {
         console.error("Element #song-list-container not found.");
       }
-      
+
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
       if (spotifyCode)
         spotifyCode.src = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
 
-      // RELEASED BY (DATE, LABEL, NUMBER)
+      // UPDATE RELEASE DETAILS
       const releaseDate = w.document.getElementById("releaseDate");
       const releaseLabel = w.document.getElementById("releaseLabel");
       const albumLength = w.document.getElementById("albumLength");
-      
-      releaseDate.innerHTML = albumReleaseYear;
-      releaseLabel.innerHTML = album.label;
-      albumLength.innerHTML = albumDurationLength;
+
+      if (releaseDate) releaseDate.innerHTML = albumReleaseYear;
+      if (releaseLabel) releaseLabel.innerHTML = album.label;
+      if (albumLength) albumLength.innerHTML = albumDurationLength;
 
       // ARTIST NAME
       const albumArtist = w.document.querySelector(".albumArtist");
@@ -111,7 +136,7 @@ export async function loadElegant(
         if (albumName)
           albumName.innerHTML = cutName(album.name.toUpperCase()).trim();
       }
-      
+
       // PALETTE
       for (var i = 0; i < 5; i++) {
         const paletteColour = w.document.querySelector(`.paletteColour${i}`);
