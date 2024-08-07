@@ -7,6 +7,28 @@ import {
 } from "../../js//utils.js";
 import { getAlbumArtwork } from "../../js/api.js";
 
+// Function to process image through Remove.bg API
+async function getTransparentImage(imageUrl) {
+  const apiKey = 'eChKXXPs9szdDGuwJvo8s4Bo'; // Replace with your API key
+
+  const response = await fetch('https://api.remove.bg/v1.0/removebg', {
+    method: 'POST',
+    headers: {
+      'X-Api-Key': apiKey
+    },
+    body: new URLSearchParams({
+      'image_url': imageUrl // Pass the image URL to Remove.bg API
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`Error: ${response.statusText}`);
+  }
+
+  const resultBlob = await response.blob();
+  return URL.createObjectURL(resultBlob); // Create an object URL for the transparent image
+}
+
 export async function loadChoatic(
   album,
   albumContainer,
@@ -23,7 +45,7 @@ export async function loadChoatic(
       (track) => `${track.track_number} ${cutName(track.name.toUpperCase())}`
     )
     .join("<br />");
-  
+
   // Convert the tracksString to an array using split
   const trackArray = tracksString
     .split("<br />")
@@ -47,22 +69,26 @@ export async function loadChoatic(
   const imageUrl = album.images[0].url;
   const base64Image = await convertImageToBase64(imageUrl);
 
+  // Spotify code image URL
+  const spotifyCodeUrl = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
+
   var w = window.open(htmlFile);
 
   if (w) {
-    w.addEventListener("load", function () {
+    w.addEventListener("load", async function () {
       // ARTWORK
       const albumCover = w.document.querySelector(".albumCover");
       if (albumCover) {
         albumCover.src = base64Image;
       }
-      
+
       // Set background image with blur effect
       const indexElement = w.document.querySelector(".index");
       if (indexElement) {
+        const transparentImageUrl = await getTransparentImage(imageUrl); // Get transparent image
         const style = indexElement.style;
         const beforeStyle = `
-          background-image: url(${base64Image});
+          background-image: url(${transparentImageUrl});
           background-size: cover;
           background-position: center;
         `;
@@ -126,9 +152,10 @@ export async function loadChoatic(
 
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
-      if (spotifyCode)      
-        spotifyCode.src = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
-      
+      if (spotifyCode) {
+        const transparentSpotifyCodeUrl = await getTransparentImage(spotifyCodeUrl); // Get transparent Spotify code image
+        spotifyCode.src = transparentSpotifyCodeUrl; // Set the transparent image URL
+      }
 
       // UPDATE RELEASE DETAILS
       const releaseDate = w.document.getElementById("releaseDate");
