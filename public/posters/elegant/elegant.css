@@ -1,0 +1,169 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Inter:400,700");
+@import url("https://px.animaapp.com/648d215ff54ade17cf7651ca.648d2160b28ec4c8efe5b7a3.648d216299d0ec1b8c284cc4.hcp.png");
+
+.screen a {
+  display: contents;
+  text-decoration: none;
+}
+
+.container-center-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  pointer-events: none;
+  width: 100%;
+}
+
+.container-center-horizontal > * {
+  flex-shrink: 0;
+  pointer-events: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.saveButton {
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --font-size-xl: 23px;
+  --font-size-xxl: 30px; 
+  --font-size-xxl2: 8.5px;
+  --font-size-xxxxl: 10px;
+  --font-size-xxxxxl: 13px;
+  --font-family-inter: Arial, sans-serif;
+}
+
+.inter-normal-black-13px {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxxxl);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.index {
+  align-items: center;
+  background-color: var(--white);
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: 1188px;
+  padding: 53px 0;
+  width: 840px;
+}
+
+.index .albumCover {
+  height: 672px;
+  margin-top: 7px;
+  object-fit: cover;
+  width: 686px;
+}
+
+.index .album-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+  justify-content: space-between;
+  width: 82.5%;
+}
+
+.index .albumName {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xl);
+  font-weight: 780;
+  letter-spacing: 0.2px;
+  text-align: left;
+  margin-right: 4px;
+  width: 500px;
+}
+
+.index .albumArtist {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 400;
+  text-align: left;
+  margin-right: 4px;
+  width: 500px;
+}
+
+.index .spotifyCode {
+  height: 35px;
+  width: 180px;
+}
+
+.index .songPlayback {
+  height: 40px;
+  width: 83%;
+}
+
+.index .song-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 5px;
+    width: 82%;
+    height: 450px;
+  }
+  
+  .index .song-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+.index .songTitles {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxxl);
+  letter-spacing: 0.2px;
+  line-height: 15px;
+}
+
+.index .bottom-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 80%;
+  margin-top: 20px;
+}
+
+.index .image-container {
+  display: flex;
+  gap: 10px;
+}
+
+.index .paletteColour0,
+.index .paletteColour1,
+.index .paletteColour2,
+.index .paletteColour3,
+.index .paletteColour4 {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.index .albumRelease {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxxl);
+  letter-spacing: 0.2px;
+  line-height: 15px;
+  text-align: right;
+  font-size: 14px;
+}
+
+.index .albumRelease strong {
+  font-weight: bold;
+}
