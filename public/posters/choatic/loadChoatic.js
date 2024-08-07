@@ -4,28 +4,48 @@ import {
   getMonthName,
   getImageColourPalette,
   convertImageToBase64
-} from "../../js//utils.js";
+} from "../../js/utils.js";
 import { getAlbumArtwork } from "../../js/api.js";
 
-// Function to process image through Remove.bg API
-async function getTransparentImage(imageUrl) {
-  const apiKey = 'eChKXXPs9szdDGuwJvo8s4Bo'; // Replace with your API key
+// Function to fetch image from URL and convert to Blob
+async function fetchImageBlob(imageUrl) {
+  const response = await fetch(imageUrl);
+  if (!response.ok) {
+    throw new Error(`Error fetching image: ${response.statusText}`);
+  }
+  return await response.blob();
+}
 
-  const response = await fetch('https://api.remove.bg/v1.0/removebg', {
+// Function to process image through Clipping Magic API
+async function getTransparentImage(imageUrl) {
+  const apiKey = 'a126rdt80furr1e1r9hn5a91dpqg6cukkckej355u3eudi1oq62u'; // Replace with your Clipping Magic API key
+
+  const imageBlob = await fetchImageBlob(imageUrl);
+
+  const formData = new FormData();
+  formData.append('image', imageBlob, 'image.jpg'); // Use any name for the file
+
+  const response = await fetch(`https://api.clippingmagic.com/v1/images?test=true`, {
     method: 'POST',
     headers: {
-      'X-API-Key': apiKey
+      'Authorization': `Basic ${btoa(apiKey + ':')}`
     },
-    body: new URLSearchParams({
-      'image_url': imageUrl // Pass the image URL to Remove.bg API
-    })
+    body: formData
   });
 
   if (!response.ok) {
     throw new Error(`Error: ${response.statusText}`);
   }
 
-  const resultBlob = await response.blob();
+  const result = await response.json();
+  const imageId = result.id;
+
+  const downloadResponse = await fetch(`https://api.clippingmagic.com/v1/images/${imageId}/result`);
+  if (!downloadResponse.ok) {
+    throw new Error(`Error: ${downloadResponse.statusText}`);
+  }
+
+  const resultBlob = await downloadResponse.blob();
   return URL.createObjectURL(resultBlob); // Create an object URL for the transparent image
 }
 
@@ -106,13 +126,13 @@ export async function loadChoatic(
         container.innerHTML = ""; // Clear any existing content
 
         for (let i = 0; i < numberOfColumns; i++) {
-          const column = document.createElement("div");
+          const column = w.document.createElement("div");
           column.classList.add("song-column");
 
           const startIndex = i * maxSongsPerColumn;
           const endIndex = Math.min(startIndex + maxSongsPerColumn, trackArray.length);
 
-          const columnContent = document.createElement("p");
+          const columnContent = w.document.createElement("p");
           columnContent.classList.add("songTitles");
           columnContent.innerHTML = trackArray
             .slice(startIndex, endIndex)
@@ -124,16 +144,16 @@ export async function loadChoatic(
 
         // Ensure there are at least two columns
         if (numberOfColumns < 2) {
-          const emptyColumn = document.createElement("div");
+          const emptyColumn = w.document.createElement("div");
           emptyColumn.classList.add("song-column");
           container.appendChild(emptyColumn);
         }
 
         // Add the album release details column
-        const releaseColumn = document.createElement("div");
+        const releaseColumn = w.document.createElement("div");
         releaseColumn.classList.add("song-column");
 
-        const releaseContent = document.createElement("p");
+        const releaseContent = w.document.createElement("p");
         releaseContent.classList.add("albumRelease");
         releaseContent.innerHTML = `
           <strong>Release Date</strong><br />
