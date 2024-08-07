@@ -17,11 +17,18 @@ export async function loadElegant(
     `${album.name}\n${album.total_tracks}\n${album.label}\n${album.release_date}\n${album.copyrights[0].text}`
   );
 
-  const tracks = album.tracks.items
+  // Convert the tracks string to an array
+  const tracksString = album.tracks.items
     .map(
       (track) => `${track.track_number} ${cutName(track.name.toUpperCase())}`
     )
     .join("<br />");
+  
+  // Convert the tracksString to an array using split
+  const trackArray = tracksString
+    .split("<br />")
+    .map(track => track.trim())
+    .filter(track => track.length > 0);
 
   // ALBUM DURATION
   let albumDuration = album.tracks.items.reduce(
@@ -55,13 +62,32 @@ export async function loadElegant(
       }
 
       // TRACK NAMES
-      const songTitles = w.document.querySelector(".songTitles");
-      if (songTitles) {
-        let spacing = Math.floor(-0.4 * album.total_tracks + 23.8);
-        songTitles.style.lineHeight = `${spacing}px`;
-        songTitles.innerHTML = tracks;
-      }
+      const maxSongsPerColumn = 12;
+      const numberOfColumns = Math.ceil(tracks.length / maxSongsPerColumn);
 
+      const container = w.document.getElementById("song-list-container");
+      if (container) {
+        container.innerHTML = ""; // Clear any existing content
+
+        for (let i = 0; i < numberOfColumns; i++) {
+          const column = document.createElement("div");
+          column.classList.add("song-column");
+
+          const startIndex = i * maxSongsPerColumn;
+          const endIndex = Math.min(startIndex + maxSongsPerColumn, tracks.length);
+
+          const columnContent = document.createElement("p");
+          columnContent.classList.add("songTitles");
+          columnContent.innerHTML = tracks
+            .slice(startIndex, endIndex)
+            .join("<br />");
+
+          column.appendChild(columnContent);
+          container.appendChild(column);
+        }
+      } else {
+        console.error("Element #song-list-container not found.");
+      }
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
       if (spotifyCode)
