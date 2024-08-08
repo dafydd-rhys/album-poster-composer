@@ -116,8 +116,13 @@ export async function loadElegant(
 
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
-      if (spotifyCode)
-        spotifyCode.src = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
+      if (spotifyCode) {
+        //Load spotify code as vector SVG and remove background fill
+        
+        spotifyCode.src = `https://scannables.scdn.co/uri/plain/svg/ffffff/black/256/${album.uri}`;
+        
+        
+      }
 
       // UPDATE RELEASE DETAILS
       const releaseDate = w.document.getElementById("releaseDate");
