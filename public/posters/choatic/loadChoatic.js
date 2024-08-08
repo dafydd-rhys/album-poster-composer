@@ -7,34 +7,23 @@ import {
 } from "../../js/utils.js";
 import { getAlbumArtwork } from "../../js/api.js";
 
-// Function to remove black background from a base64 image
-function makeBlackBackgroundTransparent(base64) {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = image.width;
-      canvas.height = image.height;
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(image, 0, 0);
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      for (let x = 0; x < imageData.width; x++) {
-        for (let y = 0; y < imageData.height; y++) {
-          const offset = (y * imageData.width + x) * 4;
-          const r = imageData.data[offset];
-          const g = imageData.data[offset + 1];
-          const b = imageData.data[offset + 2];
-          // if it is pure black, change its alpha to 0
-          if (r === 0 && g === 0 && b === 0) {
-            imageData.data[offset + 3] = 0;
-          }
-        }
-      }
-      ctx.putImageData(imageData, 0, 0);
-      resolve(canvas.toDataURL()); // Output base64
-    };
-    image.src = base64;
-  });
+async function removeFirstRectFromSVG(svgURL) {
+  const response = await fetch(svgURL);
+  const svgText = await response.text();
+
+  const parser = new DOMParser();
+  const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+
+  const firstRect = svgDoc.querySelector('rect');
+  if (firstRect) {
+    firstRect.remove();
+  }
+
+  const serializer = new XMLSerializer();
+  const modifiedSVG = serializer.serializeToString(svgDoc.documentElement);
+
+  // Convert the modified SVG back to Base64
+  return `data:image/svg+xml;base64,${btoa(modifiedSVG)}`;
 }
 
 
@@ -81,8 +70,7 @@ export async function loadChoatic(
   // Convert Spotify code image URL to Base64 and make it transparent
   console.log(album.uri);
   const spotifyCodeUrl = `https://scannables.scdn.co/uri/plain/svg/000000/white/256/${album.uri}`;
-  const base64SpotifyCodeImage = await convertImageToBase64(spotifyCodeUrl);
-  const transparentSpotifyCodeImage = await makeBlackBackgroundTransparent(base64SpotifyCodeImage);
+  const modifiedSVG = await removeFirstRectFromSVG(spotifyCodeUrl);
 
   var w = window.open(htmlFile);
 
@@ -164,7 +152,7 @@ export async function loadChoatic(
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
       if (spotifyCode) {     
-        spotifyCode.src = transparentSpotifyCodeImage;
+        spotifyCode.src = modifiedSVG;
       }
 
       // UPDATE RELEASE DETAILS
