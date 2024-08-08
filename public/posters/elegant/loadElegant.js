@@ -120,6 +120,7 @@ export async function loadElegant(
         //Load spotify code as vector SVG and remove background fill
         
         spotifyCode.src = `https://scannables.scdn.co/uri/plain/svg/000000/white/256/${album.uri}`;
+        
       }
 
       // UPDATE RELEASE DETAILS
