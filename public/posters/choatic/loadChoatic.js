@@ -80,7 +80,7 @@ export async function loadChoatic(
 
   // Convert Spotify code image URL to Base64 and make it transparent
   console.log(album.uri);
-  const spotifyCodeUrl = `https://scannables.scdn.co/uri/plain/png/000000/white/256/${album.uri}`;
+  const spotifyCodeUrl = `https://scannables.scdn.co/uri/plain/svg/000000/white/256/${album.uri}`;
   const base64SpotifyCodeImage = await convertImageToBase64(spotifyCodeUrl);
   const transparentSpotifyCodeImage = await makeBlackBackgroundTransparent(base64SpotifyCodeImage);
 
