@@ -84,9 +84,8 @@ export async function loadChoatic(
       
       // Set background image with blur effect
       const indexElement = w.document.querySelector(".blurred-background");
-    if (indexElement) {
-      indexElement.style.backgroundImage = `url(${base64Image})`;
-    
+      if (indexElement) {
+        indexElement.style.backgroundImage = `url(${base64Image})`;
       }
 
       // TRACK NAMES
