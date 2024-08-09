@@ -5,24 +5,22 @@ async function savePoster() {
   try {
     // Use html2canvas to capture the poster as an image
     const canvas = await html2canvas(poster, { allowTaint: true, useCORS: true });
-    const imgData = canvas.toDataURL('image/png');
+    const imgData = canvas.toDataURL('image/png'); // Use 'image/png' for better compatibility
 
-    // Create a new jsPDF instance for A3 size
+    // Create a new jsPDF instance with custom dimensions
     const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF('p', 'mm', 'a3'); // 'a3' specifies A3 size
+    
+    // Custom dimensions in mm (840 x 1188 pixels converted to mm)
+    const posterWidthPx = 840;
+    const posterHeightPx = 1188;
+    const pxToMm = (px) => px * 25.4 / 96;
+    const posterWidthMm = pxToMm(posterWidthPx);
+    const posterHeightMm = pxToMm(posterHeightPx);
 
-    // A3 size dimensions in mm
-    const imgWidth = 297; // A3 width in mm
-    const imgHeight = 420; // A3 height in mm
+    const pdf = new jsPDF('p', 'mm', [posterWidthPx, posterHeightPx]);
 
-    // Calculate the width and height of the image to fit the A3 size
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
-    const pdfWidth = imgWidth;
-    const pdfHeight = imgHeight;
-
-    // Adjust the image to fit the PDF
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    // Add the image to the PDF at the dimensions of the poster
+    pdf.addImage(imgData, 'PNG', 0, 0, posterWidthPx, posterHeightPx);
 
     // Save the PDF
     pdf.save('poster.pdf');
@@ -30,3 +28,4 @@ async function savePoster() {
     console.error("Error generating the poster:", error);
   }
 }
+
