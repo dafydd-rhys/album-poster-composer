@@ -63,8 +63,7 @@
   overflow: hidden; /* Ensure that content does not overflow */
 }
 
-.index::before {
-  content: "";
+.blurred-background {
   position: absolute;
   top: -5%;
   left: -5%;

@@ -83,17 +83,10 @@ export async function loadChoatic(
       }
       
       // Set background image with blur effect
-      const indexElement = w.document.querySelector(".index");
-      if (indexElement) {
-        const style = indexElement.style;
-        const beforeStyle = `
-          background-image: url(${base64Image});
-          background-size: cover;
-          background-position: center;
-        `;
-        indexElement.insertAdjacentHTML('beforeend', `<style>
-          .index::before { ${beforeStyle} }
-        </style>`);
+      const indexElement = w.document.querySelector(".blurred-background");
+    if (indexElement) {
+      indexElement.style.backgroundImage = `url(${base64Image})`;
+    
       }
 
       // TRACK NAMES
