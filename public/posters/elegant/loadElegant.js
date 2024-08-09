@@ -3,7 +3,8 @@ import {
   getAlbumNumber,
   getMonthName,
   getImageColourPalette,
-  convertImageToBase64
+  convertImageToBase64,
+  removeFirstRectFromSVG
 } from "../../js//utils.js";
 import { getAlbumArtwork } from "../../js/api.js";
 

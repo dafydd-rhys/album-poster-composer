@@ -68,3 +68,23 @@ export async function convertImageToBase64(imageUrl) {
     reader.readAsDataURL(blob);
   });
 }
+
+
+async function removeFirstRectFromSVG(svgURL) {
+  const response = await fetch(svgURL);
+  const svgText = await response.text();
+
+  const parser = new DOMParser();
+  const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+
+  const firstRect = svgDoc.querySelector('rect');
+  if (firstRect) {
+    firstRect.remove();
+  }
+
+  const serializer = new XMLSerializer();
+  const modifiedSVG = serializer.serializeToString(svgDoc.documentElement);
+
+  // Convert the modified SVG back to Base64
+  return `data:image/svg+xml;base64,${btoa(modifiedSVG)}`;
+}

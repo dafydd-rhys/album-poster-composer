@@ -3,27 +3,36 @@ import {
   getAlbumNumber,
   getMonthName,
   getImageColourPalette,
-  convertImageToBase64
+  convertImageToBase64,
+  removeFirstRectFromSVG
 } from "../../js/utils.js";
 import { getAlbumArtwork } from "../../js/api.js";
 
-async function removeFirstRectFromSVG(svgURL) {
-  const response = await fetch(svgURL);
-  const svgText = await response.text();
+// Function to blur an image using canvas
+async function blurImage(imageUrl, blurRadius = 10) {
+  const image = new Image();
+  image.crossOrigin = 'Anonymous'; // Handle CORS
 
-  const parser = new DOMParser();
-  const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
 
-  const firstRect = svgDoc.querySelector('rect');
-  if (firstRect) {
-    firstRect.remove();
-  }
+  return new Promise((resolve, reject) => {
+    image.onload = () => {
+      canvas.width = image.width;
+      canvas.height = image.height;
+      ctx.drawImage(image, 0, 0);
 
-  const serializer = new XMLSerializer();
-  const modifiedSVG = serializer.serializeToString(svgDoc.documentElement);
+      // Apply blur effect
+      ctx.filter = `blur(${blurRadius}px)`;
+      ctx.drawImage(image, 0, 0);
 
-  // Convert the modified SVG back to Base64
-  return `data:image/svg+xml;base64,${btoa(modifiedSVG)}`;
+      // Convert to Base64
+      resolve(canvas.toDataURL('image/png'));
+    };
+
+    image.onerror = reject;
+    image.src = imageUrl;
+  });
 }
 
 
@@ -63,12 +72,12 @@ export async function loadChoatic(
   // PARSING DATE FROM JSON
   let albumReleaseYear = album.release_date.substr(0, 4);
 
-  // Convert image URL to Base64
+  // Convert image URL to Base64 and apply blur
   const imageUrl = album.images[0].url;
-  const base64Image = await convertImageToBase64(imageUrl);
+  const base64Image = await convertImageToBase64(imageUrl); // Clear image for album cover
+  const blurredImage = await blurImage(imageUrl, 10); // Apply 10px blur for background
 
   // Convert Spotify code image URL to Base64 and make it transparent
-  console.log(album.uri);
   const spotifyCodeUrl = `https://scannables.scdn.co/uri/plain/svg/000000/white/256/${album.uri}`;
   const modifiedSVG = await removeFirstRectFromSVG(spotifyCodeUrl);
 
@@ -85,7 +94,7 @@ export async function loadChoatic(
       // Set background image with blur effect
       const indexElement = w.document.querySelector(".blurred-background");
       if (indexElement) {
-        indexElement.style.backgroundImage = `url(${base64Image})`;
+        indexElement.style.backgroundImage = `url(${blurredImage})`;
       }
 
       // TRACK NAMES

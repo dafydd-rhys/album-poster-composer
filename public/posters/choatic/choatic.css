@@ -69,10 +69,8 @@
   left: -5%;
   width: 110%;
   height: 110%;
-  background-image: url('https://cdn.glitch.global/26dbc63d-4f2c-4201-be76-34e4291f6e34/685ce954-64b3-4035-8826-fc504c816edd.image.png?v=1723058891524');
   background-size: cover;
   background-position: center;
-  filter: blur(10px);
   z-index: -1;
 }
 
