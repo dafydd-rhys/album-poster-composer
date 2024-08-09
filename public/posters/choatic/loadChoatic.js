@@ -74,7 +74,7 @@ export async function loadChoatic(
   // Convert image URL to Base64 and apply blur
   const imageUrl = album.images[0].url;
   const base64Image = await convertImageToBase64(imageUrl); // Clear image for album cover
-  const blurredImage = await blurImage(imageUrl, 10); // Apply 10px blur for background
+  const blurredImage = await blurImage(imageUrl, 5); // Apply 10px blur for background
 
   // Convert Spotify code image URL to Base64 and make it transparent
   const spotifyCodeUrl = `https://scannables.scdn.co/uri/plain/svg/000000/white/256/${album.uri}`;

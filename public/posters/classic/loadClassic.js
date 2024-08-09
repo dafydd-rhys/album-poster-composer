@@ -121,10 +121,12 @@ export async function loadClassic(
         }
         albumArtist.style.marginTop = `${margin}px`;
         albumArtist.innerHTML = album.artists[0].name.toUpperCase();
+        
         const albumName = w.document.querySelector(".albumName");
         if (albumName)
           albumName.innerHTML = cutName(album.name.toUpperCase()).trim();
       }
+      
       // PALETTE
       for (var i = 0; i < 5; i++) {
         const paletteColour = w.document.querySelector(`.paletteColour${i}`);
