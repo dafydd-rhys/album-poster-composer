@@ -70,7 +70,7 @@ export async function convertImageToBase64(imageUrl) {
 }
 
 
-async function removeFirstRectFromSVG(svgURL) {
+export async function removeFirstRectFromSVG(svgURL) {
   const response = await fetch(svgURL);
   const svgText = await response.text();
 

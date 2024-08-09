@@ -3,7 +3,8 @@ import {
   getAlbumNumber,
   getMonthName,
   getImageColourPalette,
-  convertImageToBase64
+  convertImageToBase64,
+  removeFirstRectFromSVG,
 } from "../../js//utils.js";
 import { getAlbumArtwork } from "../../js/api.js";
 
@@ -18,12 +19,12 @@ export async function loadModern(album, albumContainer, albumNumber, htmlFile) {
       (track) => `${track.track_number} ${cutName(track.name.toUpperCase())}`
     )
     .join("<br />");
-  
+
   // Convert the tracksString to an array using split
   const trackArray = tracksString
     .split("<br />")
-    .map(track => track.trim())
-    .filter(track => track.length > 0);
+    .map((track) => track.trim())
+    .filter((track) => track.length > 0);
 
   // ALBUM DURATION
   let albumDuration = album.tracks.items.reduce(
@@ -48,6 +49,8 @@ export async function loadModern(album, albumContainer, albumNumber, htmlFile) {
   // Convert image URL to Base64
   const imageUrl = album.images[0].url;
   const base64Image = await convertImageToBase64(imageUrl);
+  const spotifyCodeUrl = `https://scannables.scdn.co/uri/plain/svg/000000/black/256/${album.uri}`;
+  const modifiedSVG = await removeFirstRectFromSVG(spotifyCodeUrl);
 
   var w = window.open(htmlFile);
 
@@ -76,7 +79,10 @@ export async function loadModern(album, albumContainer, albumNumber, htmlFile) {
           column.classList.add("song-column");
 
           const startIndex = i * maxSongsPerColumn;
-          const endIndex = Math.min(startIndex + maxSongsPerColumn, trackArray.length);
+          const endIndex = Math.min(
+            startIndex + maxSongsPerColumn,
+            trackArray.length
+          );
 
           const columnContent = document.createElement("p");
           columnContent.classList.add("songTitles");
@@ -92,7 +98,6 @@ export async function loadModern(album, albumContainer, albumNumber, htmlFile) {
       }
 
       //------ RIGHT SIDE ------
-
 
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
@@ -127,7 +132,7 @@ export async function loadModern(album, albumContainer, albumNumber, htmlFile) {
       } else {
         console.error("Element .albumArtist not found.");
       }
-            // PALETTE
+      // PALETTE
       for (var i = 0; i < 5; i++) {
         const paletteColour = w.document.querySelector(`.paletteColour${i}`);
         if (paletteColour) {

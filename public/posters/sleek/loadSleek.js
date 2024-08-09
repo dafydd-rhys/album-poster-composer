@@ -3,29 +3,23 @@ import {
   getAlbumNumber,
   getMonthName,
   getImageColourPalette,
-  convertImageToBase64
+  convertImageToBase64,
+  removeFirstRectFromSVG,
 } from "../../js//utils.js";
 import { getAlbumArtwork } from "../../js/api.js";
 
-export async function loadSleek(
-  album,
-  albumContainer,
-  albumNumber,
-  htmlFile
-) {
+export async function loadSleek(album, albumContainer, albumNumber, htmlFile) {
   alert(
     `${album.name}\n${album.total_tracks}\n${album.label}\n${album.release_date}\n${album.copyrights[0].text}`
   );
 
   const tracks = album.tracks.items
-    .map(
-      (track) => `${cutName(track.name.toUpperCase())}`
-    )
+    .map((track) => `${cutName(track.name.toUpperCase())}`)
     .join("<br />");
 
   // PARSING DATE FROM JSON
   let albumReleaseYear = album.release_date.substr(0, 4);
-  
+
   // Convert image URL to Base64
   const imageUrl = album.images[0].url;
   const base64Image = await convertImageToBase64(imageUrl);
@@ -51,7 +45,7 @@ export async function loadSleek(
       // ARTIST NAME
       const albumArtist = w.document.querySelector(".albumArtist");
       if (albumArtist) {
-        albumArtist.innerHTML = `By ${album.artists[0].name} • ${albumReleaseYear}`;;
+        albumArtist.innerHTML = `By ${album.artists[0].name} • ${albumReleaseYear}`;
         const albumName = w.document.querySelector(".albumName");
         if (albumName)
           albumName.innerHTML = cutName(album.name.toUpperCase()).trim();

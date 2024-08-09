@@ -4,17 +4,17 @@ import {
   getMonthName,
   getImageColourPalette,
   convertImageToBase64,
-  removeFirstRectFromSVG
+  removeFirstRectFromSVG,
 } from "../../js/utils.js";
 import { getAlbumArtwork } from "../../js/api.js";
 
 // Function to blur an image using canvas
 async function blurImage(imageUrl, blurRadius = 10) {
   const image = new Image();
-  image.crossOrigin = 'Anonymous'; // Handle CORS
+  image.crossOrigin = "Anonymous"; // Handle CORS
 
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
 
   return new Promise((resolve, reject) => {
     image.onload = () => {
@@ -27,14 +27,13 @@ async function blurImage(imageUrl, blurRadius = 10) {
       ctx.drawImage(image, 0, 0);
 
       // Convert to Base64
-      resolve(canvas.toDataURL('image/png'));
+      resolve(canvas.toDataURL("image/png"));
     };
 
     image.onerror = reject;
     image.src = imageUrl;
   });
 }
-
 
 export async function loadChoatic(
   album,
@@ -52,12 +51,12 @@ export async function loadChoatic(
       (track) => `${track.track_number} ${cutName(track.name.toUpperCase())}`
     )
     .join("<br />");
-  
+
   // Convert the tracksString to an array using split
   const trackArray = tracksString
     .split("<br />")
-    .map(track => track.trim())
-    .filter(track => track.length > 0);
+    .map((track) => track.trim())
+    .filter((track) => track.length > 0);
 
   // ALBUM DURATION
   let albumDuration = album.tracks.items.reduce(
@@ -82,7 +81,6 @@ export async function loadChoatic(
   const modifiedSVG = await removeFirstRectFromSVG(spotifyCodeUrl);
 
   var w = window.open(htmlFile);
-
   if (w) {
     w.addEventListener("load", function () {
       // ARTWORK
@@ -90,7 +88,7 @@ export async function loadChoatic(
       if (albumCover) {
         albumCover.src = base64Image;
       }
-      
+
       // Set background image with blur effect
       const indexElement = w.document.querySelector(".blurred-background");
       if (indexElement) {
@@ -110,7 +108,10 @@ export async function loadChoatic(
           column.classList.add("song-column");
 
           const startIndex = i * maxSongsPerColumn;
-          const endIndex = Math.min(startIndex + maxSongsPerColumn, trackArray.length);
+          const endIndex = Math.min(
+            startIndex + maxSongsPerColumn,
+            trackArray.length
+          );
 
           const columnContent = document.createElement("p");
           columnContent.classList.add("songTitles");
@@ -152,7 +153,7 @@ export async function loadChoatic(
 
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
-      if (spotifyCode) {     
+      if (spotifyCode) {
         spotifyCode.src = modifiedSVG;
       }
 

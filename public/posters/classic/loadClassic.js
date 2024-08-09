@@ -4,7 +4,7 @@ import {
   getMonthName,
   getImageColourPalette,
   convertImageToBase64,
-  removeFirstRectFromSVG
+  removeFirstRectFromSVG,
 } from "../../js//utils.js";
 import { getAlbumArtwork } from "../../js/api.js";
 
@@ -48,6 +48,10 @@ export async function loadClassic(
   const imageUrl = album.images[0].url;
   const base64Image = await convertImageToBase64(imageUrl);
 
+  // Convert Spotify code image URL to Base64 and make it transparent
+  const spotifyCodeUrl = `https://scannables.scdn.co/uri/plain/svg/000000/black/256/${album.uri}`;
+  const modifiedSVG = await removeFirstRectFromSVG(spotifyCodeUrl);
+
   var w = window.open(htmlFile);
 
   if (w) {
@@ -77,7 +81,6 @@ export async function loadClassic(
 
       //------ RIGHT SIDE ------
 
-
       // RELEASED BY (ARTIST)
       const albumBy = w.document.querySelector(".albumBy");
       if (albumBy)
@@ -85,8 +88,9 @@ export async function loadClassic(
 
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
-      if (spotifyCode)
-        spotifyCode.src = `https://scannables.scdn.co/uri/plain/png/ffffff/black/256/${album.uri}`;
+      if (spotifyCode) {
+        spotifyCode.src = modifiedSVG;
+      }
 
       // RELEASED BY (DATE, LABEL, NUMBER)
       const albumRelease = w.document.querySelector(".albumRelease");
@@ -121,7 +125,7 @@ export async function loadClassic(
         if (albumName)
           albumName.innerHTML = cutName(album.name.toUpperCase()).trim();
       }
-            // PALETTE
+      // PALETTE
       for (var i = 0; i < 5; i++) {
         const paletteColour = w.document.querySelector(`.paletteColour${i}`);
         if (paletteColour) {

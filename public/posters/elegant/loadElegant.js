@@ -4,7 +4,7 @@ import {
   getMonthName,
   getImageColourPalette,
   convertImageToBase64,
-  removeFirstRectFromSVG
+  removeFirstRectFromSVG,
 } from "../../js//utils.js";
 import { getAlbumArtwork } from "../../js/api.js";
 
@@ -24,12 +24,12 @@ export async function loadElegant(
       (track) => `${track.track_number} ${cutName(track.name.toUpperCase())}`
     )
     .join("<br />");
-  
+
   // Convert the tracksString to an array using split
   const trackArray = tracksString
     .split("<br />")
-    .map(track => track.trim())
-    .filter(track => track.length > 0);
+    .map((track) => track.trim())
+    .filter((track) => track.length > 0);
 
   // ALBUM DURATION
   let albumDuration = album.tracks.items.reduce(
@@ -51,6 +51,8 @@ export async function loadElegant(
   // Convert image URL to Base64
   const imageUrl = album.images[0].url;
   const base64Image = await convertImageToBase64(imageUrl);
+  const spotifyCodeUrl = `https://scannables.scdn.co/uri/plain/svg/000000/black/256/${album.uri}`;
+  const modifiedSVG = await removeFirstRectFromSVG(spotifyCodeUrl);
 
   var w = window.open(htmlFile);
 
@@ -75,7 +77,10 @@ export async function loadElegant(
           column.classList.add("song-column");
 
           const startIndex = i * maxSongsPerColumn;
-          const endIndex = Math.min(startIndex + maxSongsPerColumn, trackArray.length);
+          const endIndex = Math.min(
+            startIndex + maxSongsPerColumn,
+            trackArray.length
+          );
 
           const columnContent = document.createElement("p");
           columnContent.classList.add("songTitles");
@@ -118,10 +123,7 @@ export async function loadElegant(
       // SPOTIFY URL CODE
       const spotifyCode = w.document.querySelector(".spotifyCode");
       if (spotifyCode) {
-        //Load spotify code as vector SVG and remove background fill
-        
-        spotifyCode.src = `https://scannables.scdn.co/uri/plain/svg/000000/white/256/${album.uri}`;
-        
+        spotifyCode.src = modifiedSVG;
       }
 
       // UPDATE RELEASE DETAILS
